@@ -5,10 +5,6 @@
   "devCommand": "next dev",
   "installCommand": "npm install",
   "regions": ["hnd1"],
-  "env": {
-    "ANTHROPIC_API_KEY": "@anthropic-api-key",
-    "NEXT_PUBLIC_SITE_URL": "@site-url"
-  },
   "headers": [
     {
       "source": "/api/(.*)",
