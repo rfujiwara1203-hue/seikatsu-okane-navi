@@ -1,20 +1,14 @@
-import { Suspense } from 'react'
 import { fetchNews } from '@/lib/news-fetcher'
-import { CATEGORY_META } from '@/types'
+import { CATEGORY_META, NewsItem } from '@/types'
 import { getNewsEmoji } from '@/lib/news-fetcher'
 import Navigation from '@/components/ui/Navigation'
 import { ProfileProvider } from '@/components/ui/ProfileContext'
-import ProfileForm from '@/components/ui/ProfileForm'
-import NewsSection from '@/components/news/NewsSection'
-import { GainsSummaryCard, FurusatoCard, BurdenCard } from '@/components/dashboard/SummaryCards'
 import HomeContent from './HomeContent'
 
-// ISR: 1時間キャッシュ
 export const revalidate = 3600
 
 export default async function HomePage() {
-  // サーバー側でニュースをプリフェッチ（フォールバック付き）
-  let initialNews = []
+  let initialNews: NewsItem[] = []
   try {
     const raw = await fetchNews(5)
     initialNews = raw.map(item => ({
