@@ -1,9 +1,9 @@
-export default async function Home() {
+export const dynamic = 'force-dynamic'
+
+export default function Home() {
   return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `window.location.href='/index.html'`,
-      }}
-    />
+    <div>
+      <meta httpEquiv="refresh" content="0;url=/index.html" />
+    </div>
   )
 }
