@@ -1,3 +1,2 @@
-/* v10のスタイルはpage.tsxで動的に挿入されます */
-* { box-sizing: border-box; }
-body { margin: 0; padding: 0; }
+/* globals */
+body { margin: 0; }
