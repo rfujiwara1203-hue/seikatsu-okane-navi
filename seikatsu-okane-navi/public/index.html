@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生活お金ナビ 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans JP',sans-serif;background:#f7f5f0;min-height:100vh;color:#2c2c2a;font-size:15px;line-height:1.7}
+.hdr{background:linear-gradient(135deg,#e8f5e0 0%,#d6eef8 100%);border-bottom:1px solid #c8e6c0;padding:1.2rem 1rem 1rem;text-align:center}
+.hdr h1{font-size:22px;font-weight:700;color:#2e6e3a}
+.hdr p{font-size:13px;color:#4a7a56;margin-top:2px}
+.sdot{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:#c8e6c0;transition:all .3s}
+.dot.on{background:#3a8f4e;width:24px;border-radius:4px}
+.dot.dn{background:#3a8f4e}
+
+/* 更新バナー */
+.update-banner{background:#fff;border-bottom:1px solid #e0ece4;padding:.6rem 1rem;display:flex;align-items:center;gap:8px;font-size:12px;flex-wrap:wrap}
+.upd-chip{background:#e8f5e0;color:#2e6e3a;border-radius:20px;padding:2px 10px;font-weight:700;font-size:11px;white-space:nowrap}
+.upd-text{color:#666;flex:1;min-width:0}
+.upd-next{color:#aaa;font-size:11px;white-space:nowrap}
+
+/* 広告枠 */
+.ad-banner{background:linear-gradient(135deg,#f0f8ff,#e8f5ff);border:1px solid #c0d8f0;border-radius:12px;padding:.8rem 1rem;margin:0 0 .8rem;text-align:center;cursor:pointer;transition:opacity .2s}
+.ad-banner:hover{opacity:.9}
+.ad-label{font-size:10px;color:#aaa;margin-bottom:4px}
+.ad-content{font-size:13px;font-weight:700;color:#1a4a8a}
+.ad-sub{font-size:11px;color:#5a7aaa;margin-top:2px}
+.ad-cta{display:inline-block;margin-top:6px;padding:4px 14px;background:#1a4a8a;color:#fff;border-radius:20px;font-size:11px;font-weight:700}
+.ad-native{background:#fafaf8;border:1px dashed #d0c8bc;border-radius:10px;padding:.7rem 1rem;margin:.8rem 0;display:flex;gap:10px;align-items:center;cursor:pointer}
+.ad-native:hover{background:#f5f3f0}
+.ad-n-icon{width:36px;height:36px;border-radius:8px;background:#e8e4dc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.ad-n-label{font-size:10px;color:#bbb;margin-bottom:1px}
+.ad-n-title{font-size:13px;font-weight:700;color:#2c2c2a}
+.ad-n-sub{font-size:11px;color:#888}
+
+.pg{display:none;padding:1.2rem 1rem;max-width:520px;margin:0 auto}
+.pg.active{display:block}
+.card{background:#fff;border-radius:16px;border:1px solid #e8e4dc;padding:1.2rem;margin-bottom:1rem}
+.ctit{font-size:14px;font-weight:700;color:#5a5a58;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
+label{display:block;font-size:13px;color:#5a5a58;font-weight:500;margin-bottom:4px}
+input[type=text],input[type=number],select{width:100%;padding:10px 12px;border:1.5px solid #d8d4cc;border-radius:10px;font-size:15px;font-family:'Noto Sans JP',sans-serif;background:#faf9f7;color:#2c2c2a;outline:none;transition:border-color .2s;margin-bottom:14px;appearance:none;-webkit-appearance:none}
+input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4e;background:#fff}
+.swp{position:relative}.swp::after{content:'▾';position:absolute;right:12px;top:50%;transform:translateY(-60%);color:#888;pointer-events:none;font-size:13px}
+.btn{width:100%;padding:13px;border-radius:12px;border:none;font-size:16px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:transform .15s;margin-bottom:6px;display:block}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#3a8f4e;color:#fff}.btn-p:hover{background:#2e7a42}
+.btn-s{background:#e8f5e0;color:#2e6e3a}
+.slbl{font-size:12px;font-weight:700;letter-spacing:.5px;color:#888;margin:1.4rem 0 .5rem;display:block}
+.bi{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0ede8;gap:8px}
+.bi:last-child{border-bottom:none}
+.bamt{font-size:16px;font-weight:700;color:#1a7a8a;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;margin-left:4px}
+.tg-u{background:#fff0e8;color:#c85a1a}.tg-i{background:#e6f3fb;color:#1a5a8a}
+.bitem{border-bottom:1px solid #f0ede8}.bitem:last-child{border-bottom:none}
+.bhdr{display:flex;justify-content:space-between;align-items:center;padding:12px 0;cursor:pointer;gap:8px}
+.bname{font-size:14px;font-weight:700;flex:1;color:#2c2c2a}
+.baw{font-size:13px;font-weight:700;color:#c85a1a;white-space:nowrap}
+.baw-g{font-size:13px;font-weight:700;color:#2e7a42;white-space:nowrap}
+.chev{font-size:11px;color:#aaa;transition:transform .25s;flex-shrink:0}
+.chev.open{transform:rotate(180deg)}
+.bdet{display:none;padding:0 0 14px}.bdet.open{display:block}
+.cause-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{background:#fff3ec;border:1px solid #f0c090;border-radius:20px;padding:4px 10px;font-size:12px;color:#8a4010;font-weight:500}
+.pbar{display:flex;align-items:center;gap:8px;margin:5px 0}
+.plbl{font-size:12px;color:#666;width:105px;flex-shrink:0}
+.bg2{flex:1;height:10px;background:#f0ede8;border-radius:5px;overflow:hidden}
+.fill{height:100%;border-radius:5px}
+.pval{font-size:12px;font-weight:700;width:76px;text-align:right;flex-shrink:0}
+.tl{position:relative;padding-left:20px;margin-top:8px}
+.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:#f0d8c8}
+.tli{position:relative;margin-bottom:12px}
+.tld{position:absolute;left:-16px;top:5px;width:10px;height:10px;border-radius:50%;background:#c85a1a;border:2px solid #fff;box-shadow:0 0 0 2px #c85a1a}
+.tly{font-size:11px;font-weight:700;color:#c85a1a;margin-bottom:1px}
+.tlx{font-size:13px;color:#444;line-height:1.5}
+.nb{background:#fff8f0;border:1.5px solid #f0c090;border-radius:12px;padding:.9rem;margin-bottom:.8rem}
+.ntit{font-size:13px;font-weight:700;color:#a04010;margin-bottom:4px}
+.ntxt{font-size:13px;color:#5a3a1a;line-height:1.6}
+.nb-g{background:#f0fbf5;border:1.5px solid #b8e8c8;border-radius:12px;padding:.9rem;margin-bottom:.8rem}
+.ntit-g{font-size:13px;font-weight:700;color:#1f6e36;margin-bottom:4px}
+.ntxt-g{font-size:13px;color:#2a5a3a;line-height:1.6}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.sb{background:#faf9f7;border-radius:10px;padding:8px 10px;text-align:center}
+.sl{font-size:11px;color:#888;margin-bottom:1px}.sv2{font-size:19px;font-weight:700}
+.skrow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f5f0e8;font-size:13px}
+.skrow:last-child{border-bottom:none}
+.skn{color:#444}.skup{color:#c85a1a;font-weight:700}.skdn{color:#2e7a42;font-weight:700}
+.tipc{background:#f0fbf5;border:1.5px solid #b8e8c8;border-radius:14px;padding:1rem;margin-bottom:.8rem}
+.tpt{font-size:14px;font-weight:700;color:#1f6e36;margin-bottom:4px}
+.tpd{font-size:13px;color:#3a5a44;line-height:1.6}
+.actc{background:#fff;border:1px solid #e8e4dc;border-radius:14px;padding:1rem;margin-bottom:.7rem;display:flex;gap:10px;align-items:flex-start}
+.an{width:28px;height:28px;border-radius:50%;background:#3a8f4e;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.at{font-size:14px;font-weight:700;color:#2c2c2a}.ad2{font-size:13px;color:#666;margin-top:2px}
+.otcb{background:#fdf8ee;border:1.5px solid #f0d890;border-radius:14px;padding:1rem;margin-top:.5rem}
+.orow{display:flex;gap:8px;align-items:center;margin-top:8px}
+.orow input{flex:1;padding:8px 10px;border:1.5px solid #d8c870;border-radius:8px;font-size:15px;font-family:'Noto Sans JP',sans-serif;background:#fffef8;margin-bottom:0}
+.pbbg{background:#e8e4dc;border-radius:6px;height:8px;margin-top:6px;overflow:hidden}
+.pbfl{height:100%;border-radius:6px;background:linear-gradient(90deg,#f0c030,#e8a000);transition:width .5s}
+.ores{margin-top:8px;font-size:14px;font-weight:700;color:#a07010}
+.sim-box{background:linear-gradient(135deg,#f0f8ff 0%,#e8f5e0 100%);border:1.5px solid #a8d8b8;border-radius:14px;padding:1.2rem;margin-top:.8rem}
+.sim-result{background:#fff;border-radius:10px;padding:1rem;margin-top:.8rem;text-align:center;border:1px solid #e0f0e0}
+.sim-big{font-size:30px;font-weight:700;color:#1a5a8a;letter-spacing:-1px}
+.sim-label{font-size:12px;color:#888;margin-top:2px}
+.sim-sub{font-size:13px;color:#444;margin-top:6px;line-height:1.6}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0ede8;cursor:pointer;transition:background .2s;border-radius:8px;padding-left:6px;padding-right:6px}
+.check-item:last-child{border-bottom:none}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid #d8d4cc;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff;font-size:13px;font-weight:700;color:transparent}
+.check-box.checked{background:#3a8f4e;border-color:#3a8f4e;color:#fff}
+.check-text{flex:1;font-size:14px;color:#2c2c2a}
+.check-save{font-size:12px;font-weight:700;color:#2e7a42;white-space:nowrap}
+.check-total{background:#e8f5e0;border-radius:12px;padding:.8rem 1rem;margin-top:.8rem;display:flex;justify-content:space-between;align-items:center}
+.ct-label{font-size:13px;color:#2e6e3a;font-weight:700}
+.ct-value{font-size:20px;font-weight:700;color:#1a6a30}
+.point-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0ede8;gap:8px}
+.point-row:last-child{border-bottom:none}
+.point-name{font-size:14px;font-weight:500;flex:1}
+.point-badge{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap}
+.pb-green{background:#e8f5e0;color:#2e6e3a}
+.pb-blue{background:#e6f3fb;color:#1a5a8a}
+.pb-yellow{background:#fff8e0;color:#8a6010}
+.tab-row{display:flex;gap:6px;margin-bottom:12px}
+.tab-btn{flex:1;padding:8px;border-radius:10px;border:1.5px solid #d8d4cc;background:#faf9f7;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all .2s;color:#888}
+.tab-btn.active{background:#3a8f4e;color:#fff;border-color:#3a8f4e}
+.tab-content{display:none}.tab-content.active{display:block}
+.dsc{font-size:11px;color:#999;text-align:center;padding:1rem;line-height:1.7;border-top:1px solid #e8e4dc;margin-top:.5rem}
+.hlr{color:#c85a1a}.hlg{color:#2e7a42}.hlb{color:#1a5a8a}
+.cat-tabs{display:flex;gap:4px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.cat-tab{padding:6px 12px;border-radius:20px;border:1.5px solid #d8d4cc;background:#faf9f7;font-size:12px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;white-space:nowrap;color:#888;transition:all .2s;flex-shrink:0}
+.cat-tab.active{background:#3a8f4e;color:#fff;border-color:#3a8f4e}
+.cat-section{display:none}.cat-section.active{display:block}
+/* 更新スケジュールカード */
+.upd-card{background:#f0f8ff;border:1px solid #c0d8f0;border-radius:12px;padding:.9rem;margin-bottom:.8rem}
+.upd-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #e0ecf8;font-size:13px}
+.upd-row:last-child{border-bottom:none}
+.upd-cat{color:#444;flex:1}
+.upd-date{font-size:12px;font-weight:700;color:#1a5a8a;white-space:nowrap}
+.upd-status{font-size:11px;padding:2px 7px;border-radius:10px;font-weight:700;margin-left:6px;white-space:nowrap}
+.upd-fresh{background:#e8f5e0;color:#2e6e3a}
+.upd-warn{background:#fff8e0;color:#8a6010}
+
+/* ===== ニュースセクション ===== */
+.news-section{background:#fff;border-bottom:2px solid #e8f5e0;max-width:520px;margin:0 auto}
+.news-header{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1rem .4rem}
+.news-header-left{display:flex;align-items:center;gap:8px}
+.news-header-title{font-size:14px;font-weight:700;color:#2c2c2a}
+.news-live-dot{width:8px;height:8px;border-radius:50%;background:#e85a1a;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.news-date-label{font-size:11px;color:#aaa;font-weight:400}
+.news-archive-btn{font-size:11px;color:#3a8f4e;font-weight:700;background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:8px;font-family:'Noto Sans JP',sans-serif}
+.news-archive-btn:hover{background:#e8f5e0}
+.news-scroll{display:flex;gap:10px;overflow-x:auto;padding:.4rem 1rem .8rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.news-scroll::-webkit-scrollbar{display:none}
+.news-card{flex-shrink:0;width:240px;background:#faf9f7;border:1.5px solid #e8e4dc;border-radius:14px;padding:.9rem 1rem;cursor:pointer;transition:all .2s;position:relative}
+.news-card:hover{border-color:#3a8f4e;background:#f0fbf5;transform:translateY(-1px)}
+.news-card.pinned{border-color:#3a8f4e;background:#f0fbf5}
+.news-card.relevant{border-color:#1a7aaa;background:#f0f8ff}
+.news-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;gap:6px}
+.news-cat-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.cat-burden{background:#fff0e8;color:#c85a1a}
+.cat-benefit{background:#e8f5e0;color:#2e6e3a}
+.cat-taxsaving{background:#e6f3fb;color:#1a5a8a}
+.cat-wall{background:#f5f0ff;color:#5a3a9a}
+.cat-tax{background:#fff0e8;color:#c85a1a}
+.cat-energy{background:#fff8e0;color:#8a6010}
+.cat-furusato{background:#e8f5e0;color:#2e6e3a}
+.cat-invest{background:#e6f3fb;color:#1a5a8a}
+.cat-child{background:#ffe8f5;color:#9a2a6a}
+.news-new-badge{font-size:10px;font-weight:700;background:#e85a1a;color:#fff;padding:2px 6px;border-radius:8px}
+.news-card-emoji{font-size:22px;margin-bottom:4px;display:block}
+.news-card-title{font-size:13px;font-weight:700;color:#2c2c2a;line-height:1.4;margin-bottom:4px}
+.news-card-summary{font-size:11px;color:#666;line-height:1.5}
+.news-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.news-card-date{font-size:10px;color:#bbb}
+.news-card-cta{font-size:10px;color:#3a8f4e;font-weight:700}
+.news-relevant-label{font-size:10px;color:#1a5a8a;font-weight:700;margin-top:4px;display:flex;align-items:center;gap:3px}
+/* ニュース詳細モーダル */
+.news-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center}
+.news-modal-overlay.open{display:flex}
+.news-modal{background:#fff;border-radius:20px 20px 0 0;padding:1.4rem 1.2rem 2rem;max-width:520px;width:100%;max-height:85vh;overflow-y:auto}
+.news-modal-handle{width:36px;height:4px;background:#e8e4dc;border-radius:2px;margin:0 auto 1rem;display:block}
+.news-modal-cat{margin-bottom:8px}
+.news-modal-title{font-size:18px;font-weight:700;color:#2c2c2a;line-height:1.4;margin-bottom:.6rem}
+.news-modal-date{font-size:12px;color:#aaa;margin-bottom:1rem}
+.news-modal-body{font-size:14px;color:#444;line-height:1.8;margin-bottom:1.2rem}
+.news-modal-link{display:flex;align-items:center;gap:8px;background:#f0fbf5;border:1.5px solid #b8e8c8;border-radius:12px;padding:.8rem 1rem;text-decoration:none;color:#1f6e36;font-size:13px;font-weight:700}
+.news-modal-close{width:100%;padding:12px;border-radius:12px;border:1.5px solid #e8e4dc;background:#fff;font-size:15px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;margin-top:.8rem;color:#888}
+/* アーカイブパネル */
+.news-archive-panel{display:none;padding:.5rem 1rem 1rem;border-top:1px solid #f0ede8}
+.news-archive-panel.open{display:block}
+.news-archive-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f5f2ee;cursor:pointer}
+.news-archive-item:last-child{border-bottom:none}
+.news-archive-item:hover .nai-title{color:#3a8f4e}
+.nai-emoji{font-size:18px;flex-shrink:0;width:28px;text-align:center}
+.nai-body{flex:1;min-width:0}
+.nai-title{font-size:13px;font-weight:700;color:#2c2c2a;line-height:1.4}
+.nai-meta{font-size:11px;color:#aaa;margin-top:2px}
+
+/* トースト通知 */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2c2c2a;color:#fff;font-size:13px;font-weight:500;padding:10px 18px;border-radius:24px;opacity:0;pointer-events:none;transition:all .3s;z-index:2000;white-space:nowrap;font-family:'Noto Sans JP',sans-serif}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* 復元バナー */
+.restore-bar{background:#f0fbf5;border-bottom:1px solid #c8e8d0;padding:.6rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;animation:slideDown .3s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.restore-bar-text{color:#2e6e3a;font-weight:500;display:flex;align-items:center;gap:6px}
+.restore-bar-actions{display:flex;gap:6px;flex-shrink:0}
+.restore-edit-btn{font-size:12px;color:#2e6e3a;font-weight:700;background:none;border:1.5px solid #a8d8b8;border-radius:20px;padding:3px 10px;cursor:pointer;font-family:'Noto Sans JP',sans-serif}
+.restore-reset-btn{font-size:12px;color:#888;font-weight:500;background:none;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;padding:3px 6px}
+.restore-reset-btn:hover{color:#c85a1a}
+/* 入力フォームの保存インジケーター */
+.save-indicator{font-size:11px;color:#3a8f4e;font-weight:700;display:flex;align-items:center;gap:4px;margin-top:-10px;margin-bottom:10px;opacity:0;transition:opacity .3s}
+.save-indicator.visible{opacity:1}
+
+/* ===== フィードバックシステム ===== */
+/* フローティングボタン */
+.fb-float{position:fixed;bottom:20px;right:16px;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.fb-float-btn{width:48px;height:48px;border-radius:50%;background:#3a8f4e;color:#fff;border:none;font-size:20px;cursor:pointer;box-shadow:0 3px 12px rgba(58,143,78,.35);transition:transform .2s,box-shadow .2s;font-family:'Noto Sans JP',sans-serif;display:flex;align-items:center;justify-content:center}
+.fb-float-btn:hover{transform:scale(1.08);box-shadow:0 5px 18px rgba(58,143,78,.45)}
+.fb-float-label{font-size:11px;font-weight:700;color:#fff;background:#3a8f4e;border-radius:20px;padding:3px 10px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.15);pointer-events:none}
+
+/* フィードバックドロワー（下からスライドイン） */
+.fb-drawer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.12);z-index:1100;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,1.25,.6,1);max-width:520px;margin:0 auto;padding:1.4rem 1.2rem 2rem}
+.fb-drawer.open{transform:translateY(0)}
+.fb-drawer-handle{width:36px;height:4px;background:#e8e4dc;border-radius:2px;margin:0 auto 1.2rem;display:block}
+.fb-drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1050}
+.fb-drawer-overlay.open{display:block}
+
+/* ステップ表示 */
+.fb-step{display:none}.fb-step.active{display:block}
+.fb-step-title{font-size:17px;font-weight:700;color:#2c2c2a;margin-bottom:.4rem;line-height:1.4}
+.fb-step-sub{font-size:13px;color:#888;margin-bottom:1.2rem}
+
+/* 親指スタンプ */
+.fb-thumb-row{display:flex;gap:12px;margin-bottom:1rem}
+.fb-thumb-btn{flex:1;padding:14px;border-radius:14px;border:2px solid #e8e4dc;background:#faf9f7;font-size:28px;cursor:pointer;transition:all .2s;text-align:center}
+.fb-thumb-btn:hover{border-color:#3a8f4e;background:#f0fbf5;transform:scale(1.04)}
+.fb-thumb-btn.selected-good{border-color:#3a8f4e;background:#e8f5e0}
+.fb-thumb-btn.selected-bad{border-color:#c85a1a;background:#fff3ee}
+
+/* 星評価 */
+.fb-stars{display:flex;gap:8px;justify-content:center;margin-bottom:1.2rem}
+.fb-star{font-size:36px;cursor:pointer;transition:transform .15s;color:#e0dbd4;line-height:1}
+.fb-star.lit{color:#f5a623}
+.fb-star:hover{transform:scale(1.15)}
+
+/* コンテキスト選択肢（チップ式） */
+.fb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.2rem}
+.fb-chip{padding:7px 14px;border-radius:20px;border:1.5px solid #e8e4dc;background:#faf9f7;font-size:13px;font-weight:500;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all .2s;color:#444}
+.fb-chip:hover{border-color:#3a8f4e;background:#f0fbf5;color:#2e6e3a}
+.fb-chip.selected{border-color:#3a8f4e;background:#e8f5e0;color:#1f6e36;font-weight:700}
+
+/* 自由記述 */
+.fb-textarea{width:100%;padding:10px 12px;border:1.5px solid #d8d4cc;border-radius:10px;font-size:14px;font-family:'Noto Sans JP',sans-serif;background:#faf9f7;color:#2c2c2a;outline:none;resize:none;min-height:90px;line-height:1.6;transition:border-color .2s;margin-bottom:.8rem}
+.fb-textarea:focus{border-color:#3a8f4e;background:#fff}
+.fb-textarea::placeholder{color:#bbb}
+
+/* ボタン */
+.fb-submit-btn{width:100%;padding:13px;border-radius:12px;border:none;font-size:16px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;background:#3a8f4e;color:#fff;transition:background .2s,transform .15s;margin-bottom:6px}
+.fb-submit-btn:hover{background:#2e7a42}
+.fb-submit-btn:active{transform:scale(.98)}
+.fb-submit-btn:disabled{background:#ccc;cursor:not-allowed}
+.fb-skip-btn{width:100%;padding:9px;border-radius:12px;border:1.5px solid #e8e4dc;background:#fff;font-size:14px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;color:#888;transition:background .2s}
+.fb-skip-btn:hover{background:#f5f3f0}
+
+/* 完了画面 */
+.fb-done{text-align:center;padding:1.5rem 0}
+.fb-done-emoji{font-size:52px;margin-bottom:.8rem;display:block}
+.fb-done-title{font-size:18px;font-weight:700;color:#2c2c2a;margin-bottom:.4rem}
+.fb-done-sub{font-size:13px;color:#888;margin-bottom:1.2rem;line-height:1.6}
+.fb-done-link{display:inline-block;padding:8px 20px;border-radius:20px;background:#f0fbf5;border:1.5px solid #b8e8c8;color:#1f6e36;font-size:13px;font-weight:700;text-decoration:none}
+
+/* コンテキスト型マイクロサーベイ（特定タブ滞在後） */
+.fb-contextual{position:fixed;bottom:80px;right:16px;background:#fff;border-radius:16px;border:1.5px solid #e8e4dc;padding:.9rem 1rem 1rem;box-shadow:0 4px 20px rgba(0,0,0,.12);z-index:800;max-width:240px;transform:translateX(300px);transition:transform .4s cubic-bezier(.32,1.25,.6,1);opacity:0}
+.fb-contextual.show{transform:translateX(0);opacity:1}
+.fb-ctx-close{position:absolute;top:8px;right:10px;font-size:14px;color:#bbb;cursor:pointer;background:none;border:none;line-height:1}
+.fb-ctx-q{font-size:13px;font-weight:700;color:#2c2c2a;margin-bottom:8px;padding-right:20px;line-height:1.4}
+.fb-ctx-opts{display:flex;flex-direction:column;gap:5px}
+.fb-ctx-opt{padding:6px 10px;border-radius:8px;border:1.5px solid #e8e4dc;background:#faf9f7;font-size:12px;font-weight:500;font-family:'Noto Sans JP',sans-serif;cursor:pointer;text-align:left;color:#444;transition:all .15s}
+.fb-ctx-opt:hover{border-color:#3a8f4e;background:#f0fbf5;color:#2e6e3a}
+
+/* NPSバー */
+.fb-nps-row{display:flex;gap:4px;justify-content:center;flex-wrap:nowrap;margin-bottom:.5rem}
+.fb-nps-btn{flex:1;min-width:0;padding:8px 0;border-radius:8px;border:1.5px solid #e8e4dc;background:#faf9f7;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all .15s;color:#666;text-align:center}
+.fb-nps-btn:hover{border-color:#3a8f4e;background:#f0fbf5;color:#2e6e3a}
+.fb-nps-btn.selected{background:#3a8f4e;border-color:#3a8f4e;color:#fff}
+.fb-nps-labels{display:flex;justify-content:space-between;font-size:10px;color:#aaa;margin-bottom:1rem}
+
+/* ===== 食品別物価・将来予測 ===== */
+.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.food-item{background:#faf9f7;border-radius:12px;padding:.7rem .8rem;border:1px solid #f0ede8;cursor:pointer;transition:all .2s;position:relative}
+.food-item:hover{border-color:#3a8f4e;background:#f0fbf5;transform:translateY(-1px)}
+.food-item.up{border-left:3px solid #e85a1a}
+.food-item.down{border-left:3px solid #2e7a42}
+.food-item.flat{border-left:3px solid #aab}
+.food-emoji{font-size:20px;margin-bottom:3px;display:block}
+.food-name{font-size:12px;color:#666;margin-bottom:2px;line-height:1.3}
+.food-rate{font-size:17px;font-weight:700;line-height:1}
+.food-rate.up{color:#e85a1a}
+.food-rate.down{color:#2e7a42}
+.food-reason{font-size:11px;color:#888;margin-top:3px;line-height:1.4}
+.food-tip-bubble{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#2c2c2a;color:#fff;font-size:11px;padding:6px 10px;border-radius:8px;width:160px;text-align:center;z-index:50;pointer-events:none;opacity:0;transition:opacity .2s;line-height:1.5}
+.food-item:hover .food-tip-bubble{opacity:1}
+.food-tip-bubble::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#2c2c2a}
+
+/* 将来予測タイムライン */
+.forecast-timeline{display:flex;gap:0;margin:12px 0;position:relative}
+.forecast-timeline::before{content:'';position:absolute;left:20px;right:20px;top:32px;height:2px;background:linear-gradient(90deg,#e85a1a,#f0a020,#3a8f4e);z-index:0}
+.fc-year{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1}
+.fc-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px currentColor;margin-bottom:6px;flex-shrink:0}
+.fc-dot.past{background:#e85a1a;color:#e85a1a}
+.fc-dot.now{background:#f0a020;color:#f0a020;width:18px;height:18px;border:3px solid #fff}
+.fc-dot.future{background:#3a8f4e;color:#3a8f4e}
+.fc-yr-label{font-size:11px;font-weight:700;color:#666;margin-bottom:3px}
+.fc-rate{font-size:15px;font-weight:700;margin-bottom:2px}
+.fc-rate.hot{color:#e85a1a}
+.fc-rate.warm{color:#f0a020}
+.fc-rate.cool{color:#2e7a42}
+.fc-desc{font-size:10px;color:#aaa;text-align:center;line-height:1.4;max-width:72px}
+.fc-src{font-size:10px;color:#bbb;margin-top:10px;text-align:right}
+
+/* 家計インパクトカード */
+.impact-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.impact-card{border-radius:12px;padding:.8rem;text-align:center}
+.impact-card.red{background:#fff3ee;border:1.5px solid #f0c0a0}
+.impact-card.green{background:#edfaf5;border:1.5px solid #a0e0c0}
+.impact-num{font-size:22px;font-weight:700}
+.impact-num.red{color:#c85a1a}
+.impact-num.green{color:#1a7a4e}
+.impact-label{font-size:11px;color:#888;margin-top:2px;line-height:1.4}
+
+/* 賢い買い物Tips */
+.smart-buy-list{margin-top:8px}
+.smart-buy-item{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid #f0ede8;font-size:13px}
+.smart-buy-item:last-child{border-bottom:none}
+.sb-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+.sb-text{color:#2c2c2a;flex:1;line-height:1.5}
+.sb-text strong{color:#2e6e3a}
+
+/* シナリオ解説アコーディオン */
+.scenario-box{background:#f0f4ff;border:1px solid #c0d0f0;border-radius:12px;padding:.9rem;margin-top:10px}
+.scenario-title{font-size:13px;font-weight:700;color:#1a3a7a;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.scenario-desc{font-size:12px;color:#2a4a6a;line-height:1.7}
+
+.step-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.step-sep{font-size:11px;color:#8cc4a0;margin-top:2px;font-weight:700}
+.step-lbl{font-size:10px;color:#8cc4a0;font-weight:700;white-space:nowrap}
+.dot.on + .step-lbl, .step-item:has(.dot.on) .step-lbl{color:#2e6e3a}
+.step-item:has(.dot.dn) .step-lbl{color:#4a9e5e}
+
+/* P2 お得サマリーカード */
+.gain-hero{background:linear-gradient(135deg,#e8f5e0 0%,#d4f0e8 100%);border:1.5px solid #a8dcb8;border-radius:16px;padding:1.2rem;margin-bottom:1rem;text-align:center}
+.gain-hero-label{font-size:12px;font-weight:700;color:#2e6e3a;letter-spacing:.5px;margin-bottom:6px}
+.gain-hero-amount{font-size:36px;font-weight:700;color:#1a6e3e;letter-spacing:-1px;line-height:1}
+.gain-hero-unit{font-size:14px;font-weight:500;color:#2e6e3a}
+.gain-hero-sub{font-size:12px;color:#4a8a5e;margin-top:6px;line-height:1.6}
+.gain-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.gain-tile{background:#fff;border-radius:12px;border:1px solid #d0e8d8;padding:.8rem .7rem;text-align:center}
+.gain-tile-icon{font-size:22px;margin-bottom:3px}
+.gain-tile-label{font-size:11px;color:#666;margin-bottom:2px}
+.gain-tile-val{font-size:17px;font-weight:700;color:#1a6e3e}
+.gain-tile-sub{font-size:10px;color:#999;margin-top:1px}
+
+/* P2→P3への誘導バナー */
+.bridge-banner{background:linear-gradient(135deg,#fff8f0,#fff3e8);border:1.5px solid #f0c890;border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:10px;align-items:center}
+.bridge-icon{font-size:28px;flex-shrink:0}
+.bridge-text{flex:1}
+.bridge-title{font-size:13px;font-weight:700;color:#a04010;margin-bottom:2px}
+.bridge-sub{font-size:12px;color:#7a4020;line-height:1.5}
+
+/* P3 物価セクション：ポジティブ→ネガティブ制御 */
+.price-intro-card{background:#f0fbf5;border:1.5px solid #b8e8c8;border-radius:16px;padding:1.2rem;margin-bottom:1rem;text-align:center}
+.price-intro-icon{font-size:36px;margin-bottom:6px;display:block}
+.price-intro-msg{font-size:15px;font-weight:700;color:#1f6e36;margin-bottom:4px}
+.price-intro-sub{font-size:13px;color:#3a7a4a;line-height:1.6}
+
+/* アコーディオン展開ボタン */
+.expand-btn{width:100%;padding:10px;border-radius:10px;border:1.5px solid #e8e4dc;background:#faf9f7;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;color:#666;margin-top:8px;transition:all .2s;text-align:center}
+.expand-btn:hover{background:#f0f0ec;border-color:#ccc}
+.expandable{display:none}
+.expandable.open{display:block}
+
+/* 固定費詳細カード（チェック連動） */
+.detail-card{animation:slideDown .3s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- ===== フィードバックシステム ===== -->
+<!-- フローティングボタン -->
+<div class="fb-float" id="fb-float">
+  <span class="fb-float-label" id="fb-float-label">意見を送る</span>
+  <button class="fb-float-btn" onclick="openFeedback('manual')" title="フィードバックを送る">💬</button>
+</div>
+
+<!-- ドロワーオーバーレイ -->
+<div class="fb-drawer-overlay" id="fb-overlay" onclick="closeFeedback()"></div>
+
+<!-- フィードバックドロワー -->
+<div class="fb-drawer" id="fb-drawer">
+  <span class="fb-drawer-handle"></span>
+
+  <!-- STEP 1: 親指スタンプ（デフォルト開始） -->
+  <div class="fb-step active" id="fb-step-thumb">
+    <div class="fb-step-title">このサイト、役に立ってますか？</div>
+    <div class="fb-step-sub">1タップで大丈夫です。正直に教えてください 🙏</div>
+    <div class="fb-thumb-row">
+      <button class="fb-thumb-btn" onclick="selectThumb('good')" id="thumb-good">👍<br><span style="font-size:12px;color:#666;font-weight:500">役立ってる</span></button>
+      <button class="fb-thumb-btn" onclick="selectThumb('bad')" id="thumb-bad">👎<br><span style="font-size:12px;color:#666;font-weight:500">まだ微妙</span></button>
+    </div>
+    <button class="fb-submit-btn" id="thumb-next-btn" onclick="goStep('nps')" disabled>次へ →</button>
+    <button class="fb-skip-btn" onclick="closeFeedback()">今はスキップ</button>
+  </div>
+
+  <!-- STEP 2: NPS（推薦度） -->
+  <div class="fb-step" id="fb-step-nps">
+    <div class="fb-step-title">友人・家族にすすめたいですか？</div>
+    <div class="fb-step-sub">0（まったくすすめない）〜 10（ぜひすすめたい）</div>
+    <div class="fb-nps-row" id="nps-row"></div>
+    <div class="fb-nps-labels"><span>すすめない</span><span>ぜひすすめる</span></div>
+    <button class="fb-submit-btn" id="nps-next-btn" onclick="goStep('reason')" disabled>次へ →</button>
+    <button class="fb-skip-btn" onclick="goStep('reason')">スキップ</button>
+  </div>
+
+  <!-- STEP 3: 改善ポイント選択（チップ式） -->
+  <div class="fb-step" id="fb-step-reason">
+    <div class="fb-step-title" id="reason-title">特に良かったのはどこですか？</div>
+    <div class="fb-step-sub">当てはまるものを選んでください（複数OK）</div>
+    <div class="fb-chips" id="reason-chips"></div>
+    <button class="fb-submit-btn" onclick="goStep('text')">次へ →</button>
+    <button class="fb-skip-btn" onclick="goStep('text')">スキップ</button>
+  </div>
+
+  <!-- STEP 4: 自由記述（任意） -->
+  <div class="fb-step" id="fb-step-text">
+    <div class="fb-step-title">ひとことあれば教えてください</div>
+    <div class="fb-step-sub">入力しなくてもOKです。どんな意見も参考になります 😊</div>
+    <textarea class="fb-textarea" id="fb-freetext" placeholder="例：このセクションが特にわかりやすかった／ここが知りたい／使いにくい点 など"></textarea>
+    <button class="fb-submit-btn" onclick="submitFeedback()">送信する ✓</button>
+    <button class="fb-skip-btn" onclick="submitFeedback()">記入せず送信</button>
+  </div>
+
+  <!-- STEP 完了 -->
+  <div class="fb-step" id="fb-step-done">
+    <div class="fb-done">
+      <span class="fb-done-emoji">🌱</span>
+      <div class="fb-done-title">ありがとうございます！</div>
+      <div class="fb-done-sub">正直なご意見、とても助かります。<br>いただいた声をもとに、もっと使いやすくしていきます。<br><br>引き続き「生活お金ナビ」をぜひ活用してください！<br>節約・節税のヒントが見つかりますように 💪</div>
+      <a class="fb-done-link" href="GOOGLE_FORMS_URL" target="_blank" rel="noopener" id="fb-detail-link" style="display:none">
+        📝 もっと詳しく意見を書く →
+      </a>
+    </div>
+    <button class="fb-submit-btn" onclick="closeFeedback()" style="margin-top:.8rem">閉じる</button>
+  </div>
+</div>
+
+<!-- コンテキスト型マイクロサーベイ（右下ポップアップ） -->
+<div class="fb-contextual" id="fb-contextual">
+  <button class="fb-ctx-close" onclick="dismissContextual()">✕</button>
+  <div class="fb-ctx-q" id="fb-ctx-q">このセクション、わかりやすかったですか？</div>
+  <div class="fb-ctx-opts" id="fb-ctx-opts"></div>
+</div>
+
+
+<!-- 更新バナー（常時表示） -->
+<div class="update-banner">
+  <span class="upd-chip">🔄 最終更新</span>
+  <span class="upd-text" id="banner-date">2026年4月7日</span>
+  <span class="upd-next" id="banner-next">次回更新：2026年7月予定</span>
+</div>
+<div id="restore-bar-wrap"></div>
+
+<!-- ===== ニュースセクション ===== -->
+<div class="news-section" id="news-section">
+  <div class="news-header">
+    <div class="news-header-left">
+      <div class="news-live-dot"></div>
+      <span class="news-header-title">📰 今日のピックアップ</span>
+      <span class="news-date-label" id="news-today-label"></span>
+    </div>
+    <button class="news-archive-btn" onclick="toggleArchive()">過去のニュース ▾</button>
+  </div>
+  <div class="news-scroll" id="news-scroll"></div>
+  <!-- アーカイブパネル -->
+  <div class="news-archive-panel" id="news-archive-panel">
+    <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:8px;letter-spacing:.5px">ARCHIVE</div>
+    <div id="news-archive-list"></div>
+  </div>
+</div>
+
+<!-- ニュース詳細モーダル -->
+<div class="news-modal-overlay" id="news-modal-overlay" onclick="closeModal(event)">
+  <div class="news-modal" id="news-modal">
+    <span class="news-modal-handle"></span>
+    <div class="news-modal-cat" id="modal-cat"></div>
+    <div class="news-modal-title" id="modal-title"></div>
+    <div class="news-modal-date" id="modal-date"></div>
+    <div class="news-modal-body" id="modal-body"></div>
+    <a class="news-modal-link" id="modal-link" href="#" target="_blank" rel="noopener">
+      <span>🔗</span><span id="modal-link-label">詳細を確認する</span>
+    </a>
+    <button class="news-modal-close" onclick="closeModal()">閉じる</button>
+  </div>
+</div>
+
+
+<div class="hdr">
+  <h1>💚 生活お金ナビ</h1>
+  <p>2026年、あなたの家計をスマートに守ろう</p>
+  <div class="sdot">
+    <div class="step-item"><div class="dot on" id="d1"></div><span class="step-lbl" id="sl1">入力</span></div>
+    <div class="step-sep">→</div>
+    <div class="step-item"><div class="dot" id="d2"></div><span class="step-lbl" id="sl2">お得情報</span></div>
+    <div class="step-sep">→</div>
+    <div class="step-item"><div class="dot" id="d3"></div><span class="step-lbl" id="sl3">詳しく知る</span></div>
+  </div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="pg active" id="p1">
+  <div class="card">
+    <div class="ctit">📍 お住まいの地域</div>
+    <label>都道府県</label>
+    <div class="swp"><select id="pref" onchange="svImmediate()"><option value="">選択してください</option><option>東京都</option><option>神奈川県</option><option>大阪府</option><option>愛知県</option><option>埼玉県</option><option>千葉県</option><option>兵庫県</option><option>北海道</option><option>福岡県</option><option>静岡県</option><option>その他</option></select></div>
+    <label>市区町村（任意）</label>
+    <input type="text" id="city" placeholder="例：渋谷区、横浜市" />
+  </div>
+  <div class="card">
+    <div class="ctit">💰 年収の目安</div>
+    <div class="swp"><select id="income" onchange="svImmediate()"><option value="">選択してください</option><option value="150">〜150万円</option><option value="200">151〜200万円</option><option value="300">201〜300万円</option><option value="400">301〜400万円</option><option value="500">401〜500万円</option><option value="600">501〜600万円</option><option value="700">601〜700万円</option><option value="800">701〜800万円</option><option value="1000">801〜1000万円</option><option value="1200">1001万円〜</option></select></div>
+  </div>
+  <div class="card">
+    <div class="ctit">👨‍👩‍👧 家族構成</div>
+    <div class="swp"><select id="family" onchange="svImmediate()"><option value="single">独身・一人暮らし</option><option value="couple">夫婦のみ（共働き）</option><option value="couple_dep">夫婦（配偶者控除あり）</option><option value="child1">夫婦＋子ども1人</option><option value="child2">夫婦＋子ども2人</option><option value="child3">夫婦＋子ども3人以上</option><option value="single_parent">ひとり親世帯</option></select></div>
+  </div>
+  <button class="btn btn-p" onclick="toP2()">💚 あなたへのお得情報を見る →</button>
+</div>
+
+<!-- PAGE 2: お得情報先出し（希望→現実の心理フロー） -->
+<div class="pg" id="p2">
+
+  <!-- ヒーロー：まず「あなたが得られる額」を大きく見せる -->
+  <div class="gain-hero">
+    <div class="gain-hero-label">💚 あなたが今年 受け取れる・節約できる 目安合計</div>
+    <div class="gain-hero-amount" id="p2-hero-amount">計算中...</div>
+    <div class="gain-hero-sub" id="p2-hero-sub">給付金＋ふるさと納税返礼品相当＋節税効果の合計目安</div>
+  </div>
+
+  <!-- 内訳グリッド -->
+  <div class="gain-grid" id="p2-gain-grid">
+    <div class="gain-tile">
+      <div class="gain-tile-icon">🎁</div>
+      <div class="gain-tile-label">給付金・助成（対象の場合）</div>
+      <div class="gain-tile-val" id="g-benefit">確認中</div>
+      <div class="gain-tile-sub">申請で受け取れる</div>
+    </div>
+    <div class="gain-tile">
+      <div class="gain-tile-icon">🏘️</div>
+      <div class="gain-tile-label">ふるさと納税 返礼品相当</div>
+      <div class="gain-tile-val" id="g-furusato">---</div>
+      <div class="gain-tile-sub">1件2,000円負担で返礼品が受け取れる</div>
+    </div>
+    <div class="gain-tile">
+      <div class="gain-tile-icon">📈</div>
+      <div class="gain-tile-label">iDeCo節税効果（年間目安）</div>
+      <div class="gain-tile-val" id="g-ideco">---</div>
+      <div class="gain-tile-sub">掛金月2万円の場合</div>
+    </div>
+    <div class="gain-tile">
+      <div class="gain-tile-icon">💡</div>
+      <div class="gain-tile-label">固定費見直し（目安）</div>
+      <div class="gain-tile-val" id="g-fixed">年最大<br>約17万円</div>
+      <div class="gain-tile-sub">スマホ＋電気代切替</div>
+    </div>
+  </div>
+
+  <!-- 給付金マッチング -->
+  <div class="card">
+    <div class="ctit">🎁 あなたが受け取れそうな給付金</div>
+    <div id="p2-blist"></div>
+  </div>
+
+  <!-- ふるさと納税クイックサマリー -->
+  <div class="card">
+    <div class="ctit">🏘️ ふるさと納税の今年の目安</div>
+    <div id="p2-furusato"></div>
+    <div class="ad-native" style="margin-top:8px" onclick="adClick('furusato_choice')">
+      <div class="ad-n-icon">🍱</div>
+      <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">ふるさとチョイスで返礼品を探す</div><div class="ad-n-sub">返礼品を選んで控除を受ける →</div></div>
+    </div>
+  </div>
+
+
+
+  <!-- P3への橋渡しバナー（ネガティブ情報を「知識」として誘導） -->
+  <div class="bridge-banner">
+    <div class="bridge-icon">📚</div>
+    <div class="bridge-text">
+      <div class="bridge-title">なんで今これが大事なの？ちょっと解説します</div>
+      <div class="bridge-sub">物価・負担増の詳しい内容や節税の全メニューは次のページで確認できます。知ることで、もっとお得に動けます。</div>
+    </div>
+  </div>
+
+  <button class="btn btn-p" onclick="toP3()">📖 物価・節税の詳細を見る →</button>
+  <button class="btn btn-s" onclick="toP1()">← 入力に戻る</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="pg" id="p3">
+  <!-- P3冒頭：ポジティブなイントロで受け取る -->
+  <div class="price-intro-card">
+    <span class="price-intro-icon">📖</span>
+    <div class="price-intro-msg">一緒に確認しましょう！</div>
+    <div class="price-intro-sub">物価上昇や負担増って、なんか複雑に見えるけど<br>仕組みがわかると対策が立てやすくなりますよ。<br>一緒にサクッと確認していきましょう 💪</div>
+  </div>
+
+  <div class="cat-tabs">
+    <button class="cat-tab active" onclick="showCat('price',this)">📈 物価の実態</button>
+    <button class="cat-tab" onclick="showCat('burden',this)">⚠️ 負担増</button>
+    <button class="cat-tab" onclick="showCat('invest',this)">📈 NISA・iDeCo</button>
+    <button class="cat-tab" onclick="showCat('furusato2',this)">🏘️ ふるさと納税</button>
+    <button class="cat-tab" onclick="showCat('fixed',this)">💡 固定費</button>
+    <button class="cat-tab" onclick="showCat('medical',this)">💊 医療費控除</button>
+    <button class="cat-tab" onclick="showCat('housing',this)">🏠 住宅・ローン</button>
+    <button class="cat-tab" onclick="showCat('points',this)">⭐ ポイ活</button>
+    <button class="cat-tab" onclick="showCat('update',this)">🔄 更新情報</button>
+  </div>
+
+  <!-- 物価タブ（P3最初） -->
+  <div class="cat-section active" id="cat-price">
+    <span class="slbl">今すぐできる おすすめ行動</span>
+    <div id="alist"></div>
+    <div class="card"><div class="ctit">📈 物価高騰の実態と背景</div><div id="bukka"></div></div>
+  </div>
+
+  <!-- 負担増タブ -->
+  <div class="cat-section" id="cat-burden">
+    <div class="card"><div class="ctit">⚠️ 2026年、こんな負担増があります</div><div id="burden"></div></div>
+    <div class="card"><div class="ctit">🚬🍺 嗜好品への増税スケジュール</div><div id="shiko"></div></div>
+    <div class="card"><div class="ctit">📊 年収の壁と手取りへの影響</div><div id="wall"></div></div>
+  </div>
+
+  <!-- 給付金（P3内で残す・P2でも表示済みのため「全件表示」ボタン付き） -->
+  <div class="cat-section" id="cat-benefits">
+    <div class="card"><div class="ctit">🎁 受け取れそうな給付金・助成</div><div id="blist2"></div></div>
+  </div>
+
+  <!-- NISA・iDeCo -->
+  <div class="cat-section" id="cat-invest">
+    <div class="card">
+      <div class="ctit">📈 新NISA・iDeCoで節税しながら資産形成</div>
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="showTab('nisa',this)">新NISA</button>
+        <button class="tab-btn" onclick="showTab('ideco',this)">iDeCo</button>
+      </div>
+      <div class="tab-content active" id="tab-nisa">
+
+        <div class="nb-g">
+          <div class="ntit-g">💡 新NISAとは？</div>
+          <div class="ntxt-g">投資で得た利益（売却益・配当金）が<strong>一生涯ゼロ課税</strong>になる制度。年間360万円・生涯1,800万円まで非課税で投資できます。通常は利益の20.3%が税金でとられますが、NISA口座ならまるごと手元に残ります。</div>
+        </div>
+
+        <!-- なぜ資産形成が必要か（フィナンシャルクリエイト的視点） -->
+        <div style="background:linear-gradient(135deg,#f0f8ff,#e8f5e0);border-radius:14px;padding:1.1rem 1rem;margin-bottom:1rem;border:1.5px solid #a8d8c8">
+          <div style="font-size:15px;font-weight:700;color:#1a4a6e;margin-bottom:.6rem">💭 「貯金だけ」でいいの？正直な話</div>
+
+          <!-- 3つの理由を視覚的に -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+            <div style="background:#fff;border-radius:10px;padding:.7rem .9rem;border-left:3px solid #e85a1a">
+              <div style="font-size:12px;font-weight:700;color:#c84010;margin-bottom:2px">① 物価が上がると貯金の「価値」が下がる</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">年1〜2%の物価上昇が続くと、10年後の100万円は今の<strong>約82〜90万円分</strong>の価値しかなくなります。銀行預金の金利（年0.1%前後）では物価上昇に追いつけません。</div>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:.7rem .9rem;border-left:3px solid #f0a020">
+              <div style="font-size:12px;font-weight:700;color:#a06010;margin-bottom:2px">② 年金だけでは毎月約5万円の赤字が出る（夫婦の場合）</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">総務省の家計調査によると、年金受給世帯は収入より支出が月約4〜5万円多い状況です。老後20年で<strong>約1,000万〜2,000万円</strong>の不足が生じる計算になります。</div>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:.7rem .9rem;border-left:3px solid #3a8f4e">
+              <div style="font-size:12px;font-weight:700;color:#1a6e2e;margin-bottom:2px">③ 「複利」は早く始めるほど差が大きい</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">同じ月3万円の積立でも、<strong>30歳開始と40歳開始では30年後の差が約800万円</strong>になる場合があります（年利5%想定）。時間こそが最大の武器です。</div>
+            </div>
+          </div>
+
+          <!-- 預金 vs 運用の比較 -->
+          <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:6px">📊 月3万円を20年積み立てた場合の比較（年利5%想定）</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+            <div style="background:#f5f5f5;border-radius:10px;padding:.7rem;text-align:center">
+              <div style="font-size:11px;color:#888;margin-bottom:2px">🏦 銀行預金（年0.1%）</div>
+              <div style="font-size:20px;font-weight:700;color:#888">約720万円</div>
+              <div style="font-size:10px;color:#aaa">元本720万円とほぼ同じ</div>
+            </div>
+            <div style="background:#e8f5e0;border-radius:10px;padding:.7rem;text-align:center;border:1.5px solid #b8e8c8">
+              <div style="font-size:11px;color:#2e6e3a;margin-bottom:2px">📈 NISA積立（年利5%）</div>
+              <div style="font-size:20px;font-weight:700;color:#1a6e2e">約1,233万円</div>
+              <div style="font-size:10px;color:#3a8f4e">運用益：約513万円（税金ゼロ）</div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:#aaa;line-height:1.5">※年利5%は一定の想定値です。実際の運用成果は保証されません。投資にはリスクがあります。</div>
+        </div>
+
+        <div class="sg">
+          <div class="sb"><div class="sl">年間投資枠</div><div class="sv2 hlb">360万円</div></div>
+          <div class="sb"><div class="sl">生涯非課税枠</div><div class="sv2 hlg">1,800万円</div></div>
+        </div>
+        <div class="sim-box">
+          <div style="font-size:13px;font-weight:700;color:#1a5a8a;margin-bottom:10px">📊 かんたんシミュレーター</div>
+          <label>月の積立額</label>
+          <div class="swp" style="margin-bottom:10px"><select id="nisa-monthly" onchange="calcNISA()"><option value="10000">1万円/月</option><option value="20000">2万円/月</option><option value="30000" selected>3万円/月</option><option value="50000">5万円/月</option><option value="100000">10万円/月</option></select></div>
+          <label>積立期間</label>
+          <div class="swp" style="margin-bottom:10px"><select id="nisa-years" onchange="calcNISA()"><option value="10">10年</option><option value="15" selected>15年</option><option value="20">20年</option><option value="30">30年</option></select></div>
+          <div class="sim-result">
+            <div class="sim-big" id="nisa-profit">約261万円</div>
+            <div class="sim-label">運用益（年利5%想定）</div>
+            <div class="sim-sub" id="nisa-tax">NISAなら税金0円・通常なら約53万円が税金でとられるところを節税</div>
+          </div>
+        </div>
+        <!-- 広告：証券口座 -->
+        <div class="ad-native" style="margin-top:12px" onclick="adClick('sbi_nisa')">
+          <div class="ad-n-icon">🏦</div>
+          <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">SBI証券でNISA口座を開設</div><div class="ad-n-sub">業界最安水準の手数料・開設キャンペーン実施中 →</div></div>
+        </div>
+        <div style="font-size:12px;color:#999;margin-top:8px">※年利5%の想定での試算。運用成果は保証されません。投資にはリスクがあります。</div>
+      </div>
+      <div class="tab-content" id="tab-ideco">
+
+        <div class="nb-g">
+          <div class="ntit-g">💡 iDeCoとは？</div>
+          <div class="ntxt-g">掛金が<strong>全額所得控除</strong>になる私的年金。毎月の掛金分だけ課税所得が減るため、今すぐ税金が安くなります。2026年12月から掛金上限が大幅引き上げ予定。</div>
+        </div>
+        <div class="tl">
+
+        <!-- iDeCoの強みをビジュアルで -->
+        <div style="background:linear-gradient(135deg,#f5f0ff,#eef8f0);border-radius:14px;padding:1.1rem 1rem;margin-bottom:1rem;border:1.5px solid #c0b8e8">
+          <div style="font-size:14px;font-weight:700;color:#3a2a7a;margin-bottom:.8rem">🏆 iDeCoの「3段階の税優遇」がお得な理由</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">
+            <div style="display:flex;align-items:flex-start;gap:8px;background:#fff;border-radius:10px;padding:.6rem .8rem">
+              <span style="font-size:18px;flex-shrink:0">💳</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:#3a2a7a">積み立てるとき：掛金が全額「所得控除」</div>
+                <div style="font-size:11px;color:#555;margin-top:1px">月2万円なら年24万円が課税所得から引かれ、所得税＋住民税が<strong>年約4.8〜8万円</strong>安くなります（年収・税率による）。</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;background:#fff;border-radius:10px;padding:.6rem .8rem">
+              <span style="font-size:18px;flex-shrink:0">📈</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:#3a2a7a">運用中：売却益・分配金が「非課税」</div>
+                <div style="font-size:11px;color:#555;margin-top:1px">投資信託を売却したときの利益（売却益）や、運用中に受け取る分配金に、通常20.3%かかる税金がゼロになります。「含み益（まだ売っていない状態の利益）」には税金はかかりません。売却・受取のタイミングで初めて課税が生じますが、iDeCoでは非課税です。</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;background:#fff;border-radius:10px;padding:.6rem .8rem">
+              <span style="font-size:18px;flex-shrink:0">🎁</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:#3a2a7a">受け取るとき：退職所得控除・公的年金控除が使える</div>
+                <div style="font-size:11px;color:#555;margin-top:1px">一時金で受け取れば退職所得控除（勤続年数×20〜40万円）が適用され、多くの場合ほぼ非課税で受け取れます。</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:#fff8e0;border-radius:10px;padding:.6rem .9rem;font-size:11px;color:#7a5010">
+            ⚠️ <strong>注意</strong>：原則60歳まで引き出し不可。生活費の緊急資金は別に確保した上で始めましょう。2026年12月から掛金上限が大幅に拡大予定（会社員：月2.3万→6.2万円）。
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">2026年12月〜（予定）</div><div class="tlx">会社員（企業年金なし）：月2.3万円 → <strong>月6.2万円</strong>に大幅引き上げ。自営業：月6.8万円 → <strong>月7.5万円</strong>に。</div></div>
+          <div class="tli"><div class="tld"></div><div class="tly">注意：2026年1月〜「10年ルール」</div><div class="tlx">退職金とiDeCoを両方もらう場合、空白期間が5年→10年に延長。受取タイミングの見直しが必要な場合も。</div></div>
+        </div>
+        <div class="sim-box">
+          <div style="font-size:13px;font-weight:700;color:#1a5a8a;margin-bottom:10px">💰 年収別・iDeCo節税シミュレーター</div>
+          <label>月の掛金</label>
+          <div class="swp" style="margin-bottom:10px"><select id="ideco-monthly" onchange="calcIDeCo()"><option value="10000">1万円/月</option><option value="20000" selected>2万円/月</option><option value="23000">2.3万円/月（現行上限・会社員）</option><option value="50000">5万円/月（2026年12月〜）</option><option value="62000">6.2万円/月（2026年12月〜上限）</option></select></div>
+          <div class="sim-result">
+            <div class="sim-big hlg" id="ideco-saving">約4.8万円</div>
+            <div class="sim-label">年間の節税効果（所得税＋住民税の目安）</div>
+            <div class="sim-sub" id="ideco-detail">年収500万円、月2万円の場合</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#999;margin-top:8px">※60歳まで原則引き出し不可。退職金との受取タイミングに要注意。詳細は金融機関・FPにご相談ください。</div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- cat-invest closing -->
+
+  <!-- ふるさと納税（P3詳細版） -->
+  <div class="cat-section" id="cat-furusato2">
+    <div class="card">
+      <div class="ctit">🏘️ 今年の寄付控除限度額</div>
+      <div id="finfo2"></div>
+      <!-- 広告：ふるさと納税サイト比較 -->
+      <div class="ad-native" style="margin-top:4px" onclick="adClick('furusato_choice')">
+        <div class="ad-n-icon">🍱</div>
+        <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">ふるさとチョイス｜返礼品の種類No.1</div><div class="ad-n-sub">お気に入りの返礼品を探してみる →</div></div>
+      </div>
+      <div class="ad-native" onclick="adClick('satofull')">
+        <div class="ad-n-icon">🌾</div>
+        <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">さとふる｜スマホから簡単申し込み</div><div class="ad-n-sub">ワンストップ特例もアプリで完結 →</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 固定費削減 -->
+  <div class="cat-section" id="cat-fixed">
+
+    <!-- チェックリストカード -->
+    <div class="card">
+      <div class="ctit">💡 固定費見直しチェックリスト</div>
+      <div style="font-size:13px;color:#444;margin-bottom:8px;line-height:1.7">✅ チェックを入れると、その項目の見直し方がパッと出てきます。</div>
+      <div style="font-size:12px;background:#f0fbf5;border-radius:8px;padding:6px 10px;margin-bottom:12px;color:#2e6e3a">💡 まとめてチェックして、一気に確認するのもOKです</div>
+      <div id="check-list"></div>
+      <div class="check-total">
+        <div class="ct-label">見直し可能な年間節約目安</div>
+        <div class="ct-value" id="check-total-val">0 円</div>
+      </div>
+    </div>
+
+    <!-- 詳細カードコンテナ（チェックで表示） -->
+    <div id="fixed-details">
+
+      <!-- 0: スマホ -->
+      <div class="detail-card" id="detail-0" style="display:none">
+        <div class="card">
+          <div class="ctit">📱 スマホ（通信費）の見直し方</div>
+          <div class="sg" style="margin-bottom:12px">
+            <div class="sb"><div class="sl">大手キャリア平均</div><div class="sv2 hlr">約8,000円/月</div></div>
+            <div class="sb" style="background:#e8f5e0;border:1.5px solid #b8e8c8"><div class="sl" style="color:#2e6e3a">格安SIM・サブブランド</div><div class="sv2 hlg">約1,500〜3,000円</div></div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#1a6e2e;text-align:center;background:#e8f5e0;border-radius:10px;padding:7px;margin-bottom:14px">月5,000〜6,500円削減 → <strong>年間6〜7.8万円の節約</strong>の可能性</div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">なぜ安いの？仕組みを知れば安心</div>
+          <div style="background:#f0f8ff;border-radius:12px;padding:.9rem;margin-bottom:12px">
+            <div style="font-size:13px;color:#2a4a6a;line-height:1.7">格安SIMは「MVNO」と呼ばれる会社がドコモ・au・ソフトバンクの<strong>回線を借りて</strong>サービスを提供しています。電波は大手キャリアと同じ。自社で電波塔を持たず、店舗も少なくすることで運営コストを削減し、安く提供できるのです。</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">✅ 乗り換えても変わらないこと</div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#e8f5e0;border-radius:8px;font-size:13px;color:#1a5a2a"><span>✓</span><strong>電話番号はそのまま</strong>（MNPで番号ごと持ち運べます）</div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#e8f5e0;border-radius:8px;font-size:13px;color:#1a5a2a"><span>✓</span><strong>今のスマホ本体はそのまま使える</strong>（SIMカードを差し替えるだけ）</div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#e8f5e0;border-radius:8px;font-size:13px;color:#1a5a2a"><span>✓</span><strong>LINE・SNS・通話アプリはそのまま</strong></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#e8f5e0;border-radius:8px;font-size:13px;color:#1a5a2a"><span>✓</span><strong>緊急通報（119・110）はそのまま使えます</strong></div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">⚠️ 知っておきたいデメリット</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#fff3ee;border-radius:8px;padding:.6rem .8rem;border-left:3px solid #e07040;font-size:12px;color:#5a3a20"><strong>お昼・夕方に少し遅くなることがある</strong>→ 対処法：UQモバイル・ワイモバイルは速度安定</div>
+            <div style="background:#fff3ee;border-radius:8px;padding:.6rem .8rem;border-left:3px solid #e07040;font-size:12px;color:#5a3a20"><strong>キャリアメール（@docomo等）が使えなくなる</strong>→ 対処法：各社「メール持ち運びサービス」（月約100〜330円）またはGmailへ移行</div>
+            <div style="background:#fff3ee;border-radius:8px;padding:.6rem .8rem;border-left:3px solid #e07040;font-size:12px;color:#5a3a20"><strong>店頭サポートが受けにくい</strong>→ 対処法：イオンモバイル・UQモバイル・ワイモバイルは実店舗あり</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🔍 タイプ別おすすめ</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>安定重視</strong>→ UQモバイル（au系）・ワイモバイル（SB系）月2,000〜3,000円台</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>とにかく安く</strong>→ 楽天モバイル（3GB月1,078円〜）・ahamo・LINEMO</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>店舗サポート重視・クレカなしOK</strong>→ イオンモバイル（口座振替対応）</div>
+          </div>
+          <div style="font-size:11px;color:#aaa;margin-bottom:10px">※料金は2026年4月時点。各社公式サイトでご確認ください。</div>
+          <div style="background:#f0fbf5;border:1.5px solid #b8e8c8;border-radius:10px;padding:.8rem;font-size:12px;color:#1f6e36">
+            📚 参考：<a href="https://my-best.com/10175" target="_blank" rel="noopener" style="color:#1a5a8a">格安SIMおすすめ比較（マイベスト）</a> ／ <a href="https://www.soumu.go.jp/main_sosiki/joho_tsusin/top/mobile/number_portability.html" target="_blank" rel="noopener" style="color:#1a5a8a">MNPについて（総務省）</a>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:#5a5a58;margin:12px 0 6px">📱 乗り換えはこちらから</div>
+          <div class="ad-native" onclick="adClick('rakuten_mobile')">
+            <div class="ad-n-icon">📱</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">楽天モバイル｜月1,078円〜（3GBまで）</div><div class="ad-n-sub">とにかく安くしたい方・MNP乗換特典あり →</div></div>
+          </div>
+          <div class="ad-native" style="margin-top:8px" onclick="adClick('uq_mobile')">
+            <div class="ad-n-icon">📶</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">UQモバイル｜速度安定・イオン等に店舗あり</div><div class="ad-n-sub">速度重視・サポート重視の方におすすめ →</div></div>
+          </div>
+          <div class="ad-native" style="margin-top:8px" onclick="adClick('ymobile')">
+            <div class="ad-n-icon">📡</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">ワイモバイル｜月2,365円〜・全国ショップあり</div><div class="ad-n-sub">店頭サポートを重視する方に →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1: 電力 -->
+      <div class="detail-card" id="detail-1" style="display:none">
+        <div class="card">
+          <div class="ctit">⚡ 電力会社・ガスの見直し方</div>
+          <div class="nb-g" style="margin-bottom:12px"><div class="ntit-g">🔋 切り替えるだけで年平均3.7万円節約も</div><div class="ntxt-g">電力自由化により電力会社・料金プランを自由に選べます。工事不要・賃貸でもOK（マンション一括契約の場合を除く）。</div></div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">⚠️ 2026年4月以降は補助終了で電気代が上がる！</div>
+          <div style="background:#fff3ee;border:1.5px solid #f0c090;border-radius:10px;padding:.8rem;margin-bottom:12px;font-size:13px;color:#7a4020">政府の電気・ガス補助金が2026年3月使用分（4月請求）で一旦終了。平均的な家庭で月数百〜1,000円程度の値上がりが見込まれます。今すぐプランを見直すタイミングです。</div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">切り替えのSTEP</div>
+          <div class="tl" style="margin-bottom:12px">
+            <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">STEP 1（5分）</div><div class="tlx">エネチェンジ等の比較サイトで郵便番号・月の使用量kWhを入力</div></div>
+            <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">STEP 2</div><div class="tlx">気に入ったプランに申し込み（工事不要・書類提出のみ）</div></div>
+            <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">STEP 3</div><div class="tlx">1〜2ヶ月後に自動切り替え完了。請求書で節約を実感</div></div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">✅ 切り替えでお得なケース・注意点</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#e8f5e0;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#1a5a2a"><strong>電気使用量が多い家庭（月300kWh以上）</strong>ほど切り替えの効果が大きい</div>
+            <div style="background:#e8f5e0;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#1a5a2a"><strong>電気＋ガスをまとめてセット契約</strong>するとさらにお得になるプランも</div>
+            <div style="background:#fff3ee;border-radius:8px;padding:.6rem .8rem;border-left:3px solid #e07040;font-size:12px;color:#5a3a20"><strong>注意：</strong>中東情勢等で新電力が新規受付停止になる場合あり。申込前に受付状況を確認を</div>
+            <div style="background:#fff3ee;border-radius:8px;padding:.6rem .8rem;border-left:3px solid #e07040;font-size:12px;color:#5a3a20"><strong>プロパンガス利用の方：</strong>都市ガスより高い場合が多い。エネピ等で比較できます</div>
+          </div>
+          <div style="background:#f0fbf5;border:1.5px solid #b8e8c8;border-radius:10px;padding:.8rem;font-size:12px;color:#1f6e36">
+            📚 参考：<a href="https://enechange.jp/" target="_blank" rel="noopener" style="color:#1a5a8a">エネチェンジ（電力比較）</a>
+          </div>
+          <div class="ad-native" style="margin-top:10px" onclick="adClick('enechange')">
+            <div class="ad-n-icon">⚡</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">エネチェンジで無料シミュレーション</div><div class="ad-n-sub">郵便番号1つで最安プランを診断 →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2: サブスク（メモ保存機能付き） -->
+      <div class="detail-card" id="detail-2" style="display:none">
+        <div class="card">
+          <div class="ctit">🔑 サブスク整理ツール（メモ保存）</div>
+          <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:12px">まず何に加入しているかを書き出しましょう。このページ上で入力・保存できます。ブラウザを閉じても残ります。</div>
+
+          <!-- メモツール -->
+          <div style="background:#f0f8ff;border:1.5px solid #a8d8ee;border-radius:14px;padding:1rem;margin-bottom:14px">
+            <div style="font-size:13px;font-weight:700;color:#1a4a8a;margin-bottom:10px">📝 サブスク一覧メモ</div>
+            <div id="sub-list-container"></div>
+            <button onclick="addSubEntry()" style="width:100%;padding:8px;border-radius:8px;border:1.5px dashed #a8d8ee;background:#fff;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;color:#1a4a8a;margin-top:8px">＋ サービスを追加</button>
+            <div style="display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid #d0e8f8">
+              <div style="font-size:12px;color:#666">月額合計：<strong id="sub-total-monthly" style="color:#c85a1a;font-size:15px">0円</strong></div>
+              <div style="font-size:12px;color:#666">年額合計：<strong id="sub-total-yearly" style="color:#c85a1a;font-size:15px">0円</strong></div>
+            </div>
+            <div style="font-size:11px;color:#aaa;margin-top:6px">💾 入力すると自動でブラウザに保存されます</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🔍 サブスクの確認方法</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>📱 iPhoneの場合：</strong>設定アプリ → Apple ID → サブスクリプション → 一覧が表示される</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>🤖 Androidの場合：</strong>Google Playストア → メニュー → 定期購入 → 一覧が表示される</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>💳 クレカ明細：</strong>3ヶ月分の明細を見返して定期引き落としをリストアップ</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🗑️ 解約の判断基準</div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:12px">
+            <div style="background:#fff3ee;border-radius:8px;padding:6px 10px;border-left:3px solid #e07040;font-size:12px;color:#5a3a20">この1ヶ月で1回も使わなかった → <strong>即解約を検討</strong></div>
+            <div style="background:#fff3ee;border-radius:8px;padding:6px 10px;border-left:3px solid #e07040;font-size:12px;color:#5a3a20">似たサービスに複数加入 → <strong>1本に絞る</strong></div>
+            <div style="background:#fff3ee;border-radius:8px;padding:6px 10px;border-left:3px solid #e07040;font-size:12px;color:#5a3a20">年払いで割安でも使わない → <strong>翌年更新前に解約予約</strong></div>
+          </div>
+
+          <!-- 広告：マネーフォワード（家計管理・サブスク可視化） -->
+          <div class="ad-native" onclick="adClick('moneyforward')">
+            <div class="ad-n-icon">📊</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">マネーフォワード ME｜お金の見える化</div><div class="ad-n-sub">サブスク・固定費を自動で分類して一括管理 →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: 生命保険 -->
+      <div class="detail-card" id="detail-3" style="display:none">
+        <div class="card">
+          <div class="ctit">🏥 生命保険の見直し方</div>
+          <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:12px">「昔加入したまま放置」が一番もったいないケース。ライフステージが変わると必要な保障も変わります。まずは現状把握から始めましょう。</div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🔍 今の保険を棚卸しするチェックポイント</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>① 保険証券を全部出す</strong>：何に入っているか把握する。意外と忘れているものが多い</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>② 保険の目的を確認</strong>：「誰のため」「何のリスク」に備えているのかを整理する</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>③ 今の家族状況に合っているか</strong>：子どもが独立した、共働きになった等で保障額の見直しを</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">💡 保険種類別の見直しのポイント</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+            <div style="border:1px solid #e8e4dc;border-radius:10px;padding:.7rem .9rem">
+              <div style="font-size:12px;font-weight:700;color:#2c2c2a;margin-bottom:4px">🛡️ 死亡保険（生命保険）</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">配偶者・子どもがいる間は重要。子どもが独立した・共働きになったなら<strong>保障額を減らせる</strong>場合が多い。定期保険の方が掛け捨てで安い。終身保険は資産性があるが保険料が高め。</div>
+            </div>
+            <div style="border:1px solid #e8e4dc;border-radius:10px;padding:.7rem .9rem">
+              <div style="font-size:12px;font-weight:700;color:#2c2c2a;margin-bottom:4px">🏥 医療保険・がん保険</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">公的医療保険（健康保険）で高額療養費制度があり、月の医療費自己負担には上限があります。過剰な保障は不要な場合も。特約を精査して不要なものを外すと保険料が下がることが多い。</div>
+            </div>
+            <div style="border:1px solid #e8e4dc;border-radius:10px;padding:.7rem .9rem">
+              <div style="font-size:12px;font-weight:700;color:#2c2c2a;margin-bottom:4px">🏠 火災保険・地震保険</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">持ち家は必須。賃貸は家財保険のみでOK。地震保険は単独加入不可（火災保険とセット）。更新時に比較サイトで見直すと数千〜数万円の節約になるケースあり。</div>
+            </div>
+          </div>
+
+          <div style="background:#fff8e0;border:1.5px solid #f0d090;border-radius:10px;padding:.8rem;font-size:12px;color:#7a5010;margin-bottom:10px">
+            ⚠️ <strong>保険の見直しは慎重に。</strong>解約すると再加入時に保険料が上がる・健康状態によっては加入できないことがあります。複数の保険代理店や「保険見直しラボ」「ほけんの窓口」等の無料相談を利用するのがおすすめです。
+          </div>
+          <div style="font-size:11px;color:#aaa">※このサイトは参考情報です。保険の加入・解約は必ず専門家にご相談ください。</div>
+          <!-- 広告：保険見直し相談 -->
+          <div class="ad-native" style="margin-top:12px" onclick="adClick('hoken_madoguchi')">
+            <div class="ad-n-icon">🏥</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">ほけんの窓口｜無料の保険相談</div><div class="ad-n-sub">プロが中立的に保険を見直し・提案 →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4: ガス -->
+      <div class="detail-card" id="detail-4" style="display:none">
+        <div class="card">
+          <div class="ctit">🔥 ガス会社の切り替え方</div>
+          <div class="nb-g" style="margin-bottom:12px"><div class="ntit-g">💡 都市ガスは2017年から自由化されています</div><div class="ntxt-g">電気と同様に、都市ガスも供給会社を自由に選べます。プロパンガスは別の見直し方法があります。</div></div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">都市ガスの場合</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a">電力会社との<strong>セット割を活用</strong>するのが最も効果的（東京電力×東京ガス等）</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a">ガス比較サイト（エネチェンジ等）でお住まいのエリアのプランを比較</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a">工事不要・手続きはオンラインで完結できる場合が多い</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">プロパンガスの場合</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#fff3ee;border-radius:8px;padding:.6rem .8rem;border-left:3px solid #e07040;font-size:12px;color:#5a3a20">プロパンガスは<strong>会社によって料金が大きく異なります</strong>（同じ使用量で月2,000〜5,000円差も）</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a">「エネピ」などのプロパンガス比較サービスで現在の料金が相場より高いか確認できます</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a">賃貸でも交渉・変更できる場合あり（管理会社に確認が必要）</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">節ガスのコツ（今すぐできる）</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
+            <div style="background:#faf9f7;border-radius:8px;padding:.5rem .7rem;color:#444">🍳 料理は中火〜弱火を基本に</div>
+            <div style="background:#faf9f7;border-radius:8px;padding:.5rem .7rem;color:#444">🚿 シャワー時間を1分短縮</div>
+            <div style="background:#faf9f7;border-radius:8px;padding:.5rem .7rem;color:#444">🌡️ 給湯温度を1〜2度下げる</div>
+            <div style="background:#faf9f7;border-radius:8px;padding:.5rem .7rem;color:#444">🍲 まとめ炊き・作り置き</div>
+          </div>
+          <!-- 広告：ガス比較 -->
+          <div class="ad-native" style="margin-top:12px" onclick="adClick('enepi_gas')">
+            <div class="ad-n-icon">🔥</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">エネピ｜プロパンガス無料比較</div><div class="ad-n-sub">同じ使い方なのに月2,000円安くなることも →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5: ネット回線（詳細・タイプ別選び方付き） -->
+      <div class="detail-card" id="detail-5" style="display:none">
+        <div class="card">
+          <div class="ctit">🌐 ネット回線の賢い選び方</div>
+
+          <!-- STEP 1: タイプ診断 -->
+          <div style="background:linear-gradient(135deg,#f0f8ff,#e8f5e0);border-radius:14px;padding:1rem;margin-bottom:14px;border:1.5px solid #a8d8c8">
+            <div style="font-size:14px;font-weight:700;color:#1a4a6e;margin-bottom:10px">⬇️ まず自分のスマホキャリアを確認</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="background:#fff;border-radius:10px;padding:.7rem;border:1.5px solid #c0d8f0">
+                <div style="font-size:11px;font-weight:700;color:#1a4a8a;margin-bottom:4px">📱 ドコモ利用中</div>
+                <div style="font-size:12px;color:#444">→ <strong>ドコモ光</strong>でセット割<br>月最大1,100円引き</div>
+              </div>
+              <div style="background:#fff;border-radius:10px;padding:.7rem;border:1.5px solid #c0d8f0">
+                <div style="font-size:11px;font-weight:700;color:#1a4a8a;margin-bottom:4px">📱 au/UQ利用中</div>
+                <div style="font-size:12px;color:#444">→ <strong>auひかり</strong>でセット割<br>月最大1,100円引き</div>
+              </div>
+              <div style="background:#fff;border-radius:10px;padding:.7rem;border:1.5px solid #c0d8f0">
+                <div style="font-size:11px;font-weight:700;color:#1a4a8a;margin-bottom:4px">📱 SB/ワイモバ利用中</div>
+                <div style="font-size:12px;color:#444">→ <strong>SoftBank光</strong>でセット割<br>月最大1,100円引き</div>
+              </div>
+              <div style="background:#fff;border-radius:10px;padding:.7rem;border:1.5px solid #c0d8f0">
+                <div style="font-size:11px;font-weight:700;color:#1a4a8a;margin-bottom:4px">📱 格安SIM/楽天</div>
+                <div style="font-size:12px;color:#444">→ <strong>GMOとくとくBB光</strong><br>縛りなし・月4,818円〜</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 住居タイプ別 -->
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🏠 住居タイプ別の目安料金（月額）</div>
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table style="width:100%;border-collapse:collapse;font-size:12px">
+              <thead>
+                <tr style="background:#f0f8ff">
+                  <th style="padding:6px 8px;text-align:left;border:1px solid #d0e8f8;color:#1a4a8a">回線</th>
+                  <th style="padding:6px 8px;text-align:center;border:1px solid #d0e8f8;color:#1a4a8a">戸建て</th>
+                  <th style="padding:6px 8px;text-align:center;border:1px solid #d0e8f8;color:#1a4a8a">マンション</th>
+                  <th style="padding:6px 8px;text-align:center;border:1px solid #d0e8f8;color:#1a4a8a">特徴</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:5px 8px;border:1px solid #e8f0f8">ドコモ光</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">5,720円</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">4,400円</td><td style="padding:5px 8px;border:1px solid #e8f0f8">ドコモユーザーはセット割で実質安い</td></tr>
+                <tr style="background:#f8f8ff"><td style="padding:5px 8px;border:1px solid #e8f0f8">auひかり</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">5,610円</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">4,510円</td><td style="padding:5px 8px;border:1px solid #e8f0f8">独自回線で速度が安定</td></tr>
+                <tr><td style="padding:5px 8px;border:1px solid #e8f0f8">SoftBank光</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">5,720円</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">4,180円</td><td style="padding:5px 8px;border:1px solid #e8f0f8">ソフトバンクユーザーにお得</td></tr>
+                <tr style="background:#f8f8ff"><td style="padding:5px 8px;border:1px solid #e8f0f8">GMOとくとくBB光</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">4,818円</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">3,773円</td><td style="padding:5px 8px;border:1px solid #e8f0f8">縛りなし・格安SIMユーザーに◎</td></tr>
+                <tr><td style="padding:5px 8px;border:1px solid #e8f0f8">NURO光</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">5,200円</td><td style="padding:5px 8px;border:1px solid #e8f0f8;text-align:center">3,192円〜</td><td style="padding:5px 8px;border:1px solid #e8f0f8">最速クラス・一部エリア限定</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="font-size:10px;color:#aaa;margin-bottom:12px">※2026年4月時点の税込料金目安。キャンペーン・セット割適用前の基本料金。各社公式サイトで最新情報を確認ください。</div>
+
+          <!-- タイプ別おすすめ -->
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">✅ こんな方におすすめ</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>🎮 速度・安定重視（ゲーム・在宅ワーク）</strong>→ NURO光（独自回線で最速クラス。エリア確認必須）またはauひかり</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>💰 コスパ重視・縛りなし希望</strong>→ GMOとくとくBB光（月4,818円〜・解約金なし）</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>📺 ファミリー向け・安定重視</strong>→ 使っているスマホキャリアの光回線でセット割が最もシンプル</div>
+            <div style="background:#f0f8ff;border-radius:8px;padding:.6rem .8rem;font-size:12px;color:#2a4a6a"><strong>🏢 マンション・工事不要希望</strong>→ まず建物の対応回線を管理会社に確認。既設備があれば工事なしで開通可能なことも</div>
+          </div>
+
+          <!-- 注意点 -->
+          <div style="background:#fff3ee;border:1.5px solid #f0c090;border-radius:10px;padding:.8rem;font-size:12px;color:#7a4020;margin-bottom:12px">
+            ⚠️ <strong>注意：</strong>契約期間中（2〜3年縛り）の解約は違約金が発生する場合があります。更新月（契約満了月）に見直すのがベスト。スマホを格安SIMに変える場合、キャリアとのセット割が外れることがあるため、先に光回線との合計額を試算してください。
+          </div>
+
+          <div style="font-size:12px;color:#1f6e36;background:#f0fbf5;border-radius:10px;padding:.8rem;margin-bottom:10px">
+            📚 参考：<a href="https://hikari.news.mynavi.jp/" target="_blank" rel="noopener" style="color:#1a5a8a">光回線のトリセツ（徹底比較）</a> ／ <a href="https://mayabs.co.jp/column/fiber-hikari-erabi/" target="_blank" rel="noopener" style="color:#1a5a8a">タイプ別選び方ガイド（MAYA）</a>
+          </div>
+
+          <!-- 広告：光回線比較 -->
+          <div class="ad-native" onclick="adClick('hikari_compare')">
+            <div class="ad-n-icon">🌐</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">GMOとくとくBB光｜縛りなし・最大42,000円CB</div><div class="ad-n-sub">格安SIM利用中の方・キャリア問わずおすすめ →</div></div>
+          </div>
+          <div class="ad-native" style="margin-top:8px" onclick="adClick('nuro')">
+            <div class="ad-n-icon">⚡</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">NURO光｜2ギガ超高速回線</div><div class="ad-n-sub">2ヶ月無料お試し・エリア確認はこちら →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6: クレカ（詳細・カード別比較付き） -->
+      <div class="detail-card" id="detail-6" style="display:none">
+        <div class="card">
+          <div class="ctit">💳 クレカ最適化ガイド</div>
+
+          <!-- 基本ルール -->
+          <div style="background:linear-gradient(135deg,#fff8e0,#fff3ec);border-radius:14px;padding:1rem;margin-bottom:14px;border:1.5px solid #f0d090">
+            <div style="font-size:14px;font-weight:700;color:#8a5010;margin-bottom:8px">💡 大原則：固定費を1枚の高還元カードに集約するだけでOK</div>
+            <div style="font-size:12px;color:#5a3a10;line-height:1.7">電気代・ガス代・スマホ代・ネット代・保険料などをまとめてクレカ払いにすると、<strong>毎月自動でポイントが貯まります</strong>。月10万円の固定費なら、還元率1%で年間<strong>12,000ポイント</strong>（≒12,000円分）獲得できます。</div>
+          </div>
+
+          <!-- 用途別カード比較表 -->
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">📊 用途別おすすめカード（年会費無料・2026年4月）</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+            <div style="background:#f5f5ff;border-radius:10px;padding:.8rem;border:1px solid #d8d0f0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <span style="font-size:13px;font-weight:700;color:#2c2c2a">🏆 固定費まとめ払い最強</span>
+                <span style="font-size:12px;background:#e8e0ff;color:#4a3a9a;padding:2px 8px;border-radius:10px;font-weight:700">還元率1.2%</span>
+              </div>
+              <div style="font-size:12px;color:#444;margin-bottom:2px"><strong>リクルートカード</strong>（年会費永年無料）</div>
+              <div style="font-size:11px;color:#777">公共料金・固定費でも一律1.2%還元。ポンタポイントやdポイントに交換可。固定費が多い家庭に特におすすめ。</div>
+            </div>
+            <div style="background:#fff8e0;border-radius:10px;padding:.8rem;border:1px solid #f0d890">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <span style="font-size:13px;font-weight:700;color:#2c2c2a">🛒 楽天系サービスをよく使う</span>
+                <span style="font-size:12px;background:#ffe8c0;color:#8a5010;padding:2px 8px;border-radius:10px;font-weight:700">還元率1.0%</span>
+              </div>
+              <div style="font-size:12px;color:#444;margin-bottom:2px"><strong>楽天カード</strong>（年会費永年無料）</div>
+              <div style="font-size:11px;color:#777">楽天市場では3%還元。ふるさと納税も楽天で申し込めば一元管理が楽。ただし<strong>公共料金は0.2%と低還元</strong>な点に注意。</div>
+            </div>
+            <div style="background:#f0fff0;border-radius:10px;padding:.8rem;border:1px solid #c0e8c0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <span style="font-size:13px;font-weight:700;color:#2c2c2a">🏪 コンビニ・カフェをよく使う</span>
+                <span style="font-size:12px;background:#c8f0c8;color:#1a5a1a;padding:2px 8px;border-radius:10px;font-weight:700">対象店で最大7%</span>
+              </div>
+              <div style="font-size:12px;color:#444;margin-bottom:2px"><strong>三井住友カード（NL）</strong>（年会費永年無料）</div>
+              <div style="font-size:11px;color:#777">セブン・ローソン・マクドナルド等でタッチ決済すると最大7%還元。普段使いに最強だが公共料金は0.5%。</div>
+            </div>
+            <div style="background:#f0f8ff;border-radius:10px;padding:.8rem;border:1px solid #c0d8f0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <span style="font-size:13px;font-weight:700;color:#2c2c2a">📱 PayPayをよく使う</span>
+                <span style="font-size:12px;background:#c8e8ff;color:#1a4a8a;padding:2px 8px;border-radius:10px;font-weight:700">還元率1.0%</span>
+              </div>
+              <div style="font-size:12px;color:#444;margin-bottom:2px"><strong>PayPayカード</strong>（年会費永年無料）</div>
+              <div style="font-size:11px;color:#777">公共料金含む全支払いで1%還元。PayPayとの連携でさらに便利。Yahoo!ショッピングでは最大5%以上に。</div>
+            </div>
+          </div>
+
+          <!-- 組み合わせ提案 -->
+          <div style="background:#f0fbf5;border:1.5px solid #b8e8c8;border-radius:12px;padding:.9rem;margin-bottom:12px">
+            <div style="font-size:13px;font-weight:700;color:#1f6e36;margin-bottom:6px">💡 最強の2枚組み合わせ（よく使うシーンで使い分け）</div>
+            <div style="font-size:12px;color:#2a5a3a;line-height:1.7">
+              ① <strong>リクルートカード</strong>：電気・ガス・スマホ・ネット・保険などの固定費（1.2%）<br>
+              ② <strong>三井住友カード（NL）</strong>：コンビニ・マクドナルド等の日常的な買い物（最大7%）<br>
+              →この組み合わせで年間のポイント獲得が最大化しやすい
+            </div>
+          </div>
+
+          <div style="background:#fff8e0;border:1.5px solid #f0d090;border-radius:10px;padding:.8rem;font-size:12px;color:#7a5010;margin-bottom:12px">
+            ⚠️ 分割払い・リボ払いは手数料年15〜18%。必ず1回払いで。年会費が高いカードは年間利用額とのバランスを確認してから。
+          </div>
+
+          <div style="font-size:12px;color:#1f6e36;background:#f0fbf5;border-radius:10px;padding:.8rem;margin-bottom:10px">
+            📚 参考：<a href="https://my-best.com/10240" target="_blank" rel="noopener" style="color:#1a5a8a">高還元クレジットカード比較（マイベスト）</a> ／ <a href="https://my-best.com/18767" target="_blank" rel="noopener" style="color:#1a5a8a">公共料金に強いクレカ比較</a>
+          </div>
+
+          <!-- 広告：クレカ申込 -->
+          <div class="ad-native" onclick="adClick('recruit_card')">
+            <div class="ad-n-icon">💳</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">リクルートカード｜固定費払いで1.2%還元</div><div class="ad-n-sub">年会費永年無料・最短即日発行 →</div></div>
+          </div>
+          <div class="ad-native" style="margin-top:8px" onclick="adClick('mitsui_card')">
+            <div class="ad-n-icon">🏪</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">三井住友カード（NL）｜コンビニで最大7%</div><div class="ad-n-sub">年会費永年無料・ナンバーレスで安全 →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7: NHK -->
+      <div class="detail-card" id="detail-7" style="display:none">
+        <div class="card">
+          <div class="ctit">📺 NHK受信料の支払い最適化</div>
+          <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:12px">NHK受信料はすでに払っている方がほとんどですが、<strong>支払い方法を変えるだけ</strong>で節約できます。</div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">📊 支払い方法による年額の違い</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+            <div style="background:#faf9f7;border-radius:10px;padding:.7rem;text-align:center;border:1px solid #e8e4dc">
+              <div style="font-size:11px;color:#888;margin-bottom:2px">月払い（口座振替）</div>
+              <div style="font-size:17px;font-weight:700;color:#c85a1a">2,450円/月</div>
+              <div style="font-size:10px;color:#aaa">年計29,400円</div>
+            </div>
+            <div style="background:#e8f5e0;border-radius:10px;padding:.7rem;text-align:center;border:1.5px solid #b8e8c8">
+              <div style="font-size:11px;color:#2e6e3a;margin-bottom:2px">2年前払い（クレカ）</div>
+              <div style="font-size:17px;font-weight:700;color:#1a6e2e">約2,170円/月</div>
+              <div style="font-size:10px;color:#3a8f4e">年計約26,040円（約3,360円お得）</div>
+            </div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">手続き方法</div>
+          <div class="tl" style="margin-bottom:12px">
+            <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">STEP 1</div><div class="tlx">NHK受信料の公式サイト（nhk.or.jp）にアクセス</div></div>
+            <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">STEP 2</div><div class="tlx">「クレジットカード支払い」「2年前払い」を選択して申し込み</div></div>
+            <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">STEP 3</div><div class="tlx">クレカのポイントも同時に獲得できます（年約300〜600ポイント）</div></div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:6px">免除・割引制度（知らない方が多い）</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#444">
+            <div style="background:#faf9f7;border-radius:8px;padding:.5rem .7rem">住民税非課税世帯・生活保護受給世帯 → <strong>全額免除</strong></div>
+            <div style="background:#faf9f7;border-radius:8px;padding:.5rem .7rem">障害者がいる世帯（要件あり） → <strong>全額または半額免除</strong></div>
+            <div style="background:#faf9f7;border-radius:8px;padding:.5rem .7rem">学生（一人暮らし・要件あり） → <strong>半額免除</strong></div>
+          </div>
+          <div style="font-size:11px;color:#aaa;margin-top:6px">免除申請はNHKへの申し込みが必要です。自動的には適用されません。</div>
+        </div>
+      </div>
+
+    </div><!-- /#fixed-details -->
+
+    <!-- ===== 楽天経済圏・まとめて動けるコース ===== -->
+    <div class="card" style="border:1.5px solid #e8e0dc;margin-top:4px">
+      <div class="ctit">🔍 あなたの生活スタイルに合う「経済圏」を見つけよう</div>
+      <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:14px">スマホ・クレカ・光回線を同じグループにまとめることで、ポイントが集中して貯まりやすくなります。どの「経済圏」が自分に合うかを確認してみましょう。</div>
+
+      <!-- アコーディオン形式で4経済圏 -->
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)">
+          <div class="bname" style="color:#c63300">🔴 楽天経済圏</div>
+          <div style="font-size:11px;color:#888;flex-shrink:0">楽天をよく使う方向け</div>
+          <span class="chev">▾</span>
+        </div>
+        <div class="bdet">
+          <div style="font-size:12px;color:#5a2a1a;background:#fff3ee;border-radius:8px;padding:.7rem;margin-bottom:10px;line-height:1.7">
+            <strong>こんな人に向いている：</strong>楽天市場をよく使う・楽天モバイルに興味がある・管理をシンプルにしたい
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#cc3300;margin-bottom:6px">まとめるサービス一覧</div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+            <div style="display:flex;gap:8px;align-items:flex-start;background:#faf9f7;border-radius:7px;padding:.5rem .7rem">
+              <span style="font-size:14px;flex-shrink:0">📱</span>
+              <div style="font-size:12px;color:#444"><strong>楽天モバイル</strong>：月1,078円〜。SPUのポイント倍率がアップ</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start;background:#faf9f7;border-radius:7px;padding:.5rem .7rem">
+              <span style="font-size:14px;flex-shrink:0">💳</span>
+              <div style="font-size:12px;color:#444"><strong>楽天カード</strong>：固定費を集約。楽天市場でいつでも3%還元</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start;background:#faf9f7;border-radius:7px;padding:.5rem .7rem">
+              <span style="font-size:14px;flex-shrink:0">🌐</span>
+              <div style="font-size:12px;color:#444"><strong>楽天ひかり</strong>：モバイルとセットで1年間基本料無料の特典も</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start;background:#faf9f7;border-radius:7px;padding:.5rem .7rem">
+              <span style="font-size:14px;flex-shrink:0">📈</span>
+              <div style="font-size:12px;color:#444"><strong>楽天証券（NISA）</strong>：カードで積立するとポイント還元</div>
+            </div>
+          </div>
+          <div style="background:#fff8e0;border-radius:8px;padding:.6rem .8rem;font-size:11px;color:#7a5010;margin-bottom:10px">
+            ⚠️ 楽天カードの公共料金還元率は0.2%と低め。楽天でんきは市場連動型で価格変動あり。「管理をシンプルにしてポイントをまとめたい人向け」の選択肢です。
+          </div>
+          <div class="ad-native" onclick="adClick('rakuten_card')">
+            <div class="ad-n-icon" style="background:#ffe0d0">🎴</div>
+            <div><div class="ad-n-label">PR・広告</div><div class="ad-n-title">楽天カード｜年会費無料・入会ポイントプレゼント</div><div class="ad-n-sub">楽天経済圏の入口として人気No.1 →</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)">
+          <div class="bname" style="color:#1a5a8a">🔵 ドコモ経済圏</div>
+          <div style="font-size:11px;color:#888;flex-shrink:0">ドコモユーザー向け</div>
+          <span class="chev">▾</span>
+        </div>
+        <div class="bdet">
+          <div style="font-size:12px;color:#2a3a5a;background:#f0f4ff;border-radius:8px;padding:.7rem;margin-bottom:10px;line-height:1.7">
+            <strong>こんな人に向いている：</strong>ドコモユーザー・dポイントを貯めたい・d払いをよく使う・セブン-イレブンをよく利用する
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px">
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>📱 ドコモ</strong>（スマホ）＋ <strong>💳 dカード GOLD</strong>（還元率10%）</div>
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>🌐 ドコモ光</strong>でセット割（月最大1,100円割引）</div>
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>💰 dポイント</strong>でローソン・マクドナルドをお得に</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)">
+          <div class="bname" style="color:#2e7a42">🟢 au経済圏</div>
+          <div style="font-size:11px;color:#888;flex-shrink:0">au/UQユーザー向け</div>
+          <span class="chev">▾</span>
+        </div>
+        <div class="bdet">
+          <div style="font-size:12px;color:#1a4a2a;background:#f0fbf5;border-radius:8px;padding:.7rem;margin-bottom:10px;line-height:1.7">
+            <strong>こんな人に向いている：</strong>au/UQモバイルユーザー・Pontaポイントを貯めたい・ローソンをよく使う
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px">
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>📱 au/UQモバイル</strong>＋ <strong>💳 au PAYカード</strong>（1%還元）</div>
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>🌐 auひかり</strong>でセット割（月最大1,100円割引）</div>
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>💰 Pontaポイント</strong>でローソン・ケンタッキーをお得に</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bitem" style="border-bottom:none">
+        <div class="bhdr" onclick="tog(this)">
+          <div class="bname" style="color:#555">⚪ 経済圏にこだわらない（最も合理的な組み合わせ）</div>
+          <div style="font-size:11px;color:#888;flex-shrink:0">キャリア問わず</div>
+          <span class="chev">▾</span>
+        </div>
+        <div class="bdet">
+          <div style="font-size:12px;color:#444;background:#f5f5f5;border-radius:8px;padding:.7rem;margin-bottom:10px;line-height:1.7">
+            <strong>こんな人に向いている：</strong>格安SIM利用中・特定の経済圏にこだわらず最高コスパを追求したい
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>💳 リクルートカード</strong>：固定費の支払いで一律1.2%還元（公共料金でも）</div>
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>💳 三井住友カード（NL）</strong>：コンビニ・マクドナルド等で最大7%還元</div>
+            <div style="background:#faf9f7;border-radius:7px;padding:.5rem .7rem;font-size:12px;color:#444"><strong>📱 楽天モバイル or UQモバイル</strong>：格安で速度も安定</div>
+          </div>
+          <div style="font-size:11px;color:#888">経済圏への縛りがなく、各分野で最もお得な選択ができます。管理は少し複雑になりますが、節約効果は最大化しやすいです。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="cat-section" id="cat-medical">
+    <div class="card">
+      <div class="ctit">💊 医療費控除＆セルフメディケーション</div>
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)"><div class="bname">医療費控除（基本）</div><div class="baw-g">年10万円超で節税</div><span class="chev">▾</span></div>
+        <div class="bdet">
+          <div class="nb-g"><div class="ntit-g">📌 対象となる費用</div><div class="ntxt-g">・病院・歯科・接骨院の窓口支払い<br>・処方された薬（一部の市販薬も対象）<br>・出産費用（正常分娩・入院費など）<br>・通院のための交通費（公共交通機関）<br>・インフルエンザなど一部の予防接種</div></div>
+          <div style="font-size:13px;color:#444;line-height:1.7">年間の医療費合計が<strong>10万円（所得が200万円未満の場合は所得の5%）</strong>を超えた分が所得控除の対象。確定申告が必要。レシート・領収書は必ず保管を。</div>
+        </div>
+      </div>
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)"><div class="bname">セルフメディケーション税制</div><div class="baw-g">薬12,000円超で節税</div><span class="chev">▾</span></div>
+        <div class="bdet">
+          <div class="nb-g"><div class="ntit-g">📌 仕組みと条件</div><div class="ntxt-g">ドラッグストアのスイッチOTC医薬品（箱に「セルフメディケーション税制対象」マーク）が年間12,000円を超えた分が所得控除（最大88,000円）。健康診断や予防接種を受けていることが条件。</div></div>
+          <div class="otcb">
+            <div style="font-size:13px;font-weight:700;color:#a07010">📝 今年の購入額を記録しよう</div>
+            <div class="orow"><input type="number" id="otcv" placeholder="例: 8000" min="0" oninput="updOTC()" /><span style="font-size:14px;color:#666">円</span></div>
+            <div class="pbbg"><div class="pbfl" id="obar" style="width:0%"></div></div>
+            <div class="ores" id="ores">ドラッグストアのレシートを見ながら入力してみてください</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)"><div class="bname">生命保険料控除</div><div class="baw-g">年末調整でほぼ自動</div><span class="chev">▾</span></div>
+        <div class="bdet"><div class="nb-g"><div class="ntit-g">📌 ポイント</div><div class="ntxt-g">生命保険・医療保険・介護保険・個人年金の保険料は所得控除の対象。年末に届く「控除証明書」を年末調整に提出するだけでOK（会社員は会社経由）。証明書を必ず提出しましょう。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ポイ活 -->
+  <div class="cat-section" id="cat-points">
+    <div class="card">
+      <div class="ctit">⭐ ポイ活で年間数万円を積み上げよう</div>
+      <div class="nb" style="background:#fff8f0;border-color:#f0c090">
+        <div class="ntit" style="color:#c85a1a">⚠️ 2025年10月〜：ふるさと納税のポイント付与は禁止に</div>
+        <div class="ntxt" style="color:#5a3a1a">総務省の告示により、2025年10月1日から<strong>楽天・さとふる・ふるなびなど全てのポータルサイトでふるさと納税へのポイント付与が禁止</strong>されました（楽天は禁止の撤回を求め訴訟中）。ふるさと納税は引き続き「返礼品」が受け取れるため、返礼品そのものの価値は変わりません。クレジットカードの通常ショッピングのポイントは引き続き活用できます。</div>
+      </div>
+      <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px;margin-top:4px">ふるさと納税以外で稼ぐポイ活チャンス</div>
+      <div class="point-row"><div class="point-name">電気・ガス代をクレカ払いに集約</div><div class="point-badge pb-green">還元率1〜2%</div></div>
+      <div class="point-row"><div class="point-name">スマホ代・ネット代のクレカ払い</div><div class="point-badge pb-green">還元率1〜3%</div></div>
+      <div class="point-row"><div class="point-name">スーパーのポイントカード活用</div><div class="point-badge pb-blue">2〜5倍デーを活用</div></div>
+      <div class="point-row"><div class="point-name">Paypay・d払いのキャンペーン</div><div class="point-badge pb-yellow">期間限定で還元率UP</div></div>
+      <div class="point-row"><div class="point-name">固定費を高還元カード1枚に集約</div><div class="point-badge pb-green">年1〜2万円相当</div></div>
+      <div class="nb-g" style="margin-top:12px">
+        <div class="ntit-g">💡 ポイ活のコツ</div>
+        <div class="ntxt-g">
+          ・還元率1.5%以上のカードに固定費を集約するだけで年1〜2万円ポイント獲得<br>
+          ・ポイントは現金同様に使える場合が多いが、有効期限に注意<br>
+          ・複数のポイントに分散させず、1〜2種類に絞るのが管理しやすい<br>
+          ・「ポイント目当て」の余計な買い物は本末転倒
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctit">🛒 食費を賢く削減するコツ</div>
+      <div class="point-row"><div class="point-name">スーパーのPB（プライベートブランド）を活用</div><div class="point-badge pb-green">同品質で2〜3割安</div></div>
+      <div class="point-row"><div class="point-name">まとめ買い＆冷凍保存でフードロス削減</div><div class="point-badge pb-green">月3,000〜5,000円節約</div></div>
+      <div class="point-row"><div class="point-name">ふるさと納税の食品返礼品を活用</div><div class="point-badge pb-yellow">年2,000円負担で返礼品の食材を確保</div></div>
+      <div class="point-row"><div class="point-name">コンビニの利用頻度を下げる</div><div class="point-badge pb-blue">月5千〜1万円節約</div></div>
+      <div class="point-row"><div class="point-name">外食を週1回減らす（1回2,000円換算）</div><div class="point-badge pb-green">年間約10万円節約</div></div>
+    </div>
+  </div>
+
+  <!-- 住宅・ローン -->
+  <div class="cat-section" id="cat-housing">
+    <div class="card">
+      <div class="ctit">🏠 住宅ローン控除・住宅に関する節税</div>
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)">
+          <div class="bname">住宅ローン控除（2026年改正）</div>
+          <div class="baw-g">最大21万円/年の税額控除</div>
+          <span class="chev">▾</span>
+        </div>
+        <div class="bdet">
+          <div class="nb-g">
+            <div class="ntit-g">📌 2026年入居の場合のポイント</div>
+            <div class="ntxt-g">省エネ基準適合住宅の控除率は0.7%、最大控除期間13年。所得要件は合計所得2,000万円以下。年末時点のローン残高×0.7%が毎年税額から直接差し引かれます（所得控除ではなく税額控除）。</div>
+          </div>
+          <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:10px">
+            今は金利上昇局面のため「繰り上げ返済 vs NISA運用」のどちらが得かという議論が活発です。住宅ローン控除を受けている期間中は、ローン残高が多いほど控除額も大きくなるため、<strong>必ずしも早期完済が最善ではありません</strong>。
+          </div>
+          <div class="nb">
+            <div class="ntit">💡 繰り上げ返済 vs NISA運用 — 判断の目安</div>
+            <div class="ntxt">
+              ・住宅ローンの金利が低い（1%以下）→ NISA運用の期待リターン（年3〜5%）の方が有利なケースが多い<br>
+              ・住宅ローン控除の期間中（入居から13年）→ 繰り上げ返済でローン残高を減らすと控除額も減る<br>
+              ・金利が2%超 / 控除期間終了後 → 繰り上げ返済を優先する価値が高まる<br>
+              ※個別の条件によって異なります。FP・銀行に相談を。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)">
+          <div class="bname">住宅ローンの借り換え・金利見直し</div>
+          <div class="baw-g">月1〜3万円の削減も</div>
+          <span class="chev">▾</span>
+        </div>
+        <div class="bdet">
+          <div class="nb-g">
+            <div class="ntit-g">📌 借り換えが有効なケース</div>
+            <div class="ntxt-g">
+              ・現在の金利と比べて1%以上の差がある<br>
+              ・残債が1,000万円以上ある<br>
+              ・残返済期間が10年以上ある<br>
+              この3条件が揃う場合、借り換えで総返済額が数十万〜数百万円減るケースがあります。まずは住宅ローン比較サイトで試算を。
+            </div>
+          </div>
+          <div style="font-size:12px;color:#999">※2026年は日銀の利上げ継続が見込まれており、変動金利型の方は今後の金利動向に注意が必要です。</div>
+        </div>
+      </div>
+      <div class="bitem">
+        <div class="bhdr" onclick="tog(this)">
+          <div class="bname">不動産取得税・固定資産税の軽減措置</div>
+          <div class="baw-g">新築・購入時は必ず確認</div>
+          <span class="chev">▾</span>
+        </div>
+        <div class="bdet">
+          <div class="nb-g">
+            <div class="ntit-g">📌 主な軽減措置</div>
+            <div class="ntxt-g">
+              ・不動産取得税：新築住宅は1,200万円の控除。申告が必要（自動適用されない場合が多い）<br>
+              ・固定資産税：新築の一戸建ては最初の3年間、マンションは最初の5年間、税額が1/2に軽減<br>
+              ・省エネ・バリアフリーリフォームは固定資産税の軽減申請が可能<br>
+              ※申告忘れが多いため、購入・新築後すぐに自治体へ確認を。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 更新情報 -->
+  <div class="cat-section" id="cat-update">
+    <div class="card">
+      <div class="ctit">🔄 情報の更新頻度と管理について</div>
+      <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:12px">このサイトの各カテゴリの情報更新スケジュールです。制度変更や新しい情報が出次第、随時更新します。</div>
+      <div class="upd-card">
+        <div class="upd-row">
+          <div class="upd-cat">📊 物価・CPI統計</div>
+          <div style="display:flex;align-items:center"><div class="upd-date">毎月更新</div><span class="upd-status upd-fresh">最新</span></div>
+        </div>
+        <div class="upd-row">
+          <div class="upd-cat">⚠️ 負担増・税制情報</div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+        </div>
+        <div class="upd-row">
+          <div class="upd-cat">🎁 給付金・助成情報</div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+        </div>
+        <div class="upd-row">
+          <div class="upd-cat">📈 NISA・iDeCo制度</div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+        </div>
+        <div class="upd-row">
+          <div class="upd-cat">🏘️ ふるさと納税</div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+        </div>
+        <div class="upd-row">
+          <div class="upd-cat">🏘️ ふるさと納税限度額表</div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.07予定</div><span class="upd-status upd-warn">要確認</span></div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:700;color:#5a5a58;margin:12px 0 8px">📅 定期更新スケジュール</div>
+      <div class="tl">
+        <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">毎月（〜5日頃）</div><div class="tlx">総務省CPI（消費者物価指数）の最新値を物価バー・統計に反映</div></div>
+        <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">毎年4月（税制改正施行後）</div><div class="tlx">税制・社会保険料・給付金情報の全面見直し。ふるさと納税限度額表の更新</div></div>
+        <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">毎年12月（税制改正大綱）</div><div class="tlx">翌年の税制改正内容をいち早く反映。特にiDeCo・NISA・年収の壁の変更を優先</div></div>
+        <div class="tli"><div class="tld"></div><div class="tly">随時</div><div class="tlx">給付金の申請期限・新たな給付措置・制度の緊急変更があった場合</div></div>
+      </div>
+      <div class="nb-g" style="margin-top:12px">
+        <div class="ntit-g">🛠️ 運営者向け：更新作業の手順</div>
+        <div class="ntxt-g" style="font-size:12px">
+          このサイトのデータは HTML ファイル内のJavaScript定数（<code>DATA_VERSION</code>・<code>FS</code>・<code>KS</code>・<code>BN</code>・<code>UPDATE_INFO</code>）で管理しています。更新時はこれらの定数を書き換えて再アップロードするだけでOK。次フェーズではJSONファイルに外部化すると更新が楽になります。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-s" onclick="toP2()">← お得情報に戻る</button>
+  <div class="dsc">※ このサイトはあくまでも参考情報です。数値は2026年4月時点の公表情報をもとにした概算で、個別の状況により大きく異なります。投資にはリスクがあります。<br>詳細は <strong>国税庁・金融庁・お住まいの自治体公式サイト</strong> でご確認・ご相談ください。<br>PR・広告掲載あり。掲載内容は2026年4月時点の情報です。</div>
+</div>
+
+
+
+<script>
+
+
+// ===================================================
+// フィードバックシステム
+// ===================================================
+
+// ---- 設定 ----
+// Google Forms のURLをここに設定してください（運営者向け）
+// 取得方法：Google フォームを作成 → 送信 → リンクをコピー → 下記に貼り付け
+const GOOGLE_FORMS_URL = 'https://forms.gle/YOUR_FORM_ID'; // ← ここをGoogle FormsのURLに変更
+
+// Google Forms フィールドのentry.xxxIDは事前にフォームのソースで確認
+// entry.IDはフォームの各質問に対応するIDです
+// 送信先URL（Google Forms prefill URL形式）
+const FORMS_SUBMIT_URL = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+// フィールドID（Google Formsで確認してください）
+const FORMS_FIELDS = {
+  thumb:   'entry.1111111111', // 親指（good/bad）
+  nps:     'entry.2222222222', // NPS 0-10
+  reasons: 'entry.3333333333', // 理由（カンマ区切り）
+  freetext:'entry.4444444444', // 自由記述
+  income:  'entry.5555555555', // 年収帯（任意）
+  family:  'entry.6666666666', // 家族構成（任意）
+  page:    'entry.7777777777', // 訪問ページ
+  visit:   'entry.8888888888', // 訪問回数
+};
+
+// ---- 状態 ----
+const FB = {
+  thumb: null,    // 'good' | 'bad'
+  nps: null,      // 0-10
+  reasons: [],    // string[]
+  freetext: '',
+  trigger: '',    // 'manual' | 'auto_visit' | 'auto_tab' | 'contextual'
+  tabContext: '',
+};
+
+// ---- 訪問カウント ----
+function getVisitCount() {
+  try {
+    const count = parseInt(localStorage.getItem('navi_visits') || '0') + 1;
+    localStorage.setItem('navi_visits', count);
+    return count;
+  } catch(e) { return 1; }
+}
+function hasSubmittedFeedback() {
+  try { return !!localStorage.getItem('navi_fb_done'); } catch(e) { return false; }
+}
+function markFeedbackDone() {
+  try { localStorage.setItem('navi_fb_done', Date.now()); } catch(e) {}
+}
+
+// ---- ドロワー開閉 ----
+function openFeedback(trigger='manual') {
+  FB.trigger = trigger;
+  FB.thumb = null; FB.nps = null; FB.reasons = []; FB.freetext = '';
+  document.getElementById('fb-overlay').classList.add('open');
+  document.getElementById('fb-drawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  initNPSButtons();
+  goStep('thumb');
+  // FloatButtonをいったん隠す
+  document.getElementById('fb-float').style.opacity = '0';
+}
+function closeFeedback() {
+  document.getElementById('fb-overlay').classList.remove('open');
+  document.getElementById('fb-drawer').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('fb-float').style.opacity = '1';
+}
+
+// ---- ステップ遷移 ----
+function goStep(name) {
+  document.querySelectorAll('.fb-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('fb-step-' + name).classList.add('active');
+}
+
+// ---- STEP1: 親指 ----
+function selectThumb(val) {
+  FB.thumb = val;
+  document.getElementById('thumb-good').classList.toggle('selected-good', val === 'good');
+  document.getElementById('thumb-bad').classList.toggle('selected-bad', val === 'bad');
+  document.getElementById('thumb-next-btn').disabled = false;
+  // 改善チップの内容を切り替え
+  updateReasonChips(val);
+}
+
+// ---- STEP2: NPS ----
+function initNPSButtons() {
+  const row = document.getElementById('nps-row');
+  row.innerHTML = '';
+  for(let i = 0; i <= 10; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'fb-nps-btn';
+    btn.textContent = i;
+    btn.onclick = () => selectNPS(i);
+    row.appendChild(btn);
+  }
+}
+function selectNPS(val) {
+  FB.nps = val;
+  document.querySelectorAll('.fb-nps-btn').forEach((b, i) => b.classList.toggle('selected', i === val));
+  document.getElementById('nps-next-btn').disabled = false;
+}
+
+// ---- STEP3: 改善チップ ----
+const CHIPS_GOOD = ['給付金情報がわかりやすい','ふるさと納税の計算が便利','固定費チェックが役立つ','NISAシミュレーターが良い','ニュースが参考になる','節税情報が充実','デザインが見やすい','毎日確認したい'];
+const CHIPS_BAD  = ['情報が多すぎる','欲しい情報が見つからない','計算が合っているか不安','もっと詳しい解説が欲しい','操作が少し難しい','自分に関係ない情報が多い','更新頻度が気になる','広告が多い'];
+
+function updateReasonChips(thumb) {
+  const chips = thumb === 'good' ? CHIPS_GOOD : CHIPS_BAD;
+  const title = thumb === 'good' ? '特に良かったのはどこですか？' : '改善してほしい点はありますか？';
+  document.getElementById('reason-title').textContent = title;
+  const container = document.getElementById('reason-chips');
+  container.innerHTML = chips.map(c => `
+    <button class="fb-chip" onclick="toggleChip(this,'${c}')">${c}</button>
+  `).join('');
+  FB.reasons = [];
+}
+function toggleChip(el, val) {
+  el.classList.toggle('selected');
+  if(el.classList.contains('selected')) {
+    if(!FB.reasons.includes(val)) FB.reasons.push(val);
+  } else {
+    FB.reasons = FB.reasons.filter(r => r !== val);
+  }
+}
+
+// ---- 送信 ----
+function submitFeedback() {
+  FB.freetext = document.getElementById('fb-freetext').value.trim();
+
+  // ローカルに集計データを保存（Google Forms不要でも使えるバックアップ）
+  const entry = {
+    ts: new Date().toISOString(),
+    thumb: FB.thumb,
+    nps: FB.nps,
+    reasons: FB.reasons,
+    freetext: FB.freetext,
+    trigger: FB.trigger,
+    income: uI || null,
+    family: uF || null,
+    visits: localStorage.getItem('navi_visits'),
+  };
+  try {
+    const prev = JSON.parse(localStorage.getItem('navi_fb_log') || '[]');
+    prev.push(entry);
+    localStorage.setItem('navi_fb_log', JSON.stringify(prev.slice(-20))); // 最大20件保持
+  } catch(e) {}
+
+  // Google Forms への送信（CORS回避のためiframe経由）
+  sendToGoogleForms(entry);
+
+  markFeedbackDone();
+  goStep('done');
+
+  // 詳細リンク表示
+  const detailLink = document.getElementById('fb-detail-link');
+  if(GOOGLE_FORMS_URL !== 'https://forms.gle/YOUR_FORM_ID') {
+    detailLink.href = GOOGLE_FORMS_URL;
+    detailLink.style.display = 'inline-block';
+  }
+}
+
+// Google Forms 送信（no-cors iframeトリック）
+function sendToGoogleForms(entry) {
+  if(FORMS_SUBMIT_URL.includes('YOUR_FORM_ID')) return; // 未設定なら送信しない
+  try {
+    const params = new URLSearchParams();
+    if(entry.thumb)    params.append(FORMS_FIELDS.thumb, entry.thumb);
+    if(entry.nps !== null) params.append(FORMS_FIELDS.nps, entry.nps);
+    if(entry.reasons.length) params.append(FORMS_FIELDS.reasons, entry.reasons.join(', '));
+    if(entry.freetext) params.append(FORMS_FIELDS.freetext, entry.freetext);
+    if(entry.income)   params.append(FORMS_FIELDS.income, entry.income);
+    if(entry.family)   params.append(FORMS_FIELDS.family, entry.family);
+    params.append(FORMS_FIELDS.page, window.location.pathname);
+    params.append(FORMS_FIELDS.visit, entry.visits || '1');
+
+    // iframeで送信（CORSをバイパスし結果ページは隠す）
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.name = 'fb_submit_' + Date.now();
+    document.body.appendChild(iframe);
+    const form = document.createElement('form');
+    form.action = FORMS_SUBMIT_URL;
+    form.method = 'POST';
+    form.target = iframe.name;
+    form.innerHTML = params.toString().split('&').map(p => {
+      const [k,v] = p.split('=');
+      return `<input type="hidden" name="${decodeURIComponent(k)}" value="${decodeURIComponent(v)}">`;
+    }).join('');
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => { form.remove(); iframe.remove(); }, 3000);
+  } catch(e) { console.log('Forms送信エラー（ローカル保存済み）:', e); }
+}
+
+// ---- コンテキスト型マイクロサーベイ ----
+const CONTEXTUAL_SURVEYS = {
+  'cat-invest': { q: 'NISAシミュレーター、使ってみましたか？', opts: ['使った・わかりやすい', '使った・もっと詳しく', 'まだ使ってない'] },
+  'cat-furusato': { q: 'ふるさと納税の限度額、参考になりましたか？', opts: ['参考になった', '自分の状況に合ってない気がする', '申し込み方法が知りたい'] },
+  'cat-fixed': { q: '固定費チェックリスト、試してみましたか？', opts: ['試した・参考になった', '見直したいものがあった', 'すでに見直し済み'] },
+  'cat-points': { q: 'ポイ活、実践していますか？', opts: ['すでにやってる', 'これから始めたい', '難しそう'] },
+  'cat-medical': { q: 'セルフメディケーション税制、知っていましたか？', opts: ['知ってた', '今回はじめて知った', 'もっと詳しく知りたい'] },
+};
+let contextualShownTabs = new Set();
+let contextualTimer = null;
+
+function maybeShowContextual(tabId) {
+  if(contextualShownTabs.has(tabId)) return;
+  const survey = CONTEXTUAL_SURVEYS[tabId];
+  if(!survey) return;
+  clearTimeout(contextualTimer);
+  contextualTimer = setTimeout(() => {
+    contextualShownTabs.add(tabId);
+    showContextualSurvey(survey.q, survey.opts, tabId);
+  }, 8000); // 8秒後に表示
+}
+
+function showContextualSurvey(q, opts, tabId) {
+  const el = document.getElementById('fb-contextual');
+  document.getElementById('fb-ctx-q').textContent = q;
+  const optsEl = document.getElementById('fb-ctx-opts');
+  optsEl.innerHTML = opts.map((o,i) => `<button class="fb-ctx-opt" onclick="submitContextual('${tabId}','${o}')">${o}</button>`).join('');
+  el.classList.add('show');
+}
+
+function submitContextual(tabId, answer) {
+  const el = document.getElementById('fb-contextual');
+  el.classList.remove('show');
+  // ローカル保存
+  try {
+    const prev = JSON.parse(localStorage.getItem('navi_ctx_log') || '[]');
+    prev.push({ ts: new Date().toISOString(), tab: tabId, answer, income: uI, family: uF });
+    localStorage.setItem('navi_ctx_log', JSON.stringify(prev.slice(-30)));
+  } catch(e) {}
+  showToast('💬 ありがとう！');
+}
+function dismissContextual() {
+  document.getElementById('fb-contextual').classList.remove('show');
+}
+
+// ---- 自動トリガー ----
+function initFeedbackTriggers(visitCount) {
+  // 3回目の訪問で自動表示（フィードバック未送信の場合）
+  if(visitCount === 3 && !hasSubmittedFeedback()) {
+    setTimeout(() => {
+      showToast('💬 少しだけ意見を聞かせてください！', 3000);
+      setTimeout(() => openFeedback('auto_visit'), 3500);
+    }, 5000);
+  }
+  // 5回目以降は毎5回ごとに再表示（スキップ可能）
+  if(visitCount > 3 && visitCount % 5 === 0) {
+    setTimeout(() => {
+      showToast('💬 最近の使い心地はどうですか？', 2500);
+    }, 8000);
+  }
+}
+
+// ---- showCat のフック（コンテキスト調査用） ----
+const _origShowCat = window.showCat;
+
+// ---- フロートボタンのラベルアニメーション ----
+function animateFloatLabel() {
+  const label = document.getElementById('fb-float-label');
+  const msgs = ['ご意見を送る', '気になることは？', 'お役に立てましたか？'];
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % msgs.length;
+    label.style.opacity = '0';
+    setTimeout(() => { label.textContent = msgs[i]; label.style.opacity = '1'; }, 300);
+  }, 6000);
+}
+
+// ---- 初期化 ----
+document.addEventListener('DOMContentLoaded', () => {
+  const visits = getVisitCount();
+  initFeedbackTriggers(visits);
+  animateFloatLabel();
+});
+
+
+// ===================================================
+// ニュースシステム
+// news.json を外部ファイルとして管理。
+// 単一HTMLで動作させる場合はNEWS_DATA定数を直接編集してください。
+// ===================================================
+
+// ---- ニュースデータ（news.jsonの内容をここにも持つ） ----
+const NEWS_DATA = {
+  "meta": {"version":"1.0","lastUpdated":"2026-04-07"},
+  "news": [
+    {"id":"n2026-04-07-01","date":"2026-04-07","category":"burden","categoryLabel":"負担増","emoji":"🍼","title":"子ども・子育て支援金が4月からスタート","summary":"医療保険料に月250円上乗せで徴収開始。年収500万円なら年約4,400円の負担増が目安。","body":"2026年4月から子ども・子育て支援金制度がスタートしました。医療保険料への上乗せという形で全被保険者から徴収され、2026年度は全制度平均で月額約250円（労使折半）。2027年度は月350円、2028年度は月450円と段階的に引き上がります。財源は少子化対策に充てられますが、国会では財源の公平性について議論も続いています。","relevance":{"incomeMin":0,"incomeMax":9999,"families":["all"]},"isNew":true,"isPinned":true,"link":"https://www.cfa.go.jp/policies/kodomo-shien/","linkLabel":"こども家庭庁で詳細を確認"},
+    {"id":"n2026-04-07-02","date":"2026-04-07","category":"benefit","categoryLabel":"給付金","emoji":"💰","title":"物価高対応・低所得世帯給付金の申請状況","summary":"住民税非課税世帯を対象に1世帯3万円の給付。申請期限が自治体によって異なるため要チェック。","body":"政府の物価高対策として、住民税非課税世帯（および均等割のみ課税世帯）を対象とした給付金の支給が継続しています。支給額は1世帯あたり3万円が目安ですが、申請期限は自治体によって異なります。役所からの通知書（申請不要の場合も）を見落とさないよう注意してください。まだ受け取っていない方は今すぐお住まいの自治体窓口またはWebで確認を。","relevance":{"incomeMin":0,"incomeMax":300,"families":["all"]},"isNew":true,"isPinned":false,"link":"https://www.mhlw.go.jp/","linkLabel":"厚生労働省で詳細を確認"},
+    {"id":"n2026-04-07-03","date":"2026-04-07","category":"taxsaving","categoryLabel":"節税","emoji":"💊","title":"セルフメディケーション税制の対象薬が拡充","summary":"2026年からスイッチOTC医薬品の対象品目が追加。花粉症薬・解熱剤など身近な薬が増加中。","body":"セルフメディケーション税制の対象となるスイッチOTC医薬品（市販薬）の品目が2026年も拡充されています。花粉症の鼻炎薬・解熱鎮痛剤・胃腸薬・水虫薬などが多数追加。ドラッグストアで購入する際は「セルフメディケーション税制対象」のマークを確認してレシートを保存しましょう。年間12,000円を超えた分が所得控除の対象になります。健康診断・予防接種の受診が条件です。","relevance":{"incomeMin":200,"incomeMax":9999,"families":["all"]},"isNew":true,"isPinned":false,"link":"https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000124853.html","linkLabel":"厚労省で対象品目を確認"},
+    {"id":"n2026-04-07-04","date":"2026-04-07","category":"wall","categoryLabel":"年収の壁","emoji":"📊","title":"年収の壁178万円引き上げ後の手取り変化","summary":"所得税の非課税ラインが103万→178万円に。パート・副業をしている方の働き方の見直しチャンス。","body":"2026年から所得税の基礎控除が引き上げられ、年収の壁が103万円から178万円水準に拡大しました。これにより、パート・アルバイトや副業で収入を得ている方が年収を増やしやすくなっています。ただし、社会保険の加入要件（106万円・130万円の壁）は別途残っており、働き方によっては注意が必要です。配偶者がいる方は世帯全体での試算がおすすめです。","relevance":{"incomeMin":0,"incomeMax":600,"families":["couple","couple_dep","child1","child2","child3","single_parent"]},"isNew":true,"isPinned":false,"link":"https://www.nta.go.jp/","linkLabel":"国税庁で最新情報を確認"},
+    {"id":"n2026-04-07-05","date":"2026-04-07","category":"tax","categoryLabel":"増税","emoji":"🚬","title":"加熱式たばこ税が4月から引き上げ開始","summary":"IQOS・glo・Ploomなど加熱式たばこが1箱40〜100円程度値上がり。10月にも第2段階あり。","body":"2026年4月1日より、加熱式たばこの課税方式が見直され、紙巻きたばこに近い税率に引き上げられました。銘柄によって異なりますが、1箱あたり40〜100円程度の値上がりが見込まれます。さらに2026年10月にも第2段階の引き上げがあり、その後2027〜2029年にかけて毎年段階的な増税が続きます。禁煙外来は条件付きで健康保険適用になる制度もあります。","relevance":{"incomeMin":0,"incomeMax":9999,"families":["all"]},"isNew":true,"isPinned":false,"link":"https://www.mof.go.jp/","linkLabel":"財務省でたばこ税を確認"},
+    {"id":"n2026-04-07-06","date":"2026-04-07","category":"energy","categoryLabel":"光熱費","emoji":"⚡","title":"電気・ガスの政府補助が3月使用分で一旦終了","summary":"4月請求（3月使用分）から補助金がなくなり、電気代が平均数百〜数千円値上がりする見込み。","body":"2022年から続いていた政府による電気・ガス料金の補助制度が、2026年3月使用分（4月請求）をもって一旦終了しました。これにより、4月以降の電気代・ガス代が補助分だけ高くなります。平均的な家庭で電気代が月数百〜1,000円程度の値上がりが見込まれます。中東情勢の緊迫化に伴うエネルギー価格の再上昇リスクもあるため、電力会社・ガス会社のプラン見直しを検討するタイミングです。","relevance":{"incomeMin":0,"incomeMax":700,"families":["all"]},"isNew":true,"isPinned":true,"link":"https://www.enecho.meti.go.jp/","linkLabel":"資源エネルギー庁で詳細を確認"},
+    {"id":"n2026-04-07-07","date":"2026-04-07","category":"furusato","categoryLabel":"ふるさと納税","emoji":"🏘️","title":"ふるさと納税ポイント禁止後の賢い活用法","summary":"2025年10月からポータルサイトのポイント付与は禁止に。返礼品の質・自治体の取り組みで選ぶ時代へ。","body":"2025年10月1日から全てのふるさと納税ポータルサイトでポイント付与が禁止されました（楽天は訴訟中）。しかし返礼品そのものは変わらず受け取れます。ポイント競争が終わったことで、返礼品の品質や生産者のこだわり、自治体の資金活用法に注目して選ぶ流れになっています。控除限度額いっぱいまで賢く活用すれば、年間自己負担2,000円（全寄付の合算）で数万円分の返礼品が受け取れます。","relevance":{"incomeMin":200,"incomeMax":9999,"families":["all"]},"isNew":false,"isPinned":false,"link":"https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/","linkLabel":"総務省ふるさと納税サイトで確認"},
+    {"id":"n2026-03-25-01","date":"2026-03-25","category":"invest","categoryLabel":"資産形成","emoji":"📈","title":"iDeCo拠出限度額の引き上げが2026年12月に予定","summary":"会社員（企業年金なし）は月2.3万→6.2万円に大幅拡大予定。今から計画を立てておくチャンス。","body":"2026年12月から個人型確定拠出年金（iDeCo）の拠出限度額が大幅に引き上げられる予定です。企業年金のない会社員は月2.3万円→6.2万円、自営業者は月6.8万円→7.5万円に。掛金は全額所得控除になるため、年収が高い方ほど節税効果が大きくなります。今から口座開設だけ済ませておくと、12月の改正後すぐに増額できます。","relevance":{"incomeMin":300,"incomeMax":9999,"families":["all"]},"isNew":false,"isPinned":false,"link":"https://www.ideco-koushiki.jp/","linkLabel":"iDeCo公式サイトで詳細を確認"},
+    {"id":"n2026-03-10-01","date":"2026-03-10","category":"child","categoryLabel":"子育て","emoji":"👶","title":"高校授業料・給食の無償化が2026年から拡充","summary":"所得制限が撤廃・拡充される地域も増加。対象条件はお住まいの都道府県・市区町村で確認を。","body":"2026年度から高校授業料の無償化・給食費の無償化が各地で拡充されています。国の制度としては所得要件が撤廃・緩和される方向にあり、多くの都道府県・市区町村でも独自の支援策が設けられています。ただし対象学年・所得要件・申請手続きは地域によって大きく異なるため、お住まいの教育委員会や学校に確認することをおすすめします。","relevance":{"incomeMin":0,"incomeMax":9999,"families":["child1","child2","child3","single_parent"]},"isNew":false,"isPinned":false,"link":"https://www.mext.go.jp/","linkLabel":"文部科学省で制度詳細を確認"}
+  ]
+};
+
+// ---- ニュースユーティリティ ----
+function isNewsRelevant(news, inc, fam) {
+  const r = news.relevance;
+  const incOK = (!inc || inc === 0) ? true : (inc >= r.incomeMin && inc <= r.incomeMax);
+  const famOK = r.families.includes('all') || (!fam) || r.families.includes(fam);
+  return incOK && famOK;
+}
+
+function getCatClass(cat) {
+  const map = {burden:'cat-burden',benefit:'cat-benefit',taxsaving:'cat-taxsaving',wall:'cat-wall',tax:'cat-tax',energy:'cat-energy',furusato:'cat-furusato',invest:'cat-invest',child:'cat-child'};
+  return map[cat] || 'cat-burden';
+}
+
+function fmtNewsDate(dateStr) {
+  const d = new Date(dateStr);
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+}
+
+function renderNews(inc, fam) {
+  const today = '2026-04-07'; // アプリの基準日（本番ではnew Date().toISOString().slice(0,10)に変更）
+  const all = NEWS_DATA.news;
+
+  // 今日のニュースと過去ニュースに分類
+  const todayNews = all.filter(n => n.date === today);
+  const archiveNews = all.filter(n => n.date !== today);
+
+  // 今日のニュース：関連ニュース→ピン止め→残りの順にソート
+  const sorted = [...todayNews].sort((a, b) => {
+    const aRel = isNewsRelevant(a, inc, fam) ? 1 : 0;
+    const bRel = isNewsRelevant(b, inc, fam) ? 1 : 0;
+    const aPin = a.isPinned ? 1 : 0;
+    const bPin = b.isPinned ? 1 : 0;
+    // 関連度優先 → ピン止め優先 → 新着優先
+    if (aRel !== bRel) return bRel - aRel;
+    if (aPin !== bPin) return bPin - aPin;
+    return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
+  });
+
+  // 日付ラベル
+  const el = document.getElementById('news-today-label');
+  if (el) el.textContent = fmtNewsDate(today);
+
+  // ニュースカード描画
+  const scroll = document.getElementById('news-scroll');
+  if (!scroll) return;
+  scroll.innerHTML = sorted.map(n => {
+    const rel = inc > 0 && isNewsRelevant(n, inc, fam);
+    const relClass = rel && !n.isPinned ? 'relevant' : (n.isPinned ? 'pinned' : '');
+    return `<div class="news-card ${relClass}" onclick="openModal('${n.id}')">
+      <div class="news-card-top">
+        <span class="news-cat-badge ${getCatClass(n.category)}">${n.categoryLabel}</span>
+        ${n.isNew ? '<span class="news-new-badge">NEW</span>' : ''}
+      </div>
+      <span class="news-card-emoji">${n.emoji}</span>
+      <div class="news-card-title">${n.title}</div>
+      <div class="news-card-summary">${n.summary}</div><div style="font-size:10px;color:#bbb;margin-top:3px">${n.date.slice(0,7).replace('-','年')+'月'} 更新</div>
+      ${rel ? '<div class="news-relevant-label">👤 あなたに関連しそう</div>' : ''}
+      <div class="news-card-footer">
+        <span class="news-card-date">${fmtNewsDate(n.date)}</span>
+        <span class="news-card-cta">詳しく見る →</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // アーカイブ描画
+  const archEl = document.getElementById('news-archive-list');
+  if (!archEl) return;
+  if (archiveNews.length === 0) {
+    archEl.innerHTML = '<div style="font-size:13px;color:#aaa;padding:8px 0">過去のニュースはまだありません</div>';
+    return;
+  }
+  archEl.innerHTML = archiveNews.map(n => `
+    <div class="news-archive-item" onclick="openModal('${n.id}')">
+      <div class="nai-emoji">${n.emoji}</div>
+      <div class="nai-body">
+        <div class="nai-title">${n.title}</div>
+        <div class="nai-meta">${fmtNewsDate(n.date)} ・ ${n.categoryLabel}</div>
+      </div>
+    </div>`).join('');
+}
+
+function openModal(id) {
+  const n = NEWS_DATA.news.find(x => x.id === id);
+  if (!n) return;
+  document.getElementById('modal-cat').innerHTML = `<span class="news-cat-badge ${getCatClass(n.category)}" style="display:inline-block;margin-bottom:6px">${n.categoryLabel}</span>`;
+  document.getElementById('modal-title').textContent = n.emoji + ' ' + n.title;
+  document.getElementById('modal-date').textContent = fmtNewsDate(n.date);
+  document.getElementById('modal-body').textContent = n.body;
+  const link = document.getElementById('modal-link');
+  link.href = n.link;
+  document.getElementById('modal-link-label').textContent = n.linkLabel;
+  document.getElementById('news-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('news-modal-overlay') && !e.target.classList.contains('news-modal-close')) return;
+  document.getElementById('news-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleArchive() {
+  const panel = document.getElementById('news-archive-panel');
+  const btn = document.querySelector('.news-archive-btn');
+  const isOpen = panel.classList.toggle('open');
+  btn.textContent = isOpen ? '過去のニュース ▴' : '過去のニュース ▾';
+}
+
+// ニュース初期化（入力前でも表示）
+document.addEventListener('DOMContentLoaded', () => {
+  renderNews(0, '');
+});
+
+
+// =====================================================
+// DATA（ここを更新するだけでアプリの内容が変わります）
+// =====================================================
+const DATA_VERSION = {
+  app: '4.0',
+  lastUpdated: '2026-04-07',
+  nextUpdate: '2026-07-01',
+  cpiMonth: '2026年2月',
+};
+
+const UPDATE_INFO = {
+  cpi: {date:'毎月', status:'fresh'},
+  tax: {date:'2026.04.07', status:'fresh'},
+  benefits: {date:'2026.04.07', status:'fresh'},
+  invest: {date:'2026.04.07', status:'fresh'},
+  furusato: {date:'2026.04.07', status:'fresh'},
+  furusatoTable: {date:'2026.07予定', status:'warn'},
+};
+
+// ふるさと納税控除限度額（2026年版・各種計算機との照合済み）
+const FS={
+  single:{150:14000,200:15000,300:28000,400:42000,500:61000,600:77000,700:108000,800:129000,1000:180000,1200:252000},
+  couple:{150:18000,200:20000,300:34000,400:51000,500:72000,600:93000,700:124000,800:144000,1000:200000,1200:280000},
+  couple_dep:{150:11000,200:14000,300:27000,400:40000,500:57000,600:75000,700:106000,800:127000,1000:176000,1200:248000},
+  child1:{150:9000,200:12000,300:26000,400:38000,500:56000,600:74000,700:103000,800:122000,1000:172000,1200:244000},
+  child2:{150:7000,200:10000,300:23000,400:36000,500:53000,600:70000,700:98000,800:116000,1000:165000,1200:235000},
+  child3:{150:6000,200:8000,300:20000,400:32000,500:49000,600:65000,700:92000,800:109000,1000:157000,1200:224000},
+  single_parent:{150:13000,200:15000,300:30000,400:44000,500:64000,600:82000,700:112000,800:133000,1000:185000,1200:258000}
+};
+
+// 子ども・子育て支援金（年収別年間目安額）
+const KS={
+  // こども家庭庁試算（被用者保険・労使折半後の本人負担、2026年度）
+  // 標準報酬月額×0.23%×1/2×12ヶ月
+  150: 2100,   // 月約175円（国保目安）
+  200: 2300,   // 月約192円
+  300: 3500,   // 月約288円（年収300万の標準報酬月額目安で試算）
+  400: 4600,   // 月約384円
+  500: 5800,   // 月約480円
+  600: 6900,   // 月約575円
+  700: 8100,   // 月約671円
+  800: 9200,   // 月約767円
+  1000: 11500, // 月約959円
+  1200: 13800, // 月約1,150円
+};
+
+// 給付金マスタ
+const BN=[
+  {name:"低所得世帯向け給付金（物価高対策）",amt:"3万円/世帯",c:i=>i<=300,f:"all",urg:true,desc:"住民税非課税・均等割のみ世帯が対象（自治体により異なる）"},
+  {name:"子育て世帯生活支援特別給付金",amt:"5万円/子",c:i=>i<=500,f:["child1","child2","child3","single_parent"],urg:false,desc:"ひとり親・低所得ふたり親世帯の18歳以下の子ども対象"},
+  {name:"ひとり親家庭支援給付金",amt:"自治体別",c:i=>true,f:["single_parent"],urg:false,desc:"多くの自治体で独自に実施。市区町村窓口で確認を"},
+  {name:"子どもの医療費助成",amt:"窓口無料〜",c:i=>true,f:["child1","child2","child3","single_parent"],urg:false,desc:"多くの自治体で中学・高校まで助成（所得制限あり）"},
+  {name:"電力・ガス料金補助（継続検討中）",amt:"要確認",c:i=>i<=600,f:"all",urg:false,desc:"2026年4月から政府補助一旦終了。追加措置の動向を自治体・政府サイトで確認を"},
+  {name:"高額療養費制度",amt:"超過分を還付",c:i=>true,f:"all",urg:false,desc:"月の医療費が自己負担限度額を超えた分は申請で戻ります"},
+  {name:"高校授業料・給食無償化",amt:"自治体別",c:i=>i<=700,f:["child1","child2","child3","single_parent"],urg:false,desc:"2026年から拡充。都道府県・市区町村により対象や範囲が異なります"},
+];
+
+// 固定費チェックリスト
+const CHECKS=[
+  {label:"スマホを格安SIMに乗り換え",    save:72000, icon:"📱", detailId:"detail-0"},
+  {label:"電力会社・料金プランの見直し",  save:37000, icon:"⚡", detailId:"detail-1"},
+  {label:"使っていないサブスクを解約",    save:24000, icon:"🔑", detailId:"detail-2"},
+  {label:"生命保険の保障内容を見直し",    save:20000, icon:"🏥", detailId:"detail-3"},
+  {label:"ガス会社を切り替え",           save:10000, icon:"🔥", detailId:"detail-4"},
+  {label:"ネット回線プランを見直し",      save:12000, icon:"🌐", detailId:"detail-5"},
+  {label:"クレカを高還元率カードに集約",  save:15000, icon:"💳", detailId:"detail-6"},
+  {label:"NHKをクレカ払い・2年前払いに", save:3500,  icon:"📺", detailId:"detail-7"},
+];
+// =====================================================
+
+let uI=0,uF='',checkedSets=new Set();
+
+// バナー更新
+document.getElementById('banner-date').textContent=DATA_VERSION.lastUpdated.replace(/-/g,'年').replace(/-/g,'月')+'日';
+document.getElementById('banner-next').textContent='次回更新：'+DATA_VERSION.nextUpdate.replace(/-/g,'/').slice(0,7)+'予定';
+
+function fmt(n){return n.toLocaleString('ja-JP')}
+
+// トースト表示
+function showToast(msg, duration=2200){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), duration);
+}
+
+// 即時保存（select変更時）
+function svImmediate(){
+  const pref=document.getElementById('pref').value;
+  const inc=document.getElementById('income').value;
+  const fam=document.getElementById('family').value;
+  if(!inc) return; // 未選択なら保存しない
+  try{
+    localStorage.setItem('navi5',JSON.stringify({i:parseInt(inc),f:fam,p:pref,ts:Date.now()}));
+  }catch(e){}
+  showToast('✅ 入力内容を保存しました');
+}
+
+// toP2から呼ばれる通常保存
+function sv(){
+  try{
+    localStorage.setItem('navi5',JSON.stringify({i:uI,f:uF,p:document.getElementById('pref').value,ts:Date.now()}));
+  }catch(e){}
+}
+
+// 設定リセット
+function resetSaved(){
+  if(!confirm('保存した入力内容をリセットしますか？')) return;
+  try{ localStorage.removeItem('navi5'); }catch(e){}
+  document.getElementById('pref').value='';
+  document.getElementById('income').value='';
+  document.getElementById('family').value='single';
+  document.getElementById('restore-bar-wrap').innerHTML='';
+  uI=0; uF='';
+  showToast('🗑️ リセットしました');
+}
+
+// 起動時の復元
+function ld(){
+  try{
+    // v4からv5へのキー移行
+    const old4=localStorage.getItem('navi4');
+    if(old4 && !localStorage.getItem('navi5')){
+      localStorage.setItem('navi5', old4);
+      localStorage.removeItem('navi4');
+    }
+    const raw=localStorage.getItem('navi5');
+    if(!raw) return;
+    const d=JSON.parse(raw);
+    if(!d.i) return; // 年収未選択の保存は無視
+
+    // フォームに値をセット
+    if(d.p) document.getElementById('pref').value=d.p;
+    if(d.i) document.getElementById('income').value=d.i;
+    if(d.f) document.getElementById('family').value=d.f;
+
+    // 復元バナーを表示
+    const fnames={single:'独身',couple:'夫婦（共働き）',couple_dep:'夫婦（配偶者扶養）',child1:'夫婦＋子1人',child2:'夫婦＋子2人',child3:'夫婦＋子3人以上',single_parent:'ひとり親'};
+    const incLabels={150:'〜150万円',200:'151〜200万円',300:'201〜300万円',400:'301〜400万円',500:'401〜500万円',600:'501〜600万円',700:'601〜700万円',800:'701〜800万円',1000:'801〜1000万円',1200:'1001万円〜'};
+    const pref=d.p||''; const incStr=incLabels[d.i]||''; const famStr=fnames[d.f]||'';
+    const wrap=document.getElementById('restore-bar-wrap');
+    if(wrap){
+      wrap.innerHTML=`<div class="restore-bar">
+        <div class="restore-bar-text">
+          <span>👋</span>
+          <span>おかえりなさい！前回の情報（<strong>${incStr}・${famStr}</strong>${pref?' / '+pref:''}）でお得情報を表示しています</span>
+        </div>
+        <div class="restore-bar-actions">
+          <button class="restore-edit-btn" onclick="show(1);document.getElementById('restore-bar-wrap').innerHTML=''">変更する</button>
+          <button class="restore-reset-btn" onclick="resetSaved()">リセット</button>
+        </div>
+      </div>`;
+    }
+
+    // ダッシュボードを自動展開
+    uI=d.i; uF=d.f||'single';
+    renderNews(uI, uF);
+
+  }catch(e){}
+}
+function toP1(){show(1)}
+function toP2(){const v=document.getElementById('income').value;if(!v){alert('まず年収の目安を教えてください');return}uI=parseInt(v);uF=document.getElementById('family').value;sv();rP2();renderNews(uI,uF);show(2)}
+function toP3(){renderBukka();rP3();renderBurden(uI);renderShiko();renderWall(uI);show(3)}
+function show(n){document.querySelectorAll('.pg').forEach((p,i)=>p.classList.toggle('active',i===n-1));document.querySelectorAll('.dot').forEach((d,i)=>{d.classList.toggle('on',i===n-1);d.classList.toggle('dn',i<n-1)});window.scrollTo(0,0)}
+function showCat(id,btn){document.querySelectorAll('.cat-section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));document.getElementById('cat-'+id).classList.add('active');btn.classList.add('active');maybeShowContextual('cat-'+id)}
+function showTab(id,btn){const p=btn.closest('.card');p.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));p.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));p.querySelector('#tab-'+id).classList.add('active');btn.classList.add('active')}
+
+// 広告クリックトラッキング（実装後はアフィリエイトURLに差し替え）
+function adClick(id){
+  console.log('[AD CLICK]', id, new Date().toISOString());
+  // 例：window.open('https://affi.example.com/link/'+id, '_blank');
+  // 実装時にアフィリエイトURLをここに設定
+  const urls = {
+    nisa_lp: '#',
+    energy_compare: '#',
+    sbi_nisa: '#',
+    furusato_choice: '#',
+    satofull: '#',
+    enechange: '#',
+    rakuten_mobile: '#',
+    uq_mobile: '#',
+    ymobile: '#',
+    moneyforward: '#',
+    hoken_madoguchi: '#',
+    enepi_gas: '#',
+    hikari_compare: '#',
+    nuro: '#',
+    recruit_card: '#',
+    mitsui_card: '#',
+    rakuten_card: '#',
+    rakuten_hikari: '#',
+    rakuten_denki: '#',
+    rakuten_insurance: '#',
+    rakuten_nisa: '#',
+    zexy_hoken: '#',
+  };
+  const url = urls[id];
+  if(url && url !== '#') window.open(url, '_blank');
+}
+
+function calcNISA(){
+  const m=parseInt(document.getElementById('nisa-monthly').value);
+  const y=parseInt(document.getElementById('nisa-years').value);
+  let total=0;
+  for(let i=0;i<y*12;i++) total=(total+m)*(1+0.05/12);
+  const profit=Math.round(total-m*y*12);
+  const tax=Math.round(profit*0.2031);
+  document.getElementById('nisa-profit').textContent='約'+fmt(profit)+'円';
+  document.getElementById('nisa-tax').textContent='NISAなら税金0円・通常なら約'+fmt(tax)+'円が税金でとられるところを節税';
+}
+
+function calcIDeCo(){
+  const m=parseInt(document.getElementById('ideco-monthly').value);
+  const inc=uI||500;
+  const rate=inc<=300?0.15:inc<=500?0.20:inc<=700?0.23:inc<=900?0.33:0.43;
+  const yearly=m*12;
+  const saving=Math.round(yearly*rate);
+  document.getElementById('ideco-saving').textContent='約'+fmt(saving)+'円';
+  document.getElementById('ideco-detail').textContent='年収'+inc+'万円、月'+fmt(m)+'円の場合の目安\n30年続ければ累計約'+fmt(saving*30)+'円の節税効果';
+}
+
+function rP2(){
+  const inc=uI, fam=uF;
+  const fm=FS[fam]||FS.single, fa=fm[inc]||42000;
+  const fn={single:'独身',couple:'夫婦（共働き）',couple_dep:'夫婦（配偶者扶養）',child1:'夫婦＋子1人',child2:'夫婦＋子2人',child3:'夫婦＋子3人以上',single_parent:'ひとり親'}[fam]||'';
+
+  // iDeCo節税額（月2万円ベース）
+  const rate=inc<=300?0.15:inc<=500?0.20:inc<=700?0.23:inc<=900?0.33:0.43;
+  const idecoSaving=Math.round(240000*rate);
+
+  // 給付金マッチング（P2版）
+  const bens=BN.filter(b=>b.c(inc)&&(b.f==='all'||b.f.includes(fam)));
+  const hasHighBenefit = bens.some(b=>b.urg);
+
+  // ヒーロー額：ふるさと納税＋iDeCo節税（給付金は「確認してね」扱い）
+  const heroAmt = fa + idecoSaving;
+  document.getElementById('p2-hero-amount').innerHTML =
+    `<span class="gain-hero-unit">約</span>${fmt(heroAmt)}<span class="gain-hero-unit">円</span>`;
+  document.getElementById('p2-hero-sub').textContent =
+    `ふるさと納税 返礼品相当 約${fmt(fa)}円 ＋ iDeCo節税約${fmt(idecoSaving)}円の合計目安（年収${inc}万円・${fn}の場合）`;
+
+  // 内訳グリッド
+  document.getElementById('g-benefit').textContent = bens.length > 0 ? `${bens.length}件対象` : '要確認';
+  document.getElementById('g-furusato').textContent = `約${fmt(fa)}円`;
+  document.getElementById('g-ideco').innerHTML = `年約<br>${fmt(idecoSaving)}円`;
+
+  // 給付金リスト（P2版）
+  const p2bl = document.getElementById('p2-blist');
+  if(p2bl){
+    if(bens.length === 0){
+      p2bl.innerHTML='<div style="font-size:13px;color:#888">現在の条件に合う給付金は見つかりませんでした。お住まいの自治体で最新情報をご確認ください。</div>';
+    } else {
+      p2bl.innerHTML = bens.map(b=>`
+        <div class="bi">
+          <div>
+            <div style="font-size:14px;font-weight:500">${b.name}${b.urg?'<span class="tag tg-u">期限注意</span>':'<span class="tag tg-i">対象確認を</span>'}</div>
+            <div style="font-size:12px;color:#888;margin-top:2px">${b.desc}</div>
+          </div>
+          <div class="bamt">${b.amt}</div>
+        </div>`).join('');
+    }
+  }
+
+  // ふるさと納税クイックサマリー（P2版）
+  const p2f = document.getElementById('p2-furusato');
+  if(p2f){
+    window._currentFa = fa; // 他の関数からも参照できるよう保存
+    p2f.innerHTML=`
+      <div style="margin-bottom:10px">
+        <div style="font-size:12px;color:#666;margin-bottom:2px">年収${inc}万円・${fn}の控除限度額の目安</div>
+        <div style="font-size:28px;font-weight:700;color:#1a5a8a">約${fmt(fa)}<span style="font-size:13px">円/年</span></div>
+      </div>
+      <div style="background:#fff8e0;border:1.5px solid #f0d090;border-radius:12px;padding:.9rem;margin-bottom:10px">
+        <div style="font-size:13px;font-weight:700;color:#7a5010;margin-bottom:8px">📝 今年すでにいくら寄付しましたか？</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <input type="number" id="p2-fs-input" min="0" max="${fa}" placeholder="例：20000"
+            style="flex:1;padding:8px 10px;border:1.5px solid #f0c060;border-radius:8px;font-size:15px;font-family:'Noto Sans JP',sans-serif;width:100%;box-sizing:border-box"
+            oninput="onFsInput(this.value)" />
+          <span style="font-size:13px;color:#7a5010;flex-shrink:0">円</span>
+        </div>
+        <div style="background:#f0e8c0;border-radius:6px;height:8px;margin-bottom:8px;overflow:hidden">
+          <div id="p2-fs-bar" style="height:100%;background:#e8a020;border-radius:6px;width:0%;transition:width .4s"></div>
+        </div>
+        <div id="p2-fs-remaining" style="font-size:14px;color:#7a5010">
+          まだ<strong style="color:#c85a1a;font-size:18px"> ${fmt(fa)}円</strong>の余裕があります
+        </div>
+      </div>
+      <div style="font-size:11px;color:#888">年間でこの金額まで、1件あたり自己負担2,000円で返礼品が受け取れます</div>
+      `;
+    // 保存値があれば反映
+    updateFsDisplay();
+      <div class="tipc" style="background:#eef6fb;border-color:#a8d8ee;margin-bottom:0">
+        <div class="tpt" style="color:#1a5a7a">💡 ワンポイント</div>
+        <div class="tpd" style="color:#2a4a5a">12月末まで寄付→1月10日必着でワンストップ特例申請。確定申告不要で税金が安くなります。ポータルサイトのポイント付与は2025年10月から禁止になりましたが、返礼品の内容は変わりません。</div>
+      </div>`;
+  }
+
+
+  // rP3内の物価・負担増レンダリングも呼ぶ（タブ切り替え時に備えて）
+  renderBurden(inc);
+  renderShiko();
+  renderWall(inc);
+}
+
+function rP3(){
+  const inc=uI, fam=uF;
+
+  // 物価セクションは rP2内の renderBukka で共用（タブとして切り替え）
+  renderBukka();
+
+  // 給付金（P3版 blist2）
+  const bens=BN.filter(b=>b.c(inc)&&(b.f==='all'||b.f.includes(fam)));
+  const blist2 = document.getElementById('blist2');
+  if(blist2){
+    blist2.innerHTML = bens.length
+      ? bens.map(b=>`<div class="bi"><div><div style="font-size:14px;font-weight:500">${b.name}${b.urg?'<span class="tag tg-u">期限注意</span>':'<span class="tag tg-i">対象確認を</span>'}</div><div style="font-size:12px;color:#888;margin-top:2px">${b.desc}</div></div><div class="bamt">${b.amt}</div></div>`).join('')
+      : '<div style="font-size:13px;color:#888">自治体公式サイトでご確認ください。</div>';
+  }
+
+  // ふるさと納税（P3詳細版 finfo2）
+  const fm=FS[fam]||FS.single, fa=fm[inc]||42000;
+  const fn={single:'独身',couple:'夫婦（共働き）',couple_dep:'夫婦（配偶者扶養）',child1:'夫婦＋子1人',child2:'夫婦＋子2人',child3:'夫婦＋子3人以上',single_parent:'ひとり親'}[fam]||'';
+  const finfo2 = document.getElementById('finfo2');
+  if(finfo2){
+    window._currentFa = fa;
+    finfo2.innerHTML=`
+      <div style="text-align:center;padding:.6rem 0 .8rem">
+        <div style="font-size:13px;color:#666;margin-bottom:4px">年収${inc}万円・${fn}の控除限度額の目安</div>
+        <div style="font-size:28px;font-weight:700;color:#1a5a8a">約${fmt(fa)}<span style="font-size:14px">円/年</span></div>
+        <div style="font-size:12px;color:#888;margin-top:2px">年間でこの金額まで、自己負担2,000円のみで返礼品が受け取れます</div>
+      </div>
+      <div style="background:#fff8e0;border:1.5px solid #f0d090;border-radius:12px;padding:.9rem;margin-bottom:10px">
+        <div style="font-size:13px;font-weight:700;color:#7a5010;margin-bottom:8px">📝 今年すでにいくら寄付しましたか？</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <input type="number" id="p3-fs-input" min="0" max="${fa}" placeholder="例：20000"
+            style="flex:1;padding:8px 10px;border:1.5px solid #f0c060;border-radius:8px;font-size:15px;font-family:'Noto Sans JP',sans-serif;width:100%;box-sizing:border-box"
+            oninput="onFsInput(this.value)" />
+          <span style="font-size:13px;color:#7a5010;flex-shrink:0">円</span>
+        </div>
+        <div style="background:#f0e8c0;border-radius:6px;height:8px;margin-bottom:8px;overflow:hidden">
+          <div id="p3-fs-bar" style="height:100%;background:#e8a020;border-radius:6px;width:0%;transition:width .4s"></div>
+        </div>
+        <div id="p3-fs-remaining" style="font-size:14px;color:#7a5010">
+          まだ<strong style="color:#c85a1a;font-size:18px"> ${fmt(fa)}円</strong>の余裕があります
+        </div>
+        <div style="font-size:11px;color:#aaa;margin-top:6px">💾 入力した金額は自動保存されます</div>
+      </div>
+      `;
+    // 保存値があれば反映
+    updateFsDisplay();
+      <div class="nb" style="background:#fff8f0;border-color:#f0c090;margin-bottom:10px">
+        <div class="ntit" style="color:#c85a1a">⚠️ 2025年10月〜 ポータルサイトのポイント付与は禁止</div>
+        <div class="ntxt" style="color:#5a3a1a">総務省の告示により楽天・さとふるなど全ポータルサイトでのポイント付与が禁止されました（楽天は訴訟中）。返礼品は引き続き受け取れます。</div>
+      </div>
+      <div class="tipc" style="background:#eef6fb;border-color:#a8d8ee">
+        <div class="tpt" style="color:#1a5a7a">💡 ふるさと納税のポイント</div>
+        <div class="tpd" style="color:#2a4a5a">・12月末までに寄付→1月10日必着でワンストップ特例申請（確定申告不要）<br>・返礼品は食品・日用品・旅行券など豊富<br>・複数自治体への分散寄付もOK</div>
+      </div>`;
+  }
+
+  // 固定費チェックリスト
+  const cl=document.getElementById('check-list');
+  if(cl){ cl.innerHTML=CHECKS.map((c,i)=>`<div class="check-item" onclick="toggleCheck(${i})"><div class="check-box" id="cb${i}">✓</div><div class="check-text">${c.icon} ${c.label}</div><div class="check-save">年約${fmt(c.save)}円</div></div>`).join(''); }
+  updateCheckTotal();
+  calcNISA(); calcIDeCo();
+
+  // P3のアクションリスト（#alist）
+  const acts=gActs(inc,fam);
+  const al = document.getElementById('alist');
+  if(al){ al.innerHTML=acts.map((a,i)=>`<div class="actc"><div class="an">${i+1}</div><div><div class="at">${a.t}</div><div class="ad2">${a.d}</div></div></div>`).join(''); }
+}
+
+// 物価データをbukka divにセット（P3の物価タブ用）
+function renderBukka(){
+  const el = document.getElementById('bukka');
+  if(!el || el.dataset.rendered) return;
+  el.dataset.rendered = '1';
+  el.innerHTML = getBukkaHTML();
+}
+function getBukkaHTML(){
+  return `
+<div class="sg">
+  <div class="sb"><div class="sl">5年間の累計物価上昇（2020年比）</div><div class="sv2 hlr">約+12%</div></div>
+  <div class="sb"><div class="sl">4人家族の追加負担（2026年推計）</div><div class="sv2 hlr">+約8.9万円</div></div>
+</div>
+<div style="font-size:11px;color:#aaa;margin-bottom:12px">出典：第一生命経済研究所（2026年1月）・総務省CPI（${DATA_VERSION.cpiMonth}）・日銀展望レポート</div>
+
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:10px">🛒 食品別・値上がり・値下がりの実態（前年比・2026年1月）</div>
+<div class="food-grid">
+  <div class="food-item up">
+    <div class="food-tip-bubble">コメの不作＋在庫不足が長期化。2026年も高値が続くが鈍化傾向。国産米の備蓄放出で一部緩和。</div>
+    <span class="food-emoji">🍚</span><div class="food-name">コメ・パックご飯</div>
+    <div class="food-rate up">+27.9%</div><div class="food-reason">不作・在庫不足。鈍化傾向も高値続く</div>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">円安＋漁獲量減少が直撃。サバ・サーモン・イカなど多くの魚種で値上がり中。</div>
+    <span class="food-emoji">🐟</span><div class="food-name">魚介類</div>
+    <div class="food-rate up">+7.9%</div><div class="food-reason">円安・漁獲減・輸送費増</div>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">食用油はパーム油・大豆油など輸入依存。マヨネーズ・ドレッシングなど加工品にも波及。</div>
+    <span class="food-emoji">🧴</span><div class="food-name">油脂・調味料</div>
+    <div class="food-rate up">+4.8%</div><div class="food-reason">輸入原料高・包装資材値上がり</div>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">コーヒー豆・ジュース果汁の産地不作。緑茶やウーロン茶なども値上がり。</div>
+    <span class="food-emoji">☕</span><div class="food-name">飲料（コーヒー・茶等）</div>
+    <div class="food-rate up">+7.8%</div><div class="food-reason">原産地の天候不順・不作</div>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">乳製品（バター・チーズ）は輸入依存が高く円安の影響を受けやすい。卵は鳥インフル対応済みで落ち着き傾向。</div>
+    <span class="food-emoji">🥛</span><div class="food-name">乳製品・卵</div>
+    <div class="food-rate up">+7.4%</div><div class="food-reason">輸入乳製品の円安影響大</div>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">カカオ豆が記録的な不作で価格急騰。チョコ菓子・ケーキ類は2026年も値上げが続く見込み。</div>
+    <span class="food-emoji">🍫</span><div class="food-name">菓子類（チョコ等）</div>
+    <div class="food-rate up">+8.2%</div><div class="food-reason">カカオ豆の世界的不作</div>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">人件費＋食材費の上昇分を価格転嫁。外食は今後も緩やかな値上がりが続く見込み。</div>
+    <span class="food-emoji">🍜</span><div class="food-name">外食・テイクアウト</div>
+    <div class="food-rate up">+3.9%</div><div class="food-reason">人件費・食材費の転嫁</div>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">冷凍食品・レトルトは加工コスト＋包材費が上昇。コメ系の冷食は特に高騰。</div>
+    <span class="food-emoji">🧊</span><div class="food-name">加工食品・冷凍食品</div>
+    <div class="food-rate up">+5.0%</div><div class="food-reason">包材費・人件費・原料費が重なる</div>
+  </div>
+  <div class="food-item down">
+    <div class="food-tip-bubble">天候回復で国産野菜が安定供給。旬の野菜を意識的に選ぶと節約になる。</div>
+    <span class="food-emoji">🥦</span><div class="food-name">生鮮野菜</div>
+    <div class="food-rate down">-14.0%</div><div class="food-reason">天候回復で供給安定・旬を狙って</div>
+  </div>
+  <div class="food-item down">
+    <div class="food-tip-bubble">果物は天候が良い時期に価格が落ちる。国産の旬フルーツは今がお得。</div>
+    <span class="food-emoji">🍎</span><div class="food-name">生鮮果物</div>
+    <div class="food-rate down">-10.4%</div><div class="food-reason">国産旬品が豊作で割安</div>
+  </div>
+</div>
+<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると値上がりの理由がわかります。出典：総務省CPI 2026年1月。</div>
+
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">📅 2025〜2027年のインフレ率予測</div>
+<div class="forecast-timeline">
+  <div class="fc-year"><div class="fc-dot past"></div><div class="fc-yr-label">2025年度</div><div class="fc-rate hot">+2.7%</div><div class="fc-desc">米・食料品が急騰。物価高が最も厳しかった年</div></div>
+  <div class="fc-year"><div class="fc-dot now"></div><div class="fc-yr-label">2026年度 ←今</div><div class="fc-rate warm">+1.8%</div><div class="fc-desc">政府補助終了で光熱費は上昇。食品は鈍化傾向</div></div>
+  <div class="fc-year"><div class="fc-dot future"></div><div class="fc-yr-label">2027年度</div><div class="fc-rate cool">+2.1%</div><div class="fc-desc">賃金と物価の「好循環」が始まる可能性</div></div>
+</div>
+<div class="fc-src">出典：ニッセイ基礎研究所・日銀展望レポート（2026年1月）・大和総研</div>
+
+<div class="scenario-box" style="margin-top:12px">
+  <div class="scenario-title">💡 2027年以降、「物価高」の性質が変わる可能性</div>
+  <div class="scenario-desc">2022〜2026年は「輸入コスト上昇＋円安」という<strong>外から押される物価高</strong>でした。2027年以降は春闘の賃上げが続き、「<strong>給料も上がる→物価も上がる好循環</strong>」へ移行する可能性があります。実質賃金がプラスを保ちやすくなる一方、物価が上がり続けることには変わりないため、<strong>NISA・iDeCoで資産を運用して物価に負けない準備</strong>がますます重要になります。</div>
+</div>
+
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin:16px 0 8px">🛍️ 今すぐ使える！賢い食費節約のコツ</div>
+<div class="smart-buy-list">
+  <div class="smart-buy-item"><div class="sb-icon">🥦</div><div class="sb-text"><strong>野菜・果物は今がチャンス</strong>：生鮮野菜（-14%）・果物（-10%）は今月が安い。まとめ買いして冷凍保存を。</div></div>
+  <div class="smart-buy-item"><div class="sb-icon">🍚</div><div class="sb-text"><strong>コメはPB銘柄やブレンド米に切り替え</strong>：スーパーのPBブランド米はブランド米より2〜3割安。普段使いならほぼ味の差はなし。</div></div>
+  <div class="smart-buy-item"><div class="sb-icon">🐟</div><div class="sb-text"><strong>魚は冷凍・大衆魚を活用</strong>：サバ・アジなど大衆魚の冷凍は輸送コストが低く値上がり幅が小さい。</div></div>
+  <div class="smart-buy-item"><div class="sb-icon">☕</div><div class="sb-text"><strong>コーヒーはドリップ袋で1杯30〜50円</strong>：コンビニコーヒー代わりにドリップ袋を使うと半額以下に。</div></div>
+  <div class="smart-buy-item"><div class="sb-icon">🏘️</div><div class="sb-text"><strong>ふるさと納税の食品返礼品で食費を補填</strong>：控除限度額の範囲でコメ・肉・海産物を返礼品として受け取れば実質食費の節約に。</div></div>
+</div>
+
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin:16px 0 8px">なぜ物価が上がり続けているのか？</div>
+<div class="cause-row"><span class="chip">🌍 円安の長期化</span><span class="chip">⚡ エネルギー価格高騰</span><span class="chip">🌾 輸入原材料の上昇</span><span class="chip">🚚 物流コスト増</span><span class="chip">🇷🇺 地政学リスク</span><span class="chip">👷 人件費の上昇</span></div>
+<div style="font-size:13px;color:#444;line-height:1.7;margin-top:6px">日本は食料自給率が低く、エネルギーのほぼ全量を輸入に依存しています。そのため<strong>円安になると輸入コストが直撃</strong>し、食品・光熱費・物流費が連鎖的に上昇します。2022年のロシアによるウクライナ侵攻で世界のエネルギー・食料価格が急騰したことが引き金となり、日本でも2022年以降2%超えのインフレが3年以上続いています。</div>
+`;}
+
+// 負担増を別関数として切り出し（P3タブ切替用）
+function renderBurden(inc){
+  const el = document.getElementById('burden');
+  if(!el) return;
+  if(el.dataset.rendered === String(inc)) return;
+  el.dataset.rendered = String(inc);
+  const shien=KS[inc]||4400;
+  el.innerHTML=`
+<div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">子ども・子育て支援金（医療保険料上乗せ）</div><div class="baw">年約${fmt(shien)}円</div><span class="chev">▾</span></div><div class="bdet"><div class="nb"><div class="ntit">📌 制度の背景</div><div class="ntxt">2026年4月にスタートした制度で、医療保険料に上乗せして徴収されます。<strong>被用者保険（会社員）の本人負担は年収別</strong>：年収400万→月約384円・年収600万→月約575円・年収800万→月約767円（労使折半後）。国保加入者は世帯月約300円程度。2027年度・2028年度と段階的に上がります。年収${inc}万円の場合の目安は年約${fmt(shien)}円（月${fmt(Math.round(shien/12))}円）です。</div></div></div></div>
+<div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">国民年金保険料の引き上げ</div><div class="baw">月17,920円（2026年度）</div><span class="chev">▾</span></div><div class="bdet"><div class="nb"><div class="ntit">📌 どのくらい増える？</div><div class="ntxt">2025年度：月17,510円 → 2026年度：月17,920円（+410円）。自営業・フリーランス等の国民年金加入者が対象。会社員（厚生年金）は保険料率は現状維持ですが、今後見直しの議論が続いています。</div></div></div></div>
+<div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">物価高による実質的な購買力の低下</div><div class="baw">4人家族＋約8.9万円/年</div><span class="chev">▾</span></div><div class="bdet"><div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:8px">2026年度インフレ率は約1.8%と予測。4人家族で年間約8.9万円の家計負担増（第一生命経済研究所試算）。政府補助で約2.5万円軽減見込みですが、食品・外食・サービス価格の上昇は続きます。</div><div class="sg"><div class="sb"><div class="sl">2026年推計インフレ率</div><div class="sv2 hlr">+1.8%</div></div><div class="sb"><div class="sl">政府補助による軽減（4人家族）</div><div class="sv2 hlb">▲2.5万円</div></div></div></div></div>
+<div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">社会保険料・税負担の中長期的な増加傾向</div><div class="baw">防衛・社会保障の財源問題</div><span class="chev">▾</span></div><div class="bdet"><div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:10px">防衛費増額・少子化対策・高齢化による社会保障費膨張の3課題が重なり財源議論が続いています。</div><div class="tl"><div class="tli"><div class="tld"></div><div class="tly">2026年〜</div><div class="tlx">防衛費財源としてたばこ税・法人税の増税スタート。所得増税は先送り。</div></div><div class="tli"><div class="tld"></div><div class="tly">2027〜2029年</div><div class="tlx">たばこ税を毎年段階的に引き上げ（3年で1箱30円増税）。</div></div><div class="tli"><div class="tld" style="background:#888"></div><div class="tly">検討中・未定</div><div class="tlx">所得税の防衛増税、通勤課税、金融所得課税強化など審議継続中。</div></div></div><div style="font-size:12px;color:#999;margin-top:4px">※財務省・国税庁サイトで最新情報を確認してください。</div></div></div>`;
+}
+
+function renderShiko(){
+  const el = document.getElementById('shiko');
+  if(!el||el.dataset.rendered) return;
+  el.dataset.rendered='1';
+  el.innerHTML=`
+<div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:12px">お酒やたばこにも2026年に大きな改正があります。</div>
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🚬 たばこ税の段階的引き上げ</div>
+<div class="tl"><div class="tli"><div class="tld"></div><div class="tly">2026年4月・10月（2段階）</div><div class="tlx">加熱式たばこの課税方式を見直し、紙巻きと同水準に引き上げ。1箱40〜100円程度の増税。防衛費確保が目的。</div></div><div class="tli"><div class="tld"></div><div class="tly">2027・2028・2029年4月</div><div class="tlx">紙巻き・加熱式ともに1本0.5円ずつ（1箱10円）引き上げ。3年で1箱計30円増税。最終的に1箱600〜700円台へ。</div></div></div>
+<div style="font-size:12px;color:#999;margin:4px 0 14px">喫煙者は3年間で累計約11,000円の負担増の目安。禁煙外来は条件付きで保険適用あり。</div>
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🍺 酒税改正（2026年10月・最終段階）</div>
+<div style="background:#faf9f7;border-radius:10px;padding:10px 12px">
+<div class="skrow"><div class="skn">ビール（350ml）</div><div class="skdn">変化なし</div></div>
+<div class="skrow"><div class="skn">発泡酒・チューハイ・サワー</div><div class="skup">▲ 増税（統一税率へ）</div></div>
+<div class="skrow"><div class="skn">日本酒（1.8L）</div><div class="skdn">▼ 減税（-18円）</div></div>
+<div class="skrow"><div class="skn">ワイン（720ml）</div><div class="skup">▲ 増税（+7.2円）</div></div>
+</div>`;
+}
+
+function renderWall(inc){
+  const el=document.getElementById('wall');
+  if(!el) return;
+  const wm={150:"年収150万円前後は、178万円への引き上げにより扶養される側のパート・副業収入の上限が広がる可能性があります。",200:"年収200万円台は配偶者控除・扶養の見直しが関係してくる水準。178万円引き上げで就業調整のタイミングを再検討できます。",300:"年収300万円台は直接の影響は限定的ですが、同居家族のパート収入上限が広がる可能性があります。",400:"年収400万円台では配偶者のパート収入上限が広がり、世帯手取り増につながる可能性があります。",500:"年収500万円台では配偶者・扶養家族の副業・パート収入を増やせる可能性があります。",600:"年収600万円以上では配偶者・扶養家族の就業形態次第。ふるさと納税の節税効果が大きいゾーンです。",700:"年収700万円台はふるさと納税の控除限度額が10万円超となり、積極活用できます。医療費控除も有効です。",800:"年収800万円以上ではiDeCoの活用・医療費控除・ふるさと納税の組み合わせで年間数万円単位の節税も。",1000:"年収1000万円超は税負担も重い一方、ふるさと納税の控除枠が最大級で積極活用できます。",1200:"年収1000万円超は税負担も重い一方、ふるさと納税の控除枠が最大級で積極活用できます。"};
+  el.innerHTML=`<div class="nb"><div class="ntit">📌 178万円の壁（引き上げ検討中）</div><div class="ntxt">${wm[inc]||wm[500]}</div></div><div style="font-size:12px;color:#999">※税制改正の動向によって変わる可能性があります。国税庁サイトで最新情報をご確認ください。</div>`;
+}
+
+function gActs(inc,fam){
+  const fm=FS[fam]||FS.single,fa=fm[inc]||42000,acts=[];
+  if(inc>=300) acts.push({t:`ふるさと納税で約${fmt(fa)}円分の返礼品をゲット`,d:`年間2,000円の自己負担（※全寄付の合算）で、控除限度額分の返礼品が受け取れます。ポータルサイトのポイント付与は禁止になりましたが返礼品は変わらずお得！12月末の寄付でOK。`});
+  if(inc>=300) acts.push({t:'スマホ・電気代など固定費を見直して年数万円節約',d:'格安SIMへの乗り換えで年7万円超の節約も。電力会社の乗り換えも工事不要で簡単。2026年4月から政府補助終了のため今すぐ見直しを。'});
+  else acts.push({t:'給付金・助成制度の申請漏れをチェック',d:'低所得世帯向け給付金や自治体独自の支援制度を確認しましょう。給付金タブで詳細を確認できます。'});
+  if(inc>=400) acts.push({t:'新NISA・iDeCoで税金を減らしながら資産形成',d:`iDeCoは掛金が全額所得控除。2026年12月から掛金上限が大幅拡大予定。新NISAは運用益が非課税。早めに始めるほど複利効果が大きい！`});
+  else acts.push({t:'ドラッグストアのレシートを保存して節税を狙う',d:'スイッチOTC医薬品のレシートを保存。年12,000円超えたら確定申告で節税可能。医療費控除タブで詳細を確認。'});
+  if(acts.length<3) acts.push({t:'医療費控除で病院代・薬代を節税',d:'年間医療費が10万円を超えた分が控除対象。交通費も含めてレシートを保管する習慣を今から始めましょう。'});
+  return acts.slice(0,3);
+}
+
+
+// チェックリスト
+
+// アコーディオン開閉
+function tog(hdr){
+  const det = hdr.nextElementSibling;
+  const ch  = hdr.querySelector('.chev');
+  const open = det.classList.toggle('open');
+  if(ch) ch.classList.toggle('open', open);
+}
+
+function toggleCheck(i){
+  if(checkedSets.has(i)) checkedSets.delete(i);
+  else checkedSets.add(i);
+
+  // チェックボックスの見た目更新
+  const cb = document.getElementById('cb'+i);
+  if(cb) cb.classList.toggle('checked', checkedSets.has(i));
+
+  // 対応する詳細カードを表示/非表示
+  const item = CHECKS[i];
+  if(item && item.detailId){
+    const detail = document.getElementById(item.detailId);
+    if(detail){
+      if(checkedSets.has(i)){
+        detail.style.display = 'block';
+        setTimeout(() => detail.scrollIntoView({behavior:'smooth', block:'nearest'}), 80);
+      } else {
+        detail.style.display = 'none';
+      }
+    }
+  }
+
+  updateCheckTotal();
+}
+function updateCheckTotal(){
+  let total=0;
+  checkedSets.forEach(i=>{if(CHECKS[i]) total+=CHECKS[i].save});
+  const el=document.getElementById('check-total-val');
+  if(el) el.textContent=fmt(total)+' 円';
+}
+
+
+// ===================================================
+// サブスクメモ機能（localStorage保存）
+// ===================================================
+function loadSubEntries(){
+  try{
+    return JSON.parse(localStorage.getItem('navi_sub_memo')||'[]');
+  }catch(e){ return []; }
+}
+function saveSubEntries(entries){
+  try{ localStorage.setItem('navi_sub_memo', JSON.stringify(entries)); }catch(e){}
+}
+function renderSubEntries(){
+  const entries = loadSubEntries();
+  const container = document.getElementById('sub-list-container');
+  if(!container) return;
+  if(entries.length === 0){
+    container.innerHTML = '<div style="font-size:12px;color:#aaa;text-align:center;padding:8px">まだ何も入力されていません。「＋ サービスを追加」を押してください。</div>';
+    updateSubTotals(entries);
+    return;
+  }
+  container.innerHTML = entries.map((e,i) => `
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
+      <input type="text" value="${e.name||''}" placeholder="サービス名（例：Netflix）" 
+        style="flex:2;padding:6px 8px;border:1px solid #c0d8f0;border-radius:6px;font-size:12px;font-family:'Noto Sans JP',sans-serif"
+        onchange="updateSubEntry(${i},'name',this.value)" />
+      <input type="number" value="${e.price||''}" placeholder="月額" min="0"
+        style="flex:1;padding:6px 8px;border:1px solid #c0d8f0;border-radius:6px;font-size:12px;font-family:'Noto Sans JP',sans-serif"
+        onchange="updateSubEntry(${i},'price',this.value)" />
+      <span style="font-size:11px;color:#888;flex-shrink:0">円/月</span>
+      <button onclick="removeSubEntry(${i})" style="background:none;border:none;color:#c85a1a;font-size:14px;cursor:pointer;flex-shrink:0;line-height:1">×</button>
+    </div>
+  `).join('');
+  updateSubTotals(entries);
+}
+function updateSubEntry(i, field, val){
+  const entries = loadSubEntries();
+  if(!entries[i]) entries[i] = {};
+  entries[i][field] = field === 'price' ? (parseInt(val)||0) : val;
+  saveSubEntries(entries);
+  updateSubTotals(entries);
+}
+function addSubEntry(){
+  const entries = loadSubEntries();
+  entries.push({name:'', price:0});
+  saveSubEntries(entries);
+  renderSubEntries();
+  // 新しいinputにフォーカス
+  setTimeout(()=>{
+    const inputs = document.querySelectorAll('#sub-list-container input[type=text]');
+    if(inputs.length) inputs[inputs.length-1].focus();
+  }, 50);
+}
+function removeSubEntry(i){
+  const entries = loadSubEntries();
+  entries.splice(i,1);
+  saveSubEntries(entries);
+  renderSubEntries();
+}
+function updateSubTotals(entries){
+  const monthly = entries.reduce((s,e)=>s+(parseInt(e.price)||0), 0);
+  const mEl = document.getElementById('sub-total-monthly');
+  const yEl = document.getElementById('sub-total-yearly');
+  if(mEl) mEl.textContent = monthly.toLocaleString('ja-JP') + '円';
+  if(yEl) yEl.textContent = (monthly * 12).toLocaleString('ja-JP') + '円';
+}
+// detail-2が表示されたらレンダリング
+const _origToggleCheck = toggleCheck;
+toggleCheck = function(i){
+  _origToggleCheck(i);
+  if(CHECKS[i] && CHECKS[i].detailId === 'detail-2' && checkedSets.has(i)){
+    setTimeout(renderSubEntries, 100);
+  }
+};
+
+
+// ===================================================
+// ふるさと納税：今年の寄付済み金額入力ツール
+// ===================================================
+function loadFsUsed(){
+  try{ return parseInt(localStorage.getItem('navi_fs_used')||'0')||0; }catch(e){return 0;}
+}
+function saveFsUsed(v){
+  try{ localStorage.setItem('navi_fs_used', String(v)); }catch(e){}
+}
+function updateFsDisplay(){
+  const used = loadFsUsed();
+  // P2の表示を更新
+  const p2rem = document.getElementById('p2-fs-remaining');
+  const p2bar = document.getElementById('p2-fs-bar');
+  const fa = (typeof window._currentFa !== 'undefined') ? window._currentFa : 0;
+  if(p2rem && fa > 0){
+    const rem = Math.max(0, fa - used);
+    const pct = Math.min(100, Math.round(used / fa * 100));
+    if(p2bar) p2bar.style.width = pct + '%';
+    if(rem > 0){
+      p2rem.innerHTML = `まだ<strong style="color:#c85a1a;font-size:18px"> ${fmt(rem)}円</strong>の余裕があります`;
+    } else {
+      p2rem.innerHTML = `<span style="color:#2e7a42;font-weight:700">🎉 今年の控除枠をフル活用中！</span>`;
+    }
+  }
+  // P3 finfo2の表示を更新
+  const p3rem = document.getElementById('p3-fs-remaining');
+  const p3bar = document.getElementById('p3-fs-bar');
+  if(p3rem && fa > 0){
+    const rem = Math.max(0, fa - used);
+    const pct = Math.min(100, Math.round(used / fa * 100));
+    if(p3bar) p3bar.style.width = pct + '%';
+    if(rem > 0){
+      p3rem.innerHTML = `まだ<strong style="color:#c85a1a;font-size:18px"> ${fmt(rem)}円</strong>の余裕があります`;
+    } else {
+      p3rem.innerHTML = `<span style="color:#2e7a42;font-weight:700">🎉 今年の控除枠をフル活用中！</span>`;
+    }
+  }
+  // 入力欄の値を同期
+  ['p2-fs-input','p3-fs-input'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el && parseInt(el.value||'0') !== used) el.value = used || '';
+  });
+}
+function onFsInput(val){
+  const v = parseInt(val)||0;
+  saveFsUsed(v);
+  updateFsDisplay();
+}
+
+function updOTC(){
+  const v=parseInt(document.getElementById('otcv').value)||0,t=12000,p=Math.min(100,Math.round(v/t*100));
+  document.getElementById('obar').style.width=p+'%';
+  const el=document.getElementById('ores');
+  if(!v){el.textContent='ドラッグストアのレシートを見ながら入力してみてください';el.style.color='#a07010'}
+  else if(v<t){el.textContent='あと'+fmt(t-v)+'円で控除対象ライン（12,000円）！';el.style.color='#a07010'}
+  else{el.textContent='🎉 控除対象！超過分'+fmt(v-t)+'円が所得控除の対象になります';el.style.color='#2e7a42'}
+}
+ld();
+</script>
+</body>
+</html>
