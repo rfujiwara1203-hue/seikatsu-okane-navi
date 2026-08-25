@@ -1796,8 +1796,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // 単一HTMLで動作させる場合はNEWS_DATA定数を直接編集してください。
 // ===================================================
 
-// ---- ニュースデータ（news.jsonの内容をここにも持つ） ----
-const NEWS_DATA = {
+// ---- フォールバック用ニュースデータ（/api/news取得に失敗した場合に使用） ----
+const FALLBACK_NEWS_DATA = {
   "meta": {"version":"1.0","lastUpdated":"2026-04-07"},
   "news": [
     {"id":"n2026-04-07-01","date":"2026-04-07","category":"burden","categoryLabel":"負担増","emoji":"🍼","title":"子ども・子育て支援金が4月からスタート","summary":"医療保険料に月250円上乗せで徴収開始。年収500万円なら年約4,400円の負担増が目安。","body":"2026年4月から子ども・子育て支援金制度がスタートしました。医療保険料への上乗せという形で全被保険者から徴収され、2026年度は全制度平均で月額約250円（労使折半）。2027年度は月350円、2028年度は月450円と段階的に引き上がります。財源は少子化対策に充てられますが、国会では財源の公平性について議論も続いています。","relevance":{"incomeMin":0,"incomeMax":9999,"families":["all"]},"isNew":true,"isPinned":true,"link":"https://www.cfa.go.jp/policies/kodomo-shien/","linkLabel":"こども家庭庁で詳細を確認"},
@@ -1811,6 +1811,62 @@ const NEWS_DATA = {
     {"id":"n2026-03-10-01","date":"2026-03-10","category":"child","categoryLabel":"子育て","emoji":"👶","title":"高校授業料・給食の無償化が2026年から拡充","summary":"所得制限が撤廃・拡充される地域も増加。対象条件はお住まいの都道府県・市区町村で確認を。","body":"2026年度から高校授業料の無償化・給食費の無償化が各地で拡充されています。国の制度としては所得要件が撤廃・緩和される方向にあり、多くの都道府県・市区町村でも独自の支援策が設けられています。ただし対象学年・所得要件・申請手続きは地域によって大きく異なるため、お住まいの教育委員会や学校に確認することをおすすめします。","relevance":{"incomeMin":0,"incomeMax":9999,"families":["child1","child2","child3","single_parent"]},"isNew":false,"isPinned":false,"link":"https://www.mext.go.jp/","linkLabel":"文部科学省で制度詳細を確認"}
   ]
 };
+
+// ---- 表示用ニュースデータ（初期値はフォールバック。/api/news取得後に差し替え） ----
+let NEWS_DATA = FALLBACK_NEWS_DATA;
+
+// フォールバック内の「最終更新日」の記事＝今日のピックアップとして表示
+function markPickup(newsArr, pickupDate) {
+  return newsArr.map(n => ({ ...n, isPickup: n.date === pickupDate }));
+}
+NEWS_DATA = { meta: FALLBACK_NEWS_DATA.meta, news: markPickup(FALLBACK_NEWS_DATA.news, FALLBACK_NEWS_DATA.meta.lastUpdated) };
+
+// /api/news のレスポンス1件を、このページのニュースカード形式に変換
+function mapApiNewsItem(item, idx) {
+  const d = item.pubDate ? new Date(item.pubDate) : new Date();
+  const dateISO = isNaN(d.getTime()) ? new Date().toISOString().slice(0, 10) : d.toISOString().slice(0, 10);
+  const body = item.content || item.title;
+  return {
+    id: item.id || `api-${idx}`,
+    date: dateISO,
+    category: item.category,
+    categoryLabel: item.categoryLabel || 'ニュース',
+    emoji: item.emoji || '📰',
+    title: item.title,
+    summary: body.length > 70 ? body.slice(0, 70) + '…' : body,
+    body,
+    relevance: { incomeMin: 0, incomeMax: 9999, families: ['all'] },
+    isNew: true,
+    isPinned: false,
+    isPickup: true,
+    link: item.link,
+    linkLabel: item.source ? `${item.source}で詳細を確認` : '元記事を確認',
+  };
+}
+
+// /api/news から最新ニュースを取得し、NEWS_DATAを差し替えて再描画
+async function loadLiveNews(inc, fam) {
+  try {
+    const params = new URLSearchParams({ income: String(inc || 0), family: fam || 'single' });
+    const res = await fetch('/api/news?' + params.toString());
+    if (!res.ok) throw new Error('news fetch failed: ' + res.status);
+    const json = await res.json();
+    if (Array.isArray(json.items) && json.items.length > 0) {
+      const liveItems = json.items.map(mapApiNewsItem);
+      const liveIds = new Set(liveItems.map(n => n.id));
+      const archive = FALLBACK_NEWS_DATA.news
+        .filter(n => !liveIds.has(n.id))
+        .map(n => ({ ...n, isPickup: false }));
+      NEWS_DATA = {
+        meta: { version: json.fetchedAt || '2.0', lastUpdated: (json.fetchedAt || new Date().toISOString()).slice(0, 10) },
+        news: [...liveItems, ...archive],
+      };
+    }
+  } catch (e) {
+    console.warn('ライブニュース取得に失敗、フォールバックデータを表示します', e);
+  }
+  renderNews(inc, fam);
+}
 
 // ---- ニュースユーティリティ ----
 function isNewsRelevant(news, inc, fam) {
@@ -1831,12 +1887,12 @@ function fmtNewsDate(dateStr) {
 }
 
 function renderNews(inc, fam) {
-  const today = '2026-04-07'; // アプリの基準日（本番ではnew Date().toISOString().slice(0,10)に変更）
+  const today = NEWS_DATA.meta.lastUpdated || new Date().toISOString().slice(0, 10);
   const all = NEWS_DATA.news;
 
-  // 今日のニュースと過去ニュースに分類
-  const todayNews = all.filter(n => n.date === today);
-  const archiveNews = all.filter(n => n.date !== today);
+  // 今日のピックアップと過去ニュースに分類（isPickupフラグ基準）
+  const todayNews = all.filter(n => n.isPickup);
+  const archiveNews = all.filter(n => !n.isPickup);
 
   // 今日のニュース：関連ニュース→ピン止め→残りの順にソート
   const sorted = [...todayNews].sort((a, b) => {
@@ -1920,9 +1976,10 @@ function toggleArchive() {
   btn.textContent = isOpen ? '過去のニュース ▴' : '過去のニュース ▾';
 }
 
-// ニュース初期化（入力前でも表示）
+// ニュース初期化（フォールバックで即描画→APIの最新ニュースに差し替え）
 document.addEventListener('DOMContentLoaded', () => {
   renderNews(0, '');
+  loadLiveNews(0, '');
 });
 
 
