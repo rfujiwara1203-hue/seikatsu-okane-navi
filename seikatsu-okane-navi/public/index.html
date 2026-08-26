@@ -333,6 +333,10 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
 .food-tip-bubble{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#2c2c2a;color:#fff;font-size:11px;padding:6px 10px;border-radius:8px;width:160px;text-align:center;z-index:50;pointer-events:none;opacity:0;transition:opacity .2s;line-height:1.5}
 .food-item:hover .food-tip-bubble{opacity:1}
 .food-tip-bubble::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#2c2c2a}
+.food-trend{font-size:10px;color:#999;margin-top:2px;line-height:1.4}
+.food-badge{display:inline-block;font-size:9px;font-weight:700;border-radius:99px;padding:1px 6px;margin-top:3px}
+.food-badge.fresh{background:#e8f5e0;color:#2e6e3a}
+.food-badge.stale{background:#f5f0e0;color:#a8791f}
 
 /* 将来予測タイムライン */
 .forecast-timeline{display:flex;gap:0;margin:12px 0;position:relative}
@@ -2437,60 +2441,79 @@ function getBukkaHTML(){
 </div>
 <div style="font-size:11px;color:#aaa;margin-bottom:12px">出典：<a href="https://www.dlri.co.jp/report/macro/560702.html" target="_blank" rel="noopener" style="color:#888">第一生命経済研究所（2026年1月）</a>・<a href="https://www.soumu.go.jp/menu_news/s-news/01toukei08_01000337.html" target="_blank" rel="noopener" style="color:#888">総務省CPI（${DATA_VERSION.cpiMonth}）</a>・日銀展望レポート</div>
 
-<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:10px">🛒 食品別・値上がり・値下がりの実態（前年比・2026年1月）</div>
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:2px">🛒 食品別・値上がり・値下がりの実態</div>
+<div style="font-size:11px;color:#999;margin-bottom:10px">🟢最新まで再確認済み　🟡2026年1月時点のまま（要最新化）</div>
 <div class="food-grid">
-  <div class="food-item up">
-    <div class="food-tip-bubble">コメの不作＋在庫不足が長期化。2026年も高値が続くが鈍化傾向。国産米の備蓄放出で一部緩和。</div>
+  <div class="food-item down">
+    <div class="food-tip-bubble">2025年はピーク時+101.5%まで高騰した「令和の米騒動」。しかし在庫が適正水準の1.5倍以上に膨らみ、2026年5月に前年比マイナスへ完全反転。新米（2026年産）は前年比2割安の見通し。</div>
     <span class="food-emoji">🍚</span><div class="food-name">コメ・パックご飯</div>
-    <div class="food-rate up">+27.9%</div><div class="food-reason">不作・在庫不足。鈍化傾向も高値続く</div>
+    <div class="food-rate down">-4.9%</div>
+    <div class="food-trend">2025年ピーク+101.5% → 26年1月+27.9% → 26年5月<strong style="color:#2e7a42">−4.9%</strong></div>
+    <div class="food-reason">在庫過多で値崩れ。新米はさらに安くなる見込み</div>
+    <span class="food-badge fresh">🟢 26年5月時点</span>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">カカオ豆の国際商品価格は供給回復（コートジボワール増産）で2024年ピークの1/3〜1/4まで急落。ただし小売価格への反映には半年〜1年ほど時間差があり、店頭ではまだ値上がりが続いている。</div>
+    <span class="food-emoji">🍫</span><div class="food-name">菓子類（チョコ等）</div>
+    <div class="food-rate up">+24.0%</div>
+    <div class="food-trend">原料（カカオ豆）は既に急落中 → 店頭価格への反映はこれから</div>
+    <div class="food-reason">仕入コスト高が今も店頭価格に反映され続けている（原料はピークアウト済み）</div>
+    <span class="food-badge fresh">🟢 26年3月時点</span>
+  </div>
+  <div class="food-item up">
+    <div class="food-tip-bubble">2026年2月にかけて産地不作で急騰したが、3月以降は国際相場が落ち着き始めている。店頭価格は仕入れタイムラグでまだ高止まり中。</div>
+    <span class="food-emoji">☕</span><div class="food-name">コーヒー豆</div>
+    <div class="food-rate up">+7.8%</div>
+    <div class="food-trend">国際相場はピークアウトの兆し、店頭価格は今後緩やかに落ち着く見込み</div>
+    <div class="food-reason">産地不作の影響が続くが、相場は既に落ち着き始めている</div>
+    <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
   <div class="food-item up">
     <div class="food-tip-bubble">円安＋漁獲量減少が直撃。サバ・サーモン・イカなど多くの魚種で値上がり中。</div>
     <span class="food-emoji">🐟</span><div class="food-name">魚介類</div>
     <div class="food-rate up">+7.9%</div><div class="food-reason">円安・漁獲減・輸送費増</div>
+    <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
   <div class="food-item up">
     <div class="food-tip-bubble">食用油はパーム油・大豆油など輸入依存。マヨネーズ・ドレッシングなど加工品にも波及。</div>
     <span class="food-emoji">🧴</span><div class="food-name">油脂・調味料</div>
     <div class="food-rate up">+4.8%</div><div class="food-reason">輸入原料高・包装資材値上がり</div>
-  </div>
-  <div class="food-item up">
-    <div class="food-tip-bubble">コーヒー豆・ジュース果汁の産地不作。緑茶やウーロン茶なども値上がり。</div>
-    <span class="food-emoji">☕</span><div class="food-name">飲料（コーヒー・茶等）</div>
-    <div class="food-rate up">+7.8%</div><div class="food-reason">原産地の天候不順・不作</div>
+    <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
   <div class="food-item up">
     <div class="food-tip-bubble">乳製品（バター・チーズ）は輸入依存が高く円安の影響を受けやすい。卵は鳥インフル対応済みで落ち着き傾向。</div>
     <span class="food-emoji">🥛</span><div class="food-name">乳製品・卵</div>
     <div class="food-rate up">+7.4%</div><div class="food-reason">輸入乳製品の円安影響大</div>
-  </div>
-  <div class="food-item up">
-    <div class="food-tip-bubble">カカオ豆が記録的な不作で価格急騰。チョコ菓子・ケーキ類は2026年も値上げが続く見込み。</div>
-    <span class="food-emoji">🍫</span><div class="food-name">菓子類（チョコ等）</div>
-    <div class="food-rate up">+8.2%</div><div class="food-reason">カカオ豆の世界的不作</div>
+    <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
   <div class="food-item up">
     <div class="food-tip-bubble">人件費＋食材費の上昇分を価格転嫁。外食は今後も緩やかな値上がりが続く見込み。</div>
     <span class="food-emoji">🍜</span><div class="food-name">外食・テイクアウト</div>
     <div class="food-rate up">+3.9%</div><div class="food-reason">人件費・食材費の転嫁</div>
+    <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
   <div class="food-item up">
     <div class="food-tip-bubble">冷凍食品・レトルトは加工コスト＋包材費が上昇。コメ系の冷食は特に高騰。</div>
     <span class="food-emoji">🧊</span><div class="food-name">加工食品・冷凍食品</div>
     <div class="food-rate up">+5.0%</div><div class="food-reason">包材費・人件費・原料費が重なる</div>
+    <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
-  <div class="food-item down">
-    <div class="food-tip-bubble">天候回復で国産野菜が安定供給。旬の野菜を意識的に選ぶと節約になる。</div>
+  <div class="food-item flat">
+    <div class="food-tip-bubble">野菜は品目差が非常に大きい年。たまねぎ等は不作で+40%超まで急騰した一方、天候に恵まれた品目は値下がりしている。「野菜全般が安い」とは言い切れない状況。</div>
     <span class="food-emoji">🥦</span><div class="food-name">生鮮野菜</div>
-    <div class="food-rate down">-14.0%</div><div class="food-reason">天候回復で供給安定・旬を狙って</div>
+    <div class="food-rate" style="color:#a8791f">品目差 大</div>
+    <div class="food-trend">たまねぎ等は+40%超の急騰、他の品目は値下がりも。ばらつき大</div>
+    <div class="food-reason">一律に「安い」とは言えない。買う野菜による</div>
+    <span class="food-badge fresh">🟢 26年3月時点</span>
   </div>
   <div class="food-item down">
     <div class="food-tip-bubble">果物は天候が良い時期に価格が落ちる。国産の旬フルーツは今がお得。</div>
     <span class="food-emoji">🍎</span><div class="food-name">生鮮果物</div>
     <div class="food-rate down">-10.4%</div><div class="food-reason">国産旬品が豊作で割安</div>
+    <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
 </div>
-<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると値上がりの理由がわかります。出典：<a href="https://www.stat.go.jp/data/cpi/1.html" target="_blank" rel="noopener" style="color:#888">総務省統計局 消費者物価指数（CPI）</a> 2026年1月分をもとに、品目別の内訳は当サイトで推計・要約したものです。</div>
+<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると詳細がわかります。出典：<a href="https://www.stat.go.jp/data/cpi/1.html" target="_blank" rel="noopener" style="color:#888">総務省統計局 消費者物価指数（CPI）</a>。🟡の品目は2026年1月時点のデータのままで、その後の変動を未反映です（コメの例のように大きく状況が変わっている可能性があります）。</div>
 
 <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">📅 2025〜2027年のインフレ率予測</div>
 <div class="forecast-timeline">
