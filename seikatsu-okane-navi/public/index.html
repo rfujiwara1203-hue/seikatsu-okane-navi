@@ -2199,7 +2199,7 @@ function ld(){
 }
 function toP1(){show(1)}
 function toP2(){const v=document.getElementById('income').value;if(!v){alert('まず年収の目安を教えてください');return}uI=parseInt(v);uF=document.getElementById('family').value;sv();rP2();renderNews(uI,uF);loadLiveNews(uI,uF,true);show(2)}
-function toP3(){renderBukka();rP3();renderBurden(uI);renderShiko();renderWall(uI);show(3)}
+function toP3(){renderBukka();rP3();renderBurden(uI);renderShiko();renderWall(uI);show(3);loadFoodPrices()}
 
 // ハッシュ付きURL（例: /index.html#furusato）で特定カテゴリへ直接ジャンプできるようにする
 const HASH_CAT_MAP = {
@@ -2426,6 +2426,58 @@ function rP3(){
   if(al){ al.innerHTML=acts.map((a,i)=>`<div class="actc"><div class="an">${i+1}</div><div><div class="at">${a.t}</div><div class="ad2">${a.d}</div></div></div>`).join(''); }
 }
 
+// /api/food-prices（e-Stat APIラッパー）から品目別の最新の前年同月比を取得し、
+// 対応するfood-itemカードの数値・推移・鮮度バッジを実際の値で上書きする
+async function loadFoodPrices(){
+  try{
+    const res = await fetch('/api/food-prices');
+    if(!res.ok) throw new Error('food-prices fetch failed: ' + res.status);
+    const json = await res.json();
+    if(!Array.isArray(json.items) || json.items.length === 0) return; // appId未設定時は静かにスキップ
+
+    json.items.forEach(item => {
+      const card = document.getElementById('food-' + item.id);
+      if(!card || item.latestYoyPercent === null) return;
+
+      const v = item.latestYoyPercent;
+      const rateEl = card.querySelector('.food-rate');
+      if(rateEl){
+        rateEl.textContent = (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+        rateEl.classList.remove('up','down');
+        rateEl.classList.add(v >= 0 ? 'up' : 'down');
+        rateEl.style.color = '';
+      }
+      card.classList.remove('up','down','flat');
+      card.classList.add(v >= 0 ? 'up' : 'down');
+
+      // 直近の推移（新しい順で来るので古い→新しいに並べ替えて表示）
+      let trendEl = card.querySelector('.food-trend');
+      if(item.trend && item.trend.length > 1){
+        const chronological = [...item.trend].reverse();
+        const text = chronological.map(t => {
+          const mm = t.month.replace(/^\d{2}(\d{2})年/, '$1年'); // 「2026年7月」→「26年7月」
+          const val = (t.yoyPercent > 0 ? '+' : '') + t.yoyPercent.toFixed(1) + '%';
+          return mm + val;
+        }).join(' → ');
+        if(!trendEl){
+          trendEl = document.createElement('div');
+          trendEl.className = 'food-trend';
+          card.querySelector('.food-reason')?.insertAdjacentElement('beforebegin', trendEl);
+        }
+        trendEl.textContent = text;
+      }
+
+      const badge = card.querySelector('.food-badge');
+      if(badge){
+        badge.className = 'food-badge fresh';
+        badge.textContent = '🟢 ' + item.latestMonth.replace(/^\d{2}(\d{2}年)/, '$1') + '・e-Stat API取得';
+      }
+    });
+  }catch(e){
+    console.warn('食品物価データの自動取得に失敗、既存の数値のまま表示します', e);
+  }
+}
+
 // 物価データをbukka divにセット（P3の物価タブ用）
 function renderBukka(){
   const el = document.getElementById('bukka');
@@ -2444,53 +2496,53 @@ function getBukkaHTML(){
 <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:2px">🛒 食品別・値上がり・値下がりの実態</div>
 <div style="font-size:11px;color:#999;margin-bottom:10px">🟢最新まで再確認済み　🟡2026年1月時点のまま（要最新化）</div>
 <div class="food-grid">
-  <div class="food-item down">
-    <div class="food-tip-bubble">2025年はピーク時+101.5%まで高騰した「令和の米騒動」。しかし在庫が適正水準の1.5倍以上に膨らみ、2026年5月に前年比マイナスへ完全反転。新米（2026年産）は前年比2割安の見通し。</div>
+  <div class="food-item down" id="food-rice">
+    <div class="food-tip-bubble">2025年はピーク時+101.7%まで高騰した「令和の米騒動」。しかし在庫が適正水準を大幅に上回り、2026年4月に前年比マイナスへ完全反転。新米（2026年産）はさらに安くなる見通し。</div>
     <span class="food-emoji">🍚</span><div class="food-name">コメ・パックご飯</div>
-    <div class="food-rate down">-4.9%</div>
-    <div class="food-trend">2025年ピーク+101.5% → 26年1月+27.9% → 26年5月<strong style="color:#2e7a42">−4.9%</strong></div>
-    <div class="food-reason">在庫過多で値崩れ。新米はさらに安くなる見込み</div>
-    <span class="food-badge fresh">🟢 26年5月時点</span>
+    <div class="food-rate down">-11.6%</div>
+    <div class="food-trend">26年1月+27.7% → 3月+6.7% → 5月−4.8% → 7月<strong style="color:#2e7a42">−11.6%</strong></div>
+    <div class="food-reason">在庫過多で値崩れが加速。新米はさらに安くなる見込み</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item up">
+  <div class="food-item up" id="food-sweets">
     <div class="food-tip-bubble">カカオ豆の国際商品価格は供給回復（コートジボワール増産）で2024年ピークの1/3〜1/4まで急落。ただし小売価格への反映には半年〜1年ほど時間差があり、店頭ではまだ値上がりが続いている。</div>
     <span class="food-emoji">🍫</span><div class="food-name">菓子類（チョコ等）</div>
-    <div class="food-rate up">+24.0%</div>
-    <div class="food-trend">原料（カカオ豆）は既に急落中 → 店頭価格への反映はこれから</div>
-    <div class="food-reason">仕入コスト高が今も店頭価格に反映され続けている（原料はピークアウト済み）</div>
-    <span class="food-badge fresh">🟢 26年3月時点</span>
+    <div class="food-rate up">+6.1%</div>
+    <div class="food-trend">原料（カカオ豆）は既に急落中 → 店頭価格への反映はこれから、伸びは鈍化傾向</div>
+    <div class="food-reason">仕入コスト高がまだ店頭価格に反映中（原料自体はピークアウト済み）</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item up">
-    <div class="food-tip-bubble">2026年2月にかけて産地不作で急騰したが、3月以降は国際相場が落ち着き始めている。店頭価格は仕入れタイムラグでまだ高止まり中。</div>
-    <span class="food-emoji">☕</span><div class="food-name">コーヒー豆</div>
-    <div class="food-rate up">+7.8%</div>
-    <div class="food-trend">国際相場はピークアウトの兆し、店頭価格は今後緩やかに落ち着く見込み</div>
-    <div class="food-reason">産地不作の影響が続くが、相場は既に落ち着き始めている</div>
-    <span class="food-badge stale">🟡 26年1月時点</span>
+  <div class="food-item up" id="food-coffee">
+    <div class="food-tip-bubble">産地不作の影響で高値が続いており、2026年に入ってからも上昇ペースが加速。国際相場はピークアウトの兆しがあるが、店頭価格への反映はこれから。</div>
+    <span class="food-emoji">☕</span><div class="food-name">コーヒー・ココア</div>
+    <div class="food-rate up">+12.7%</div>
+    <div class="food-trend">2026年に入ってむしろ上昇ペースが加速中</div>
+    <div class="food-reason">産地不作の影響が長引いている</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item up">
-    <div class="food-tip-bubble">円安＋漁獲量減少が直撃。サバ・サーモン・イカなど多くの魚種で値上がり中。</div>
+  <div class="food-item up" id="food-fish">
+    <div class="food-tip-bubble">円安＋漁獲量減少が直撃。サバ・サーモン・イカなど多くの魚種で値上がりが続いている。</div>
     <span class="food-emoji">🐟</span><div class="food-name">魚介類</div>
-    <div class="food-rate up">+7.9%</div><div class="food-reason">円安・漁獲減・輸送費増</div>
-    <span class="food-badge stale">🟡 26年1月時点</span>
+    <div class="food-rate up">+9.0%</div><div class="food-reason">円安・漁獲減・輸送費増</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item up">
+  <div class="food-item up" id="food-oil_season">
     <div class="food-tip-bubble">食用油はパーム油・大豆油など輸入依存。マヨネーズ・ドレッシングなど加工品にも波及。</div>
     <span class="food-emoji">🧴</span><div class="food-name">油脂・調味料</div>
-    <div class="food-rate up">+4.8%</div><div class="food-reason">輸入原料高・包装資材値上がり</div>
-    <span class="food-badge stale">🟡 26年1月時点</span>
+    <div class="food-rate up">+3.4%</div><div class="food-reason">輸入原料高・包装資材値上がり</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item up">
-    <div class="food-tip-bubble">乳製品（バター・チーズ）は輸入依存が高く円安の影響を受けやすい。卵は鳥インフル対応済みで落ち着き傾向。</div>
+  <div class="food-item up" id="food-dairy_egg">
+    <div class="food-tip-bubble">乳製品（バター・チーズ）は輸入依存が高く円安の影響を受けやすい。1月時点より伸びは落ち着いてきている。</div>
     <span class="food-emoji">🥛</span><div class="food-name">乳製品・卵</div>
-    <div class="food-rate up">+7.4%</div><div class="food-reason">輸入乳製品の円安影響大</div>
-    <span class="food-badge stale">🟡 26年1月時点</span>
+    <div class="food-rate up">+3.5%</div><div class="food-reason">輸入乳製品の円安影響、ただし鈍化傾向</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item up">
-    <div class="food-tip-bubble">人件費＋食材費の上昇分を価格転嫁。外食は今後も緩やかな値上がりが続く見込み。</div>
+  <div class="food-item up" id="food-eating_out">
+    <div class="food-tip-bubble">人件費＋食材費の上昇分を価格転嫁。ただし1月時点より上昇率は落ち着いてきている。</div>
     <span class="food-emoji">🍜</span><div class="food-name">外食・テイクアウト</div>
-    <div class="food-rate up">+3.9%</div><div class="food-reason">人件費・食材費の転嫁</div>
-    <span class="food-badge stale">🟡 26年1月時点</span>
+    <div class="food-rate up">+1.7%</div><div class="food-reason">人件費・食材費の転嫁、伸びは鈍化中</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
   <div class="food-item up">
     <div class="food-tip-bubble">冷凍食品・レトルトは加工コスト＋包材費が上昇。コメ系の冷食は特に高騰。</div>
@@ -2498,22 +2550,24 @@ function getBukkaHTML(){
     <div class="food-rate up">+5.0%</div><div class="food-reason">包材費・人件費・原料費が重なる</div>
     <span class="food-badge stale">🟡 26年1月時点</span>
   </div>
-  <div class="food-item flat">
-    <div class="food-tip-bubble">野菜は品目差が非常に大きい年。たまねぎ等は不作で+40%超まで急騰した一方、天候に恵まれた品目は値下がりしている。「野菜全般が安い」とは言い切れない状況。</div>
+  <div class="food-item up" id="food-veg">
+    <div class="food-tip-bubble">野菜は品目差が非常に大きい。たまねぎ等は不作で急騰した一方、天候に恵まれた品目は値下がりしており、全体としては小幅な上昇。</div>
     <span class="food-emoji">🥦</span><div class="food-name">生鮮野菜</div>
-    <div class="food-rate" style="color:#a8791f">品目差 大</div>
-    <div class="food-trend">たまねぎ等は+40%超の急騰、他の品目は値下がりも。ばらつき大</div>
+    <div class="food-rate up">+6.6%</div>
+    <div class="food-trend">品目差が大きい（一部急騰・一部値下がり）が、全体では上昇</div>
     <div class="food-reason">一律に「安い」とは言えない。買う野菜による</div>
-    <span class="food-badge fresh">🟢 26年3月時点</span>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item down">
-    <div class="food-tip-bubble">果物は天候が良い時期に価格が落ちる。国産の旬フルーツは今がお得。</div>
+  <div class="food-item up" id="food-fruit">
+    <div class="food-tip-bubble">1月時点では値下がりしていたが、その後上昇に転じている。天候・産地の状況で品目差もある。</div>
     <span class="food-emoji">🍎</span><div class="food-name">生鮮果物</div>
-    <div class="food-rate down">-10.4%</div><div class="food-reason">国産旬品が豊作で割安</div>
-    <span class="food-badge stale">🟡 26年1月時点</span>
+    <div class="food-rate up">+2.4%</div>
+    <div class="food-trend">1月時点は値下がりだったが、その後上昇に転換</div>
+    <div class="food-reason">品目・季節による差が大きい</div>
+    <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
 </div>
-<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると詳細がわかります。出典：<a href="https://www.stat.go.jp/data/cpi/1.html" target="_blank" rel="noopener" style="color:#888">総務省統計局 消費者物価指数（CPI）</a>。🟡の品目は2026年1月時点のデータのままで、その後の変動を未反映です（コメの例のように大きく状況が変わっている可能性があります）。</div>
+<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると詳細がわかります。出典：<a href="https://www.stat.go.jp/data/cpi/1.html" target="_blank" rel="noopener" style="color:#888">総務省統計局 消費者物価指数（CPI）</a>（2025年基準・e-Stat API経由で自動取得）。🟡の品目（加工食品・冷凍食品）はe-Statに対応する品目区分が無いため2026年1月時点のままです。</div>
 
 <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">📅 2025〜2027年のインフレ率予測</div>
 <div class="forecast-timeline">
