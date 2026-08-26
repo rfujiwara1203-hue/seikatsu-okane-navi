@@ -15,6 +15,18 @@ const RSS_SOURCES = [
     source: '内閣府',
     keywords: ['給付金', '控除', '支援', '保険', '物価', '税', '家計'],
   },
+  {
+    url: 'https://www.mhlw.go.jp/stf/news.rdf', // 厚生労働省 新着情報(RSS1.0/RDF形式)
+    category: 'burden' as NewsCategory,
+    source: '厚生労働省',
+    keywords: ['給付金', '支援金', '保険料', '年金', '子育て', '介護', '医療費'],
+  },
+  {
+    url: 'https://www.caa.go.jp/news.rss', // 消費者庁 新着情報
+    category: 'price' as NewsCategory,
+    source: '消費者庁',
+    keywords: ['物価', '価格', '表示', '食品', '値上', 'くらし', '家計'],
+  },
 ]
 
 // カテゴリ分類キーワード
@@ -50,12 +62,15 @@ function parseRssXml(xml: string, source: string, defaultCategory: NewsCategory)
 
   while ((match = itemRegex.exec(xml)) !== null) {
     const itemXml = match[1]
-    const title   = stripHtml(/<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/s.exec(itemXml)?.[1] ?? '')
-    const link    = /<link>(.*?)<\/link>|<link\s+href="(.*?)"/.exec(itemXml)?.[1]?.trim() ?? ''
+    const titleMatch = /<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/s.exec(itemXml)
+    const title   = stripHtml(titleMatch?.[1] ?? titleMatch?.[2] ?? '')
+    const linkMatch = /<link>(.*?)<\/link>|<link\s+href="(.*?)"/.exec(itemXml)
+    const link    = (linkMatch?.[1] ?? linkMatch?.[2] ?? '').trim()
     const pubDate = /<pubDate>(.*?)<\/pubDate>/.exec(itemXml)?.[1]?.trim()
       ?? /<dc:date>(.*?)<\/dc:date>/.exec(itemXml)?.[1]?.trim()
       ?? new Date().toISOString()
-    const desc    = stripHtml(/<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/s.exec(itemXml)?.[1] ?? '')
+    const descMatch = /<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/s.exec(itemXml)
+    const desc    = stripHtml(descMatch?.[1] ?? descMatch?.[2] ?? '')
     const guid    = /<guid[^>]*>(.*?)<\/guid>/.exec(itemXml)?.[1]?.trim() ?? link
 
     if (!title || !link) continue
