@@ -17,6 +17,7 @@ const FOOD_ITEMS: { id: string; label: string; emoji: string; catCode: string }[
   { id: 'sweets', label: '菓子類（チョコ等）', emoji: '🍫', catCode: '0033' },
   { id: 'coffee', label: 'コーヒー・ココア', emoji: '☕', catCode: '0039' },
   { id: 'eating_out', label: '外食・テイクアウト', emoji: '🍜', catCode: '0042' },
+  { id: 'processed', label: '加工食品・冷凍食品', emoji: '🧊', catCode: '0034' }, // 調理食品
 ]
 
 interface EstatValue {

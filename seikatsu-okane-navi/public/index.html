@@ -39,8 +39,10 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans JP',sans-serif;background:#f7f5f0;min-height:100vh;color:#2c2c2a;font-size:15px;line-height:1.7}
-.hdr{background:linear-gradient(135deg,#e8f5e0 0%,#d6eef8 100%);border-bottom:1px solid #c8e6c0;padding:1.2rem 1rem 1rem;text-align:center}
+.brand-bar{height:4px;background:linear-gradient(90deg,#e8a020 0%,#f0c060 50%,#e8a020 100%)}
+.hdr{background:linear-gradient(135deg,#e8f5e0 0%,#d6eef8 100%);border-bottom:1px solid #c8e6c0;padding:1.2rem 1rem 1rem;text-align:center;position:relative}
 .hdr h1{font-size:22px;font-weight:700;color:#2e6e3a}
+.hdr h1 .brand-mark{color:#c8871a}
 .hdr p{font-size:13px;color:#4a7a56;margin-top:2px}
 .sdot{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px}
 .dot{width:8px;height:8px;border-radius:50%;background:#c8e6c0;transition:all .3s}
@@ -541,8 +543,9 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
 </div>
 
 
+<div class="brand-bar"></div>
 <div class="hdr">
-  <h1>💚 生活お金ナビ</h1>
+  <h1>💚 生活お金<span class="brand-mark">ナビ</span></h1>
   <p>2026年、あなたの家計をスマートに守ろう</p>
   <p style="font-size:11px;color:#5a8a66;margin-top:4px">情報源：NHK・内閣府・厚生労働省・消費者庁など公的機関のニュースを毎日反映 ｜ <a href="/tokushoho.html" style="color:#2e6e3a;text-decoration:underline">運営者情報</a></p>
   <div class="sdot">
@@ -1498,29 +1501,30 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
       <div class="upd-card">
         <div class="upd-row">
           <div class="upd-cat">📊 物価・CPI統計</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">毎月更新</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">毎月自動取得</div><span class="upd-status upd-fresh">🔄 自動</span></div>
         </div>
-        <div class="upd-row">
+        <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">⚠️ 負担増・税制情報</div>
           <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
-        <div class="upd-row">
+        <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">🎁 給付金・助成情報</div>
           <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
-        <div class="upd-row">
+        <div class="upd-row" data-due="2026-12-01">
           <div class="upd-cat">📈 NISA・iDeCo制度</div>
           <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
-        <div class="upd-row">
+        <div class="upd-row" data-due="2026-12-15">
           <div class="upd-cat">🏘️ ふるさと納税</div>
           <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
-        <div class="upd-row">
+        <div class="upd-row" data-due="2026-07-01">
           <div class="upd-cat">🏘️ ふるさと納税限度額表</div>
           <div style="display:flex;align-items:center"><div class="upd-date">2026.07予定</div><span class="upd-status upd-warn">要確認</span></div>
         </div>
       </div>
+      <div id="upd-overdue-note" style="display:none;font-size:12px;color:#a8791f;background:#fff8e0;border-radius:8px;padding:8px 10px;margin-top:8px">⚠️ 確認期限を過ぎている項目があります（運営者向け）。内容を見直し、問題なければ次回期限を延長してください。</div>
       <div style="font-size:13px;font-weight:700;color:#5a5a58;margin:12px 0 8px">📅 定期更新スケジュール</div>
       <div class="tl">
         <div class="tli"><div class="tld" style="background:#3a8f4e;box-shadow:0 0 0 2px #3a8f4e"></div><div class="tly" style="color:#2e7a42">毎月（〜5日頃）</div><div class="tlx">総務省CPI（消費者物価指数）の最新値を物価バー・統計に反映</div></div>
@@ -2544,7 +2548,7 @@ function getBukkaHTML(){
     <div class="food-rate up">+1.7%</div><div class="food-reason">人件費・食材費の転嫁、伸びは鈍化中</div>
     <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
-  <div class="food-item up">
+  <div class="food-item up" id="food-processed">
     <div class="food-tip-bubble">冷凍食品・レトルトは加工コスト＋包材費が上昇。コメ系の冷食は特に高騰。</div>
     <span class="food-emoji">🧊</span><div class="food-name">加工食品・冷凍食品</div>
     <div class="food-rate up">+5.0%</div><div class="food-reason">包材費・人件費・原料費が重なる</div>
@@ -2567,7 +2571,7 @@ function getBukkaHTML(){
     <span class="food-badge fresh">🟢 26年7月・e-Stat API取得</span>
   </div>
 </div>
-<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると詳細がわかります。出典：<a href="https://www.stat.go.jp/data/cpi/1.html" target="_blank" rel="noopener" style="color:#888">総務省統計局 消費者物価指数（CPI）</a>（2025年基準・e-Stat API経由で自動取得）。🟡の品目（加工食品・冷凍食品）はe-Statに対応する品目区分が無いため2026年1月時点のままです。</div>
+<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると詳細がわかります。出典：<a href="https://www.stat.go.jp/data/cpi/1.html" target="_blank" rel="noopener" style="color:#888">総務省統計局 消費者物価指数（CPI）</a>（2025年基準・e-Stat API経由で自動取得）。</div>
 
 <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">📅 2025〜2027年のインフレ率予測</div>
 <div class="forecast-timeline">
@@ -2822,8 +2826,29 @@ function updOTC(){
   else if(v<t){el.textContent='あと'+fmt(t-v)+'円で控除対象ライン（12,000円）！';el.style.color='#a07010'}
   else{el.textContent='🎉 控除対象！超過分'+fmt(v-t)+'円が所得控除の対象になります';el.style.color='#2e7a42'}
 }
+// 「情報の更新頻度と管理について」の各項目を、今日の日付とdata-due（次回確認期限）で判定し、
+// 期限切れなら自動で「要確認」表示に切り替える（運営者が更新時期を見逃さないための仕組み）
+function checkUpdateFreshness(){
+  const today = new Date();
+  let anyOverdue = false;
+  document.querySelectorAll('.upd-row[data-due]').forEach(row => {
+    const due = new Date(row.dataset.due);
+    const badge = row.querySelector('.upd-status');
+    if(!badge) return;
+    if(today > due){
+      badge.classList.remove('upd-fresh');
+      badge.classList.add('upd-warn');
+      badge.textContent = '要確認';
+      anyOverdue = true;
+    }
+  });
+  const note = document.getElementById('upd-overdue-note');
+  if(note) note.style.display = anyOverdue ? 'block' : 'none';
+}
+
 ld();
 applyHashRoute();
+checkUpdateFreshness();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
