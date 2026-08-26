@@ -20,6 +20,20 @@
 <meta name="twitter:title" content="生活お金ナビ｜年収・家族構成でわかる節税・給付金・お得情報">
 <meta name="twitter:description" content="年収と家族構成を入力するだけで、ふるさと納税・給付金・NISA/iDeCo・固定費見直しのお得額をまとめて診断できる無料サイトです。">
 <meta name="twitter:image" content="https://seikatsu-okane-navi.vercel.app/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "生活お金ナビ",
+  "url": "https://seikatsu-okane-navi.vercel.app/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "description": "年収と家族構成を入力するだけで、ふるさと納税の限度額・もらえる給付金・NISA/iDeCoの節税効果・固定費見直しの節約額をまとめて診断できる無料サイト。",
+  "inLanguage": "ja",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -525,6 +539,7 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
 <div class="hdr">
   <h1>💚 生活お金ナビ</h1>
   <p>2026年、あなたの家計をスマートに守ろう</p>
+  <p style="font-size:11px;color:#5a8a66;margin-top:4px">情報源：NHK・内閣府・厚生労働省・消費者庁など公的機関のニュースを毎日反映 ｜ <a href="/tokushoho.html" style="color:#2e6e3a;text-decoration:underline">運営者情報</a></p>
   <div class="sdot">
     <div class="step-item"><div class="dot on" id="d1"></div><span class="step-lbl" id="sl1">入力</span></div>
     <div class="step-sep">→</div>
@@ -2180,6 +2195,25 @@ function ld(){
 function toP1(){show(1)}
 function toP2(){const v=document.getElementById('income').value;if(!v){alert('まず年収の目安を教えてください');return}uI=parseInt(v);uF=document.getElementById('family').value;sv();rP2();renderNews(uI,uF);loadLiveNews(uI,uF,true);show(2)}
 function toP3(){renderBukka();rP3();renderBurden(uI);renderShiko();renderWall(uI);show(3)}
+
+// ハッシュ付きURL（例: /index.html#furusato）で特定カテゴリへ直接ジャンプできるようにする
+const HASH_CAT_MAP = {
+  furusato:'furusato2', nisa:'invest', ideco:'invest', invest:'invest',
+  fixed:'fixed', benefits:'benefits', burden:'burden', wall:'burden',
+  price:'price', medical:'medical', housing:'housing', points:'points'
+};
+function goToCat(catId){
+  const btn = document.querySelector(`.cat-tab[onclick*="showCat('${catId}'"]`);
+  if(btn) showCat(catId, btn);
+}
+function applyHashRoute(){
+  const h = (location.hash || '').replace('#','');
+  const catId = HASH_CAT_MAP[h];
+  if(!catId) return;
+  toP3();
+  goToCat(catId);
+  setTimeout(()=>{ const el=document.querySelector('.cat-tabs'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+}
 function show(n){document.querySelectorAll('.pg').forEach((p,i)=>p.classList.toggle('active',i===n-1));document.querySelectorAll('.dot').forEach((d,i)=>{d.classList.toggle('on',i===n-1);d.classList.toggle('dn',i<n-1)});window.scrollTo(0,0)}
 function showCat(id,btn){document.querySelectorAll('.cat-section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));document.getElementById('cat-'+id).classList.add('active');btn.classList.add('active');maybeShowContextual('cat-'+id)}
 function showTab(id,btn){const p=btn.closest('.card');p.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));p.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));p.querySelector('#tab-'+id).classList.add('active');btn.classList.add('active')}
@@ -2711,6 +2745,7 @@ function updOTC(){
   else{el.textContent='🎉 控除対象！超過分'+fmt(v-t)+'円が所得控除の対象になります';el.style.color='#2e7a42'}
 }
 ld();
+applyHashRoute();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
