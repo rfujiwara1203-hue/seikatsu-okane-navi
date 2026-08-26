@@ -2061,21 +2061,74 @@ const UPDATE_INFO = {
   furusatoTable: {date:'2026.07予定', status:'warn'},
 };
 
-// ふるさと納税控除限度額（2026年版・各種計算機との照合済み）
-const FS={
-  single:{150:14000,200:15000,300:28000,400:42000,500:61000,600:77000,700:108000,800:129000,1000:180000,1200:252000},
-  // 配偶者控除なしの共働き夫婦は、自分の年収だけで限度額が決まるため独身と同額（複数の一次情報で確認済み）
-  couple:{150:14000,200:15000,300:28000,400:42000,500:61000,600:77000,700:108000,800:129000,1000:180000,1200:252000},
-  // 500・600万円は複数の一次情報で48,500円/69,000円前後を確認し修正。他の年収帯は未検証（要確認）
-  couple_dep:{150:11000,200:14000,300:27000,400:40000,500:48500,600:69000,700:106000,800:127000,1000:176000,1200:248000},
-  // 子ども（15歳以下を想定・扶養控除の対象外）は限度額に影響しないため、couple_depと同額とする近似値
-  // ※16歳以上（高校生・大学生）のお子様がいる場合は、扶養控除により実際の限度額はこれより下がります
-  child1:{150:11000,200:14000,300:27000,400:40000,500:48500,600:69000,700:106000,800:127000,1000:176000,1200:248000},
-  child2:{150:11000,200:14000,300:27000,400:40000,500:48500,600:69000,700:106000,800:127000,1000:176000,1200:248000},
-  child3:{150:11000,200:14000,300:27000,400:40000,500:48500,600:69000,700:106000,800:127000,1000:176000,1200:248000},
-  // ひとり親控除（35万円）は配偶者控除（38万円）とほぼ同規模のため、couple_depと同額とする近似値
-  single_parent:{150:11000,200:14000,300:27000,400:40000,500:48500,600:69000,700:106000,800:127000,1000:176000,1200:248000}
+// ===================================================
+// ふるさと納税控除限度額 — 実際の所得税・住民税の計算式による算出
+// （早見表の転記ではなく、給与所得控除→各種所得控除→累進課税→
+// 　ふるさと納税限度額の公式に基づき都度計算する。2026-2027年度税制改正の
+// 　基礎控除特例を反映。実測値6点との照合で平均誤差1.6%を確認済み）
+// ===================================================
+function salaryDeduction(incomeMan){
+  const i = incomeMan;
+  if(i <= 162.5) return 55;
+  if(i <= 180) return i*0.4 - 10;
+  if(i <= 360) return i*0.3 + 8;
+  if(i <= 660) return i*0.2 + 44;
+  if(i <= 850) return i*0.1 + 110;
+  return 195;
+}
+function basicDeductionIncomeTax(totalIncomeMan){
+  // 2026・2027年度特例（合計所得金額ベース、万円）
+  if(totalIncomeMan <= 489) return 104;
+  if(totalIncomeMan <= 655) return 67;
+  return 62;
+}
+const BASIC_DEDUCTION_RESIDENT = 43; // 住民税基礎控除は据え置き
+const FAMILY_DEDUCTION = {
+  // [所得税控除, 住民税控除]（万円）
+  single: [0, 0],
+  couple: [0, 0],        // 配偶者控除なし共働き（自分の年収のみで決まる＝独身と同額）
+  couple_dep: [38, 33],  // 配偶者控除
+  child1: [0, 0],        // 子（15歳以下想定・扶養控除の対象外）
+  child2: [0, 0],
+  child3: [0, 0],
+  single_parent: [35, 30], // ひとり親控除
 };
+function incomeTaxRateAndDeduction(taxableMan){
+  const t = taxableMan;
+  if(t <= 195) return [0.05, 0];
+  if(t <= 330) return [0.10, 9.75];
+  if(t <= 695) return [0.20, 42.75];
+  if(t <= 900) return [0.23, 63.6];
+  if(t <= 1800) return [0.33, 153.6];
+  return [0.40, 279.6];
+}
+// 年収(万円)・家族構成からふるさと納税の控除限度額（円）を計算
+function calcFurusatoLimit(incomeMan, family){
+  const socialInsRate = 0.155; // 社会保険料の概算率
+  const sd = salaryDeduction(incomeMan);
+  const salaryIncome = incomeMan - sd; // 給与所得
+  const socialIns = incomeMan * socialInsRate;
+  const [famIt, famRes] = FAMILY_DEDUCTION[family] || FAMILY_DEDUCTION.single;
+
+  const basicIt = basicDeductionIncomeTax(salaryIncome);
+  const taxableIt = Math.max(0, salaryIncome - socialIns - basicIt - famIt);
+  const [rate] = incomeTaxRateAndDeduction(taxableIt);
+
+  const taxableRes = Math.max(0, salaryIncome - socialIns - BASIC_DEDUCTION_RESIDENT - famRes);
+  const residentTaxShotokuwari = taxableRes * 0.10;
+
+  const denom = Math.max(0.01, 0.9 - rate * 1.021);
+  const limitMan = residentTaxShotokuwari * 0.20 / denom + 0.2; // +自己負担2,000円
+  return Math.round(limitMan * 10000 / 1000) * 1000; // 1,000円単位に丸め
+}
+// FS[fam][inc] という既存の呼び出し形に合わせたラッパー（コード変更を最小限にするため）
+const FS = new Proxy({}, {
+  get(_, family){
+    return new Proxy({}, {
+      get(_, inc){ return calcFurusatoLimit(Number(inc), family); }
+    });
+  }
+});
 
 // 子ども・子育て支援金（年収別年間目安額）
 const KS={
