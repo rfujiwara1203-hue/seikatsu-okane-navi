@@ -2435,7 +2435,7 @@ function getBukkaHTML(){
   <div class="sb"><div class="sl">5年間の累計物価上昇（2020年比）</div><div class="sv2 hlr">約+12%</div></div>
   <div class="sb"><div class="sl">4人家族の追加負担（2026年推計）</div><div class="sv2 hlr">+約8.9万円</div></div>
 </div>
-<div style="font-size:11px;color:#aaa;margin-bottom:12px">出典：第一生命経済研究所（2026年1月）・総務省CPI（${DATA_VERSION.cpiMonth}）・日銀展望レポート</div>
+<div style="font-size:11px;color:#aaa;margin-bottom:12px">出典：<a href="https://www.dlri.co.jp/report/macro/560702.html" target="_blank" rel="noopener" style="color:#888">第一生命経済研究所（2026年1月）</a>・<a href="https://www.soumu.go.jp/menu_news/s-news/01toukei08_01000337.html" target="_blank" rel="noopener" style="color:#888">総務省CPI（${DATA_VERSION.cpiMonth}）</a>・日銀展望レポート</div>
 
 <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:10px">🛒 食品別・値上がり・値下がりの実態（前年比・2026年1月）</div>
 <div class="food-grid">
@@ -2490,15 +2490,15 @@ function getBukkaHTML(){
     <div class="food-rate down">-10.4%</div><div class="food-reason">国産旬品が豊作で割安</div>
   </div>
 </div>
-<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると値上がりの理由がわかります。出典：総務省CPI 2026年1月。</div>
+<div style="font-size:11px;color:#aaa;margin-bottom:16px">カードにカーソル（スマホはタップ）をあてると値上がりの理由がわかります。出典：<a href="https://www.stat.go.jp/data/cpi/1.html" target="_blank" rel="noopener" style="color:#888">総務省統計局 消費者物価指数（CPI）</a> 2026年1月分をもとに、品目別の内訳は当サイトで推計・要約したものです。</div>
 
 <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">📅 2025〜2027年のインフレ率予測</div>
 <div class="forecast-timeline">
   <div class="fc-year"><div class="fc-dot past"></div><div class="fc-yr-label">2025年度</div><div class="fc-rate hot">+2.7%</div><div class="fc-desc">米・食料品が急騰。物価高が最も厳しかった年</div></div>
-  <div class="fc-year"><div class="fc-dot now"></div><div class="fc-yr-label">2026年度 ←今</div><div class="fc-rate warm">+1.8%</div><div class="fc-desc">政府補助終了で光熱費は上昇。食品は鈍化傾向</div></div>
-  <div class="fc-year"><div class="fc-dot future"></div><div class="fc-yr-label">2027年度</div><div class="fc-rate cool">+2.1%</div><div class="fc-desc">賃金と物価の「好循環」が始まる可能性</div></div>
+  <div class="fc-year"><div class="fc-dot now"></div><div class="fc-yr-label">2026年度 ←今</div><div class="fc-rate warm">+2.3%</div><div class="fc-desc">輸入物価上昇が食品・日用品に波及、年度末には3%台まで加速の見込み</div></div>
+  <div class="fc-year"><div class="fc-dot future"></div><div class="fc-yr-label">2027年度</div><div class="fc-rate cool">+1.3%</div><div class="fc-desc">飲食料品の消費税率引き下げ効果で1%台まで鈍化する見通し</div></div>
 </div>
-<div class="fc-src">出典：ニッセイ基礎研究所・日銀展望レポート（2026年1月）・大和総研</div>
+<div class="fc-src">出典：<a href="https://www.nli-research.co.jp/report/detail/id=86587?site=nli" target="_blank" rel="noopener" style="color:#888">ニッセイ基礎研究所「2026・2027年度経済見通し」（2026年8月）</a>・日銀展望レポート</div>
 
 <div class="scenario-box" style="margin-top:12px">
   <div class="scenario-title">💡 2027年以降、「物価高」の性質が変わる可能性</div>
@@ -2529,7 +2529,7 @@ function renderBurden(inc){
   el.innerHTML=`
 <div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">子ども・子育て支援金（医療保険料上乗せ）</div><div class="baw">年約${fmt(shien)}円</div><span class="chev">▾</span></div><div class="bdet"><div class="nb"><div class="ntit">📌 制度の背景</div><div class="ntxt">2026年4月にスタートした制度で、医療保険料に上乗せして徴収されます。<strong>被用者保険（会社員）の本人負担は年収別</strong>：年収400万→月約384円・年収600万→月約575円・年収800万→月約767円（労使折半後）。国保加入者は世帯月約300円程度。2027年度・2028年度と段階的に上がります。年収${inc}万円の場合の目安は年約${fmt(shien)}円（月${fmt(Math.round(shien/12))}円）です。</div></div></div></div>
 <div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">国民年金保険料の引き上げ</div><div class="baw">月17,920円（2026年度）</div><span class="chev">▾</span></div><div class="bdet"><div class="nb"><div class="ntit">📌 どのくらい増える？</div><div class="ntxt">2025年度：月17,510円 → 2026年度：月17,920円（+410円）。自営業・フリーランス等の国民年金加入者が対象。会社員（厚生年金）は保険料率は現状維持ですが、今後見直しの議論が続いています。</div></div></div></div>
-<div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">物価高による実質的な購買力の低下</div><div class="baw">4人家族＋約8.9万円/年</div><span class="chev">▾</span></div><div class="bdet"><div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:8px">2026年度インフレ率は約1.8%と予測。4人家族で年間約8.9万円の家計負担増（第一生命経済研究所試算）。政府補助で約2.5万円軽減見込みですが、食品・外食・サービス価格の上昇は続きます。</div><div class="sg"><div class="sb"><div class="sl">2026年推計インフレ率</div><div class="sv2 hlr">+1.8%</div></div><div class="sb"><div class="sl">政府補助による軽減（4人家族）</div><div class="sv2 hlb">▲2.5万円</div></div></div></div></div>
+<div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">物価高による実質的な購買力の低下</div><div class="baw">4人家族＋約8.9万円/年</div><span class="chev">▾</span></div><div class="bdet"><div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:8px">2026年度インフレ率は約1.8%と予測。4人家族で年間約8.9万円の家計負担増（<a href="https://www.dlri.co.jp/report/macro/560702.html" target="_blank" rel="noopener" style="color:#888">第一生命経済研究所試算</a>）。政府補助で約2.5万円軽減見込みですが、食品・外食・サービス価格の上昇は続きます。</div><div class="sg"><div class="sb"><div class="sl">2026年推計インフレ率</div><div class="sv2 hlr">+1.8%</div></div><div class="sb"><div class="sl">政府補助による軽減（4人家族）</div><div class="sv2 hlb">▲2.5万円</div></div></div></div></div>
 <div class="bitem"><div class="bhdr" onclick="tog(this)"><div class="bname">社会保険料・税負担の中長期的な増加傾向</div><div class="baw">防衛・社会保障の財源問題</div><span class="chev">▾</span></div><div class="bdet"><div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:10px">防衛費増額・少子化対策・高齢化による社会保障費膨張の3課題が重なり財源議論が続いています。</div><div class="tl"><div class="tli"><div class="tld"></div><div class="tly">2026年〜</div><div class="tlx">防衛費財源としてたばこ税・法人税の増税スタート。所得増税は先送り。</div></div><div class="tli"><div class="tld"></div><div class="tly">2027〜2029年</div><div class="tlx">たばこ税を毎年段階的に引き上げ（3年で1箱30円増税）。</div></div><div class="tli"><div class="tld" style="background:#888"></div><div class="tly">検討中・未定</div><div class="tlx">所得税の防衛増税、通勤課税、金融所得課税強化など審議継続中。</div></div></div><div style="font-size:12px;color:#999;margin-top:4px">※財務省・国税庁サイトで最新情報を確認してください。</div></div></div>`;
 }
 
