@@ -9,10 +9,11 @@ const RSS_SOURCES = [
     keywords: ['物価', '給付', '支援金', '保険料', '税', '年金', '補助', '家計', '食料', 'ガス', '電気'],
   },
   {
-    url: 'https://www.e-gov.go.jp/rss/news.rss',
+    // 旧 e-gov.go.jp/rss/news.rss は404のため、内閣府の報道発表RSS(RSS1.0/RDF形式)に差し替え
+    url: 'https://www.cao.go.jp/rss/news.rdf',
     category: 'policy' as NewsCategory,
-    source: 'e-Gov',
-    keywords: ['給付金', '控除', '支援', '保険'],
+    source: '内閣府',
+    keywords: ['給付金', '控除', '支援', '保険', '物価', '税', '家計'],
   },
 ]
 
@@ -44,14 +45,16 @@ function stripHtml(html: string): string {
 // RSS XMLをパース（rss-parserの代わりに軽量実装）
 function parseRssXml(xml: string, source: string, defaultCategory: NewsCategory): RawNewsItem[] {
   const items: RawNewsItem[] = []
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g
+  const itemRegex = /<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/g
   let match
 
   while ((match = itemRegex.exec(xml)) !== null) {
     const itemXml = match[1]
     const title   = stripHtml(/<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/s.exec(itemXml)?.[1] ?? '')
     const link    = /<link>(.*?)<\/link>|<link\s+href="(.*?)"/.exec(itemXml)?.[1]?.trim() ?? ''
-    const pubDate = /<pubDate>(.*?)<\/pubDate>/.exec(itemXml)?.[1]?.trim() ?? new Date().toISOString()
+    const pubDate = /<pubDate>(.*?)<\/pubDate>/.exec(itemXml)?.[1]?.trim()
+      ?? /<dc:date>(.*?)<\/dc:date>/.exec(itemXml)?.[1]?.trim()
+      ?? new Date().toISOString()
     const desc    = stripHtml(/<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/s.exec(itemXml)?.[1] ?? '')
     const guid    = /<guid[^>]*>(.*?)<\/guid>/.exec(itemXml)?.[1]?.trim() ?? link
 
