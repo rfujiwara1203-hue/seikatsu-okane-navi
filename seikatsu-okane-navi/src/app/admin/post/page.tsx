@@ -9,6 +9,23 @@ export default function AdminPostPage() {
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [dryRun, setDryRun] = useState(true);
+  const [imageBase64, setImageBase64] = useState<string>("");
+  const [imageName, setImageName] = useState<string>("");
+
+  function onImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) {
+      setImageBase64("");
+      setImageName("");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageBase64(reader.result as string);
+      setImageName(file.name);
+    };
+    reader.readAsDataURL(file);
+  }
 
   async function loadDraft() {
     if (!password) {
@@ -58,7 +75,7 @@ export default function AdminPostPage() {
       const res = await fetch("/api/post-x", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password, text, dryRun }),
+        body: JSON.stringify({ password, text, dryRun, imageBase64: imageBase64 || undefined }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -70,6 +87,8 @@ export default function AdminPostPage() {
       } else {
         setStatus(`投稿成功! ${data.tweetUrl}`);
         setText("");
+        setImageBase64("");
+        setImageName("");
       }
     } catch (e) {
       setStatus(`エラー: ${String(e)}`);
@@ -116,6 +135,19 @@ export default function AdminPostPage() {
           style={{ display: "block", width: "100%", padding: 8, marginTop: 4 }}
         />
       </label>
+
+      <label style={{ display: "block", marginBottom: 16 }}>
+        画像(任意)
+        <input type="file" accept="image/*" onChange={onImageChange} style={{ display: "block", marginTop: 4 }} />
+      </label>
+
+      {imageBase64 && (
+        <div style={{ marginBottom: 16 }}>
+          <p style={{ fontSize: 13, color: "#555" }}>{imageName}</p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={imageBase64} alt="preview" style={{ maxWidth: "100%", maxHeight: 240, borderRadius: 6 }} />
+        </div>
+      )}
 
       <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
         <input

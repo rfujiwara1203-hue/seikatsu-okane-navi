@@ -53,12 +53,26 @@ export async function POST(req: NextRequest) {
   });
 
   try {
-    const result = await client.v2.tweet(text);
+    let mediaIds: [string] | undefined;
+    if (typeof body.imageBase64 === "string" && body.imageBase64.length > 0) {
+      const match = body.imageBase64.match(/^data:(image\/\w+);base64,(.+)$/);
+      if (!match) {
+        return NextResponse.json({ error: "invalid image data" }, { status: 400 });
+      }
+      const mimeType = match[1];
+      const buffer = Buffer.from(match[2], "base64");
+      const mediaId = await client.v1.uploadMedia(buffer, { mimeType });
+      mediaIds = [mediaId];
+    }
+
+    const result = mediaIds
+      ? await client.v2.tweet(text, { media: { media_ids: mediaIds } })
+      : await client.v2.tweet(text);
     const tweetId = result.data.id;
     const tweetUrl = `https://x.com/seikatsunavi/status/${tweetId}`;
 
     try {
-      const logEntry = `## ${nowJSTLabel()}\n${text}\n投稿URL: ${tweetUrl}\n`;
+      const logEntry = `## ${nowJSTLabel()}\n${text}\n画像: ${mediaIds ? "あり" : "なし"}\n投稿URL: ${tweetUrl}\n`;
       await appendToLog("sns-posts-log.md", logEntry);
     } catch (logError) {
       console.error("log append failed", logError);
