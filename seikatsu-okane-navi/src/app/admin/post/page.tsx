@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 
+interface ParsedPost {
+  label: string;
+  text: string;
+  image: string | null;
+}
+
 export default function AdminPostPage() {
   const [password, setPassword] = useState("");
   const [text, setText] = useState("");
@@ -11,6 +17,39 @@ export default function AdminPostPage() {
   const [dryRun, setDryRun] = useState(true);
   const [imageBase64, setImageBase64] = useState<string>("");
   const [imageName, setImageName] = useState<string>("");
+  const [posts, setPosts] = useState<ParsedPost[]>([]);
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
+
+  function blobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  async function selectPost(post: ParsedPost) {
+    setSelectedLabel(post.label);
+    setText(post.text);
+    if (post.image) {
+      try {
+        const res = await fetch(`/sns-images/${post.image}`);
+        if (!res.ok) throw new Error(`画像が見つかりません: ${post.image}`);
+        const blob = await res.blob();
+        const base64 = await blobToBase64(blob);
+        setImageBase64(base64);
+        setImageName(post.image);
+      } catch (e) {
+        setImageBase64("");
+        setImageName("");
+        setStatus(`画像の読み込みに失敗しました: ${String(e)}`);
+      }
+    } else {
+      setImageBase64("");
+      setImageName("");
+    }
+  }
 
   function onImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -47,10 +86,15 @@ export default function AdminPostPage() {
       if (!data.found) {
         setStatus(`${data.date} のドラフトが見つかりませんでした`);
         setText("");
+        setPosts([]);
         return;
       }
-      setText(data.content);
-      setStatus(`${data.date} のドラフトを読み込みました`);
+      setPosts(data.posts || []);
+      setSelectedLabel("");
+      setText("");
+      setImageBase64("");
+      setImageName("");
+      setStatus(`${data.date} のドラフトを読み込みました。投稿案を選んでください`);
     } catch (e) {
       setStatus(`エラー: ${String(e)}`);
     } finally {
@@ -125,6 +169,26 @@ export default function AdminPostPage() {
           ドラフト読込
         </button>
       </div>
+
+      {posts.length > 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
+          {posts.map((p) => (
+            <button
+              key={p.label}
+              onClick={() => selectPost(p)}
+              style={{
+                padding: "6px 12px",
+                borderRadius: 6,
+                border: p.label === selectedLabel ? "2px solid #2e6e3a" : "1px solid #ccc",
+                background: p.label === selectedLabel ? "#eaf5ec" : "#fff",
+                cursor: "pointer",
+              }}
+            >
+              {p.label}{p.image ? " 🖼" : ""}
+            </button>
+          ))}
+        </div>
+      )}
 
       <label style={{ display: "block", marginBottom: 8 }}>
         投稿内容 ({text.length}/280文字)
