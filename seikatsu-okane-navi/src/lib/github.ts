@@ -1,6 +1,13 @@
 const OWNER = "rfujiwara1203-hue";
 const REPO = "seikatsu-okane-navi";
 const API_BASE = `https://api.github.com/repos/${OWNER}/${REPO}`;
+// リポジトリのルート直下に、Next.jsアプリ本体が入った同名のネストしたフォルダがある構成
+// （github.com/rfujiwara1203-hue/seikatsu-okane-navi/seikatsu-okane-navi/...）
+const APP_SUBDIR = "seikatsu-okane-navi";
+
+function fullPath(path: string): string {
+  return `${APP_SUBDIR}/${path}`;
+}
 
 function authHeaders() {
   const token = process.env.GITHUB_TOKEN;
@@ -14,7 +21,7 @@ function authHeaders() {
 export async function getFileContent(
   path: string
 ): Promise<{ content: string; sha: string } | null> {
-  const res = await fetch(`${API_BASE}/contents/${path}`, {
+  const res = await fetch(`${API_BASE}/contents/${fullPath(path)}`, {
     headers: authHeaders(),
     cache: "no-store",
   });
@@ -38,7 +45,7 @@ export async function upsertFile(
   };
   if (existing) body.sha = existing.sha;
 
-  const res = await fetch(`${API_BASE}/contents/${path}`, {
+  const res = await fetch(`${API_BASE}/contents/${fullPath(path)}`, {
     method: "PUT",
     headers: { ...authHeaders(), "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -62,7 +69,7 @@ export async function appendToLog(
   };
   if (existing) body.sha = existing.sha;
 
-  const res = await fetch(`${API_BASE}/contents/${path}`, {
+  const res = await fetch(`${API_BASE}/contents/${fullPath(path)}`, {
     method: "PUT",
     headers: { ...authHeaders(), "Content-Type": "application/json" },
     body: JSON.stringify(body),
