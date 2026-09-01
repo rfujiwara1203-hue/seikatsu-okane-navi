@@ -8,6 +8,7 @@ export default function AdminPostPage() {
   const [draftDate, setDraftDate] = useState("");
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [dryRun, setDryRun] = useState(true);
 
   async function loadDraft() {
     if (!password) {
@@ -49,23 +50,27 @@ export default function AdminPostPage() {
       setStatus("投稿内容が空です");
       return;
     }
-    if (!confirm("この内容で本当に投稿しますか?\n\n" + text)) return;
+    if (!dryRun && !confirm("これは本番投稿です。この内容で本当にXに投稿しますか?\n\n" + text)) return;
 
     setLoading(true);
-    setStatus("投稿中...");
+    setStatus(dryRun ? "お試し確認中(実際には投稿されません)..." : "投稿中...");
     try {
       const res = await fetch("/api/post-x", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password, text }),
+        body: JSON.stringify({ password, text, dryRun }),
       });
       const data = await res.json();
       if (!res.ok) {
-        setStatus(`投稿失敗: ${data.error || res.status}`);
+        setStatus(`失敗: ${data.error || res.status}`);
         return;
       }
-      setStatus(`投稿成功! ${data.tweetUrl}`);
-      setText("");
+      if (data.dryRun) {
+        setStatus(`お試しOK: 設定は正しく読み込まれています。実際には投稿していません。`);
+      } else {
+        setStatus(`投稿成功! ${data.tweetUrl}`);
+        setText("");
+      }
     } catch (e) {
       setStatus(`エラー: ${String(e)}`);
     } finally {
@@ -112,12 +117,21 @@ export default function AdminPostPage() {
         />
       </label>
 
+      <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+        <input
+          type="checkbox"
+          checked={dryRun}
+          onChange={(e) => setDryRun(e.target.checked)}
+        />
+        お試しモード(実際には投稿しない・設定確認のみ)
+      </label>
+
       <button
         onClick={post}
         disabled={loading}
         style={{
           padding: "12px 24px",
-          background: "#2e6e3a",
+          background: dryRun ? "#888" : "#2e6e3a",
           color: "#fff",
           border: "none",
           borderRadius: 6,
@@ -125,7 +139,7 @@ export default function AdminPostPage() {
           cursor: "pointer",
         }}
       >
-        この内容で投稿する
+        {dryRun ? "お試し確認する" : "この内容で本当に投稿する"}
       </button>
 
       {status && (

@@ -26,6 +26,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "text too long" }, { status: 400 });
   }
 
+  const dryRun = body.dryRun === true;
+
+  if (dryRun) {
+    const missing = ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET", "GITHUB_TOKEN"].filter(
+      (k) => !process.env[k]
+    );
+    if (missing.length > 0) {
+      return NextResponse.json(
+        { error: `環境変数が未設定です: ${missing.join(", ")}` },
+        { status: 500 }
+      );
+    }
+    return NextResponse.json({
+      success: true,
+      dryRun: true,
+      tweetUrl: "(dry-run: 実際には投稿されていません)",
+    });
+  }
+
   const client = new TwitterApi({
     appKey: process.env.X_API_KEY as string,
     appSecret: process.env.X_API_SECRET as string,
