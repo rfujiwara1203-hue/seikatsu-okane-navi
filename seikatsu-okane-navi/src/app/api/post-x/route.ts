@@ -79,7 +79,15 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true, tweetUrl });
-  } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+  } catch (e: unknown) {
+    const err = e as { code?: number; data?: unknown; message?: string };
+    return NextResponse.json(
+      {
+        error: err?.message || String(e),
+        code: err?.code,
+        detail: err?.data,
+      },
+      { status: 500 }
+    );
   }
 }

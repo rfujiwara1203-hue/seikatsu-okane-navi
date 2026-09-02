@@ -123,7 +123,9 @@ export default function AdminPostPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setStatus(`失敗: ${data.error || res.status}`);
+        const detail = data.detail ? ` / detail: ${JSON.stringify(data.detail)}` : "";
+        const code = data.code ? ` (code: ${data.code})` : "";
+        setStatus(`失敗: ${data.error || res.status}${code}${detail}`);
         return;
       }
       if (data.dryRun) {
