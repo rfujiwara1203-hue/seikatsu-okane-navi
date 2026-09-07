@@ -142,12 +142,16 @@ export const DEEP_DIVE_ARTICLES: DeepDiveArticle[] = [
       },
     ],
   },
+]
+
+// 一旦非表示にした記事（週1本ペースで公開するため）。内容は消さずここに保管。
+// 個別に深掘りする際は DEEP_DIVE_ARTICLES に戻す。
+export const ARCHIVED_DEEP_DIVE_ARTICLES: DeepDiveArticle[] = [
   {
     slug: 'zero-yen-solar',
     emoji: '☀️',
     title: '「0円ソーラー」が増えているワケ　―― タダより高いものはない？',
     tags: ['太陽光', 'PPA', '初期費用ゼロ'],
-    featured: true,
     background:
       '「初期費用0円で太陽光発電が付けられる」という広告を見かける機会が増えています。これは「PPA（電力購入契約）モデル」や「屋根貸し／リース型」と呼ばれる仕組みで、太陽光パネルを事業者が所有・設置し、家庭はその電気を使った分だけ料金を払う（あるいは屋根を貸す対価を受け取る）という契約形態です。物価高で自己資金に余裕がない家庭が増えたことと、電気代の値上がりで「自家発電の魅力」自体は年々高まっていることが重なって、初期費用ゼロで太陽光を始められるこの仕組みへの関心が増えています。',
     mechanism:
@@ -204,11 +208,6 @@ export const DEEP_DIVE_ARTICLES: DeepDiveArticle[] = [
       },
     ],
   },
-]
-
-// 一旦非表示にした記事（EV記事に一本化するため）。内容は消さずここに保管。
-// 個別に深掘りする際は DEEP_DIVE_ARTICLES に戻す。
-export const ARCHIVED_DEEP_DIVE_ARTICLES: DeepDiveArticle[] = [
   {
     slug: 'home-battery',
     emoji: '🔋',
