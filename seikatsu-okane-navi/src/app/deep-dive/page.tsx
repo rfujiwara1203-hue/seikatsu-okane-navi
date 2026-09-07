@@ -1,10 +1,42 @@
 import Navigation from '@/components/ui/Navigation'
-import { DEEP_DIVE_ARTICLES } from '@/lib/deep-dive-content'
+import { DEEP_DIVE_ARTICLES, type DeepDiveArticle } from '@/lib/deep-dive-content'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: '事実！今の流行を調べてみた｜生活お金ナビ',
   description: '電気自動車がなぜ増えているのか、経済的にお得になる仕組み、どんな人に向いているかを、生活目線でゆるっと解説します。',
+}
+
+type DialogueGroup = NonNullable<DeepDiveArticle['dialogues']>[number]
+
+function DialogueBlock({ lines }: { lines: DialogueGroup['lines'] }) {
+  return (
+    <div className="bg-surface rounded-2xl p-4 sm:p-5 space-y-3">
+      {lines.map((line, i) => {
+        const isTeacher = line.role === 'teacher'
+        return (
+          <div key={i} className={`flex gap-2 items-end ${isTeacher ? '' : 'flex-row-reverse'}`}>
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-base flex-shrink-0 ${
+                isTeacher ? 'bg-primary text-white' : 'bg-navy-light text-navy'
+              }`}
+            >
+              {isTeacher ? '💚' : '🙋'}
+            </div>
+            <div
+              className={`max-w-[80%] rounded-2xl px-3.5 py-2 text-[13.5px] leading-relaxed ${
+                isTeacher
+                  ? 'bg-white border border-surface-border text-gray-700 rounded-bl-sm'
+                  : 'bg-navy text-white rounded-br-sm'
+              }`}
+            >
+              {line.text}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 export default function DeepDivePage() {
@@ -44,12 +76,19 @@ export default function DeepDivePage() {
               <p>{article.background}</p>
               <p>{article.mechanism}</p>
 
+              {article.dialogues
+                ?.filter(d => d.afterHeading === '__intro__')
+                .map((d, i) => <DialogueBlock key={i} lines={d.lines} />)}
+
               {article.deepSections?.map(sec => (
                 <div key={sec.heading}>
                   <h3 className="text-lg font-display font-bold text-gray-800 mt-2 mb-2 pl-3 border-l-4 border-primary">
                     {sec.heading}
                   </h3>
                   <p>{sec.body}</p>
+                  {article.dialogues
+                    ?.filter(d => d.afterHeading === sec.heading)
+                    .map((d, i) => <DialogueBlock key={i} lines={d.lines} />)}
                   {sec.table && (
                     <div className="overflow-x-auto mt-3 rounded-xl border border-surface-border">
                       <table className="w-full text-[13px] border-collapse">

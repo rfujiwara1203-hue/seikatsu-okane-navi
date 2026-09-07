@@ -12,6 +12,9 @@ export interface DeepDiveArticle {
   sources: { label: string; url: string }[]
   // featured記事のみ使う、より踏み込んだ追加セクション
   deepSections?: { heading: string; body: string; table?: { cols: string[]; rows: string[][] } }[]
+  // 生徒⇔先生の会話を、指定したセクションの直後に挿入する（afterHeadingは
+  // '__intro__'（背景＋仕組みの直後）か、deepSectionsのheadingと一致させる）
+  dialogues?: { afterHeading: string; lines: { role: 'student' | 'teacher'; text: string }[] }[]
 }
 
 // 「なぜ今これが流行っているか」「経済的にお得になる仕組み」「誰に向いているか」を
@@ -40,6 +43,26 @@ export const DEEP_DIVE_ARTICLES: DeepDiveArticle[] = [
       { label: '日本経済新聞 日本の原油輸入5割減、主要国で突出 イラン攻撃3カ月で中東依存鮮明', url: 'https://www.nikkei.com/article/DGXZQOCB131YK0T10C26A5000000/' },
       { label: 'リセバ総研 中東情勢の緊迫とホルムズ海峡封鎖でガソリン価格の値上げが大幅に加速', url: 'https://resalevalue.jp/article/17082/' },
       { label: '政府広報オンライン 災害時の燃料供給の拠り所 自家発電設備付き給油所「住民拠点SS」', url: 'https://www.gov-online.go.jp/article/201909/entry-9394.html' },
+    ],
+    dialogues: [
+      {
+        afterHeading: '__intro__',
+        lines: [
+          { role: 'student', text: 'EVって流行ってるって聞くけど、結局のところ「買うと得」なんですか？' },
+          { role: 'teacher', text: '正直に言うと、初期費用まで含めて考えると「得」と言い切るのは難しいんだ。' },
+          { role: 'student', text: 'え、そうなんですか…？じゃあ何がいいんです？' },
+          { role: 'teacher', text: 'ガソリンスタンドに寄らなくていい手間とか、停電に強いとか。「普段は気づかないけど、なくなると初めて困る」タイプの価値が大きいんだよ。' },
+        ],
+      },
+      {
+        afterHeading: '🌍 「自衛できない外的要因」に強いという、地味だけど大きな違い',
+        lines: [
+          { role: 'student', text: '中東で何かあると、日本のガソリン代も上がっちゃうんですね…' },
+          { role: 'teacher', text: 'そうなんだ。しかも2026年には実際にホルムズ海峡が事実上封鎖されて、ガソリン価格が急騰した時期があった。' },
+          { role: 'student', text: 'EVならその影響を受けにくいってことですか？' },
+          { role: 'teacher', text: '全く無関係とまでは言えないけど、少なくとも「輸入した燃料が届かないと走れない」という弱点そのものはなくなるね。' },
+        ],
+      },
     ],
     // 200Vコンセント工事費・太陽光/蓄電池・車両価格帯の相場感は、掲載時点のWebSearchで
     // 複数の専門メディアの記述を突き合わせて範囲（レンジ）表記にしている。個別の見積もりは業者に確認を。
