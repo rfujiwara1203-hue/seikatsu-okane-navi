@@ -1,2 +1,14 @@
 /* globals */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body { margin: 0; }
+
+/* .card was referenced across several pages/components but never defined,
+   so those cards rendered with no styling at all. */
+@layer components {
+  .card {
+    @apply bg-white border border-surface-border rounded-2xl p-4 shadow-sm;
+  }
+}
