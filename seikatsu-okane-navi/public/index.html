@@ -622,6 +622,12 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
     <div id="p2-blist"></div>
   </div>
 
+  <!-- 地域限定のお得情報 -->
+  <div class="card" id="p2-regional-card" style="display:none">
+    <div class="ctit">📍 お住まいの地域限定情報</div>
+    <div id="p2-regional"></div>
+  </div>
+
   <!-- ふるさと納税クイックサマリー -->
   <div class="card">
     <div class="ctit">🏘️ ふるさと納税の今年の目安</div>
@@ -2157,6 +2163,19 @@ const BN=[
   {name:"高校授業料・給食無償化",amt:"自治体別",c:i=>i<=700,f:["child1","child2","child3","single_parent"],urg:false,desc:"2026年から拡充。都道府県・市区町村により対象や範囲が異なります"},
 ];
 
+// 都道府県別の独自制度（確認済みのものだけ掲載。捏造しないこと。
+// 未確認の都道府県は fallback として汎用の確認案内を表示する。
+// 対象を広げる際は必ず一次情報（都道府県公式サイト等）で裏取りしてから追記する）
+const REGIONAL_BENEFITS = {
+  '東京都': [
+    {name:'018サポート', amt:'月5,000円/子', desc:'0〜18歳の子どもがいる都内在住世帯が対象。所得制限なし。要申請（東京都独自事業）'},
+  ],
+  '大阪府': [
+    {name:'高校授業料完全無償化', amt:'授業料実質0円', desc:'2026年度、府内在住で所得制限なく高校生の授業料が無償化される見込み（公立・私立とも対象、入学金等は対象外）'},
+  ],
+};
+const REGIONAL_FALLBACK = 'お住まいの都道府県・市区町村独自の給付金や助成制度がある場合があります。「(お住まいの自治体名) 給付金 助成」で検索して確認してみましょう。';
+
 // 固定費チェックリスト
 const CHECKS=[
   {label:"スマホを格安SIMに乗り換え",    save:72000, icon:"📱", detailId:"detail-0"},
@@ -2344,6 +2363,30 @@ function calcIDeCo(){
 
 function rP2(){
   const inc=uI, fam=uF;
+  const pref=document.getElementById('pref').value;
+
+  // 地域限定のお得情報
+  const regionalCard = document.getElementById('p2-regional-card');
+  const regionalBody = document.getElementById('p2-regional');
+  if(pref && regionalCard && regionalBody){
+    regionalCard.style.display='block';
+    const items = REGIONAL_BENEFITS[pref];
+    if(items && items.length > 0){
+      regionalBody.innerHTML = items.map(b=>`
+        <div class="bi">
+          <div>
+            <div style="font-size:14px;font-weight:500">${b.name}</div>
+            <div style="font-size:12px;color:#888;margin-top:2px">${b.desc}</div>
+          </div>
+          <div class="bamt">${b.amt}</div>
+        </div>`).join('') + `<div style="font-size:11px;color:#aaa;margin-top:8px">※上記以外にも市区町村独自の制度がある場合があります</div>`;
+    } else {
+      regionalBody.innerHTML = `<div style="font-size:13px;color:#888">${pref}の掲載情報は準備中です。${REGIONAL_FALLBACK}</div>`;
+    }
+  } else if(regionalCard){
+    regionalCard.style.display='none';
+  }
+
   const fm=FS[fam]||FS.single, fa=fm[inc]||42000;
   const fn={single:'独身',couple:'夫婦（共働き）',couple_dep:'夫婦（配偶者扶養）',child1:'夫婦＋子1人',child2:'夫婦＋子2人',child3:'夫婦＋子3人以上',single_parent:'ひとり親'}[fam]||'';
 
