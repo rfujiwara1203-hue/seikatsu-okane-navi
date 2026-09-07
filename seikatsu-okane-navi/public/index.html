@@ -2173,7 +2173,7 @@ const CHECKS=[
 let uI=0,uF='',checkedSets=new Set();
 
 // バナー更新
-document.getElementById('banner-date').textContent=DATA_VERSION.lastUpdated.replace(/-/g,'年').replace(/-/g,'月')+'日';
+document.getElementById('banner-date').textContent=DATA_VERSION.lastUpdated.replace(/^(\d+)-(\d+)-(\d+)$/,'$1年$2月$3')+'日';
 document.getElementById('banner-next').textContent='次回更新：'+DATA_VERSION.nextUpdate.replace(/-/g,'/').slice(0,7)+'予定';
 
 function fmt(n){return n.toLocaleString('ja-JP')}
