@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 const navItems = [
   { href: '/',          label: 'ホーム',    emoji: '🏠' },
   { href: '/news',      label: '今日のニュース', emoji: '📰' },
-  { href: '/deep-dive', label: '深掘り解説', emoji: '🔍' },
+  { href: '/deep-dive', label: '今の流行', emoji: '🔍' },
   { href: '/dashboard', label: 'マイ家計',  emoji: '📊' },
 ]
 

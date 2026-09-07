@@ -3,7 +3,7 @@ import { DEEP_DIVE_ARTICLES } from '@/lib/deep-dive-content'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: '深掘り解説｜なぜ流行っているか・お得になる仕組み｜生活お金ナビ',
+  title: '事実！今の流行を調べてみた｜生活お金ナビ',
   description: '電気自動車や太陽光、断熱リフォームなど、今話題のテーマがなぜ広がっているのか、経済的にお得になる仕組み、どんな人に向いているかを解説します。',
 }
 
@@ -14,7 +14,7 @@ export default function DeepDivePage() {
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-6 pb-24 sm:pb-8">
         <header className="animate-fade-in">
           <h1 className="text-xl font-display font-bold text-gray-800 flex items-center gap-2">
-            <span>🔍</span>深掘り解説
+            <span>🔍</span>事実！今の流行を調べてみた
           </h1>
           <p className="text-sm text-gray-500 mt-1">
             「なぜ今これが流行っているのか」「お得になる仕組み」「どんな人に向いているか」を一歩踏み込んで解説します。
@@ -26,8 +26,13 @@ export default function DeepDivePage() {
           {DEEP_DIVE_ARTICLES.map(article => (
             <article
               key={article.slug}
-              className="bg-white border border-surface-border rounded-2xl p-5 shadow-sm"
+              className={`bg-white rounded-2xl p-5 shadow-sm ${
+                article.featured ? 'border-2 border-primary' : 'border border-surface-border'
+              }`}
             >
+              {article.featured && (
+                <div className="text-[11px] font-bold text-primary mb-2">🏆 今週の徹底解説</div>
+              )}
               <div className="flex flex-wrap gap-1.5 mb-2">
                 {article.tags.map(tag => (
                   <span
@@ -53,6 +58,35 @@ export default function DeepDivePage() {
                 <h3 className="text-xs font-bold text-gray-500 mb-1">💡 お得になる仕組み</h3>
                 <p className="text-[13px] text-gray-700 leading-relaxed">{article.mechanism}</p>
               </section>
+
+              {article.deepSections?.map(sec => (
+                <section key={sec.heading} className="mb-3">
+                  <h3 className="text-xs font-bold text-navy mb-1">{sec.heading}</h3>
+                  <p className="text-[13px] text-gray-700 leading-relaxed">{sec.body}</p>
+                  {sec.table && (
+                    <div className="overflow-x-auto mt-2">
+                      <table className="w-full text-[12px] border-collapse">
+                        <thead>
+                          <tr>
+                            {sec.table.cols.map(c => (
+                              <th key={c} className="text-left font-bold text-gray-500 border-b border-surface-border pb-1 pr-2 whitespace-nowrap">{c}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {sec.table.rows.map((row, i) => (
+                            <tr key={i}>
+                              {row.map((cell, j) => (
+                                <td key={j} className="py-1.5 pr-2 text-gray-700 whitespace-nowrap">{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </section>
+              ))}
 
               <section className="mb-3 bg-surface rounded-xl p-3">
                 <h3 className="text-xs font-bold text-gray-500 mb-2">こんな人におすすめ</h3>
