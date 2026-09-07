@@ -2290,30 +2290,32 @@ function showTab(id,btn){const p=btn.closest('.card');p.querySelectorAll('.tab-c
 function adClick(id){
   console.log('[AD CLICK]', id, new Date().toISOString());
   // 例：window.open('https://affi.example.com/link/'+id, '_blank');
-  // 実装時にアフィリエイトURLをここに設定
+  // アフィリエイト提携が済んだキーから順にトラッキングURLへ差し替える。
+  // 未提携のものは、リンク切れ('#')を避けるため各サービスの公式サイトへ暫定的に直リンクしている
+  // （この場合は成果報酬は発生しない。提携が取れ次第、アフィリエイトURLに置き換えること）。
   const urls = {
-    nisa_lp: '#',
-    energy_compare: '#',
-    sbi_nisa: '#',
+    nisa_lp: 'https://www.fsa.go.jp/policy/nisa2/',
+    energy_compare: 'https://kakaku.com/energy/',
+    sbi_nisa: 'https://www.sbisec.co.jp/',
     furusato_choice: 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3779569&pid=892685830',
     satofull: 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3779569&pid=892685828',
     enechange: 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3779569&pid=892686506',
     rakuten_mobile: 'https://hb.afl.rakuten.co.jp/hsc/56db37e8.5cdb16a3.56db37e9.f4b77193/?link_type=pict&rafst=rmn&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJwaWN0IiwiY29sIjoxLCJjYXQiOjEsImJhbiI6MjM3Nzg5MiwiYW1wIjpmYWxzZX0%3D',
     uq_mobile: 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3779569&pid=892685405', // 提携待ち（承認後に成果発生）
     ymobile: 'https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3779569&pid=892685403',
-    moneyforward: '#',
-    hoken_madoguchi: '#',
-    enepi_gas: '#',
-    hikari_compare: '#',
-    nuro: '#',
-    recruit_card: '#',
-    mitsui_card: '#',
+    moneyforward: 'https://moneyforward.com/',
+    hoken_madoguchi: 'https://www.hokennomadoguchi.com/',
+    enepi_gas: 'https://enepi.jp/',
+    hikari_compare: 'https://kakaku.com/hikari/',
+    nuro: 'https://www.nuro.jp/',
+    recruit_card: 'https://www.recruit-card.jp/',
+    mitsui_card: 'https://www.smbc-card.com/',
     rakuten_card: 'https://hb.afl.rakuten.co.jp/hsc/56db3976.33b88032.56db37e9.f4b77193/?link_type=pict&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJwaWN0IiwiY29sIjoxLCJjYXQiOjEsImJhbiI6MTY3NDAxLCJhbXAiOmZhbHNlfQ%3D%3D',
-    rakuten_hikari: '#',
-    rakuten_denki: '#',
-    rakuten_insurance: '#',
-    rakuten_nisa: '#',
-    zexy_hoken: '#',
+    rakuten_hikari: 'https://hikari.rakuten.co.jp/',
+    rakuten_denki: 'https://denki.rakuten.co.jp/',
+    rakuten_insurance: 'https://hoken.rakuten.co.jp/',
+    rakuten_nisa: 'https://www.rakuten-sec.co.jp/',
+    zexy_hoken: 'https://zexy-hoken.net/',
   };
   const url = urls[id];
   if(url && url !== '#') window.open(url, '_blank');
