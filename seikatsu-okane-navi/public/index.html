@@ -1931,6 +1931,7 @@ async function loadLiveNews(inc, fam, analyze) {
         meta: { version: json.fetchedAt || '2.0', lastUpdated: (json.fetchedAt || new Date().toISOString()).slice(0, 10) },
         news: [...liveItems, ...archive],
       };
+      updateFreshnessBanner(NEWS_DATA.news);
     }
   } catch (e) {
     console.warn('ライブニュース取得に失敗、フォールバックデータを表示します', e);
@@ -2198,9 +2199,18 @@ const CHECKS=[
 
 let uI=0,uF='',checkedSets=new Set();
 
-// バナー更新
-document.getElementById('banner-date').textContent=DATA_VERSION.lastUpdated.replace(/^(\d+)-(\d+)-(\d+)$/,'$1年$2月$3')+'日';
-document.getElementById('banner-next').textContent='次回更新：'+DATA_VERSION.nextUpdate.replace(/-/g,'/').slice(0,7)+'予定';
+// バナー更新（ニュースデータの中で最も新しい日付を「最終更新」として動的に表示する）
+function updateFreshnessBanner(newsList) {
+  const dates = (newsList || [])
+    .map(n => n.date)
+    .filter(Boolean)
+    .sort()
+    .reverse();
+  const latest = dates[0] || DATA_VERSION.lastUpdated;
+  document.getElementById('banner-date').textContent = latest.replace(/^(\d+)-(\d+)-(\d+)$/, '$1年$2月$3') + '日';
+  document.getElementById('banner-next').textContent = 'ニュースは毎日自動更新中';
+}
+updateFreshnessBanner(FALLBACK_NEWS_DATA.news);
 
 function fmt(n){return n.toLocaleString('ja-JP')}
 
