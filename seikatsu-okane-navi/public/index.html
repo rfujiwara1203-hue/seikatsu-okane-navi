@@ -1519,23 +1519,23 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
         </div>
         <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">⚠️ 負担増・税制情報</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
         <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">🎁 給付金・助成情報</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
         <div class="upd-row" data-due="2026-12-01">
           <div class="upd-cat">📈 NISA・iDeCo制度</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
         <div class="upd-row" data-due="2026-12-15">
           <div class="upd-cat">🏘️ ふるさと納税</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.04.07</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
-        <div class="upd-row" data-due="2026-07-01">
+        <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">🏘️ ふるさと納税限度額表</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.07予定</div><span class="upd-status upd-warn">要確認</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
       </div>
       <div id="upd-overdue-note" style="display:none;font-size:12px;color:#a8791f;background:#fff8e0;border-radius:8px;padding:8px 10px;margin-top:8px">⚠️ 確認期限を過ぎている項目があります（運営者向け）。内容を見直し、問題なければ次回期限を延長してください。</div>
@@ -1556,7 +1556,7 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
   </div>
 
   <button class="btn btn-s" onclick="toP2()">← お得情報に戻る</button>
-  <div class="dsc">※ このサイトはあくまでも参考情報です。数値は2026年4月時点の公表情報をもとにした概算で、個別の状況により大きく異なります。投資にはリスクがあります。<br>詳細は <strong>国税庁・金融庁・お住まいの自治体公式サイト</strong> でご確認・ご相談ください。<br>PR・広告掲載あり。掲載内容は2026年4月時点の情報です。</div>
+  <div class="dsc">※ このサイトはあくまでも参考情報です。数値は2026年10月時点の公表情報をもとにした概算で、個別の状況により大きく異なります。投資にはリスクがあります。<br>詳細は <strong>国税庁・金融庁・お住まいの自治体公式サイト</strong> でご確認・ご相談ください。<br>PR・広告掲載あり。掲載内容は2026年10月時点の情報です。</div>
 </div>
 
 <div style="text-align:center;padding:1.5rem 1rem 2.5rem;font-size:12px;color:#999">
@@ -2061,18 +2061,18 @@ document.addEventListener('DOMContentLoaded', () => {
 // =====================================================
 const DATA_VERSION = {
   app: '4.0',
-  lastUpdated: '2026-04-07',
-  nextUpdate: '2026-07-01',
+  lastUpdated: '2026-10-01',
+  nextUpdate: '2026-11-01',
   cpiMonth: '2026年2月',
 };
 
 const UPDATE_INFO = {
   cpi: {date:'毎月', status:'fresh'},
-  tax: {date:'2026.04.07', status:'fresh'},
-  benefits: {date:'2026.04.07', status:'fresh'},
-  invest: {date:'2026.04.07', status:'fresh'},
-  furusato: {date:'2026.04.07', status:'fresh'},
-  furusatoTable: {date:'2026.07予定', status:'warn'},
+  tax: {date:'2026.10.01', status:'fresh'},
+  benefits: {date:'2026.10.01', status:'fresh'},
+  invest: {date:'2026.10.01', status:'fresh'},
+  furusato: {date:'2026.10.01', status:'fresh'},
+  furusatoTable: {date:'2026.10.01', status:'fresh'},
 };
 
 // ===================================================
@@ -2162,13 +2162,13 @@ const KS={
 
 // 給付金マスタ
 const BN=[
-  {name:"低所得世帯向け給付金（物価高対策）",amt:"3万円/世帯",c:i=>i<=300,f:"all",urg:true,desc:"住民税非課税・均等割のみ世帯が対象（自治体により異なる）"},
-  {name:"子育て世帯生活支援特別給付金",amt:"5万円/子",c:i=>i<=500,f:["child1","child2","child3","single_parent"],urg:false,desc:"ひとり親・低所得ふたり親世帯の18歳以下の子ども対象"},
+  {name:"低所得世帯向け給付金（物価高対策）",amt:"3万円/世帯",c:i=>i<=300,f:"all",urg:true,desc:"住民税非課税・均等割のみ世帯が対象。重点支援地方交付金を原資に自治体が実施（2026年度分の申請受付は多くの自治体で春〜初夏に終了済み。次回実施は自治体へ要確認）"},
+  {name:"住民税非課税世帯の子育て加算（物価高対策）",amt:"2万円/子",c:i=>i<=300,f:["child1","child2","child3","single_parent"],urg:false,desc:"上記「低所得世帯向け給付金」に上乗せされる18歳以下の子ども1人あたりの加算分。自治体により申請要否・時期が異なります"},
   {name:"ひとり親家庭支援給付金",amt:"自治体別",c:i=>true,f:["single_parent"],urg:false,desc:"多くの自治体で独自に実施。市区町村窓口で確認を"},
   {name:"子どもの医療費助成",amt:"窓口無料〜",c:i=>true,f:["child1","child2","child3","single_parent"],urg:false,desc:"多くの自治体で中学・高校まで助成（所得制限あり）"},
-  {name:"電力・ガス料金補助（継続検討中）",amt:"要確認",c:i=>i<=600,f:"all",urg:false,desc:"2026年4月から政府補助一旦終了。追加措置の動向を自治体・政府サイトで確認を"},
+  {name:"電力・ガス料金補助",amt:"要確認",c:i=>i<=600,f:"all",urg:false,desc:"政府は2026年7〜9月使用分について補助を再開（電気1kWhあたり3.5〜4.5円、都市ガス1㎥あたり14〜18円、申請不要・料金から自動値引き）。10月以降の延長は未定のため、資源エネルギー庁・契約中の電力/ガス会社サイトで確認を"},
   {name:"高額療養費制度",amt:"超過分を還付",c:i=>true,f:"all",urg:false,desc:"月の医療費が自己負担限度額を超えた分は申請で戻ります"},
-  {name:"高校授業料・給食無償化",amt:"自治体別",c:i=>i<=700,f:["child1","child2","child3","single_parent"],urg:false,desc:"2026年から拡充。都道府県・市区町村により対象や範囲が異なります"},
+  {name:"高校授業料・給食無償化",amt:"自治体別",c:i=>i<=700,f:["child1","child2","child3","single_parent"],urg:false,desc:"2026年度から所得制限が撤廃され、私立高校生向けの就学支援金上限が引き上げ（公立は年約11.9万円、私立は所得に応じ最大約45.7万円）。都道府県・市区町村の上乗せ制度もあり、対象や範囲が異なります"},
 ];
 
 // 都道府県別の独自制度（確認済みのものだけ掲載。捏造しないこと。
@@ -2179,7 +2179,10 @@ const REGIONAL_BENEFITS = {
     {name:'018サポート', amt:'月5,000円/子', desc:'0〜18歳の子どもがいる都内在住世帯が対象。所得制限なし。要申請（東京都独自事業）'},
   ],
   '大阪府': [
-    {name:'高校授業料完全無償化', amt:'授業料実質0円', desc:'2026年度、府内在住で所得制限なく高校生の授業料が無償化される見込み（公立・私立とも対象、入学金等は対象外）'},
+    {name:'高校授業料完全無償化', amt:'授業料実質0円', desc:'2024年度の高3から段階導入され、2026年度に全学年で所得制限なしの無償化を実施（公立・私立とも対象、入学金等は対象外）'},
+  ],
+  '愛知県': [
+    {name:'愛知県子育て応援給付金', amt:'5万円/回（対象児童1人）', desc:'1歳6か月児健診・3歳児健診を受診した児童が対象。児童扶養手当受給世帯または住民税均等割非課税世帯が対象（所得制限あり）。健診日から6か月以内に要申請（愛知県独自事業）'},
   ],
 };
 const REGIONAL_FALLBACK = 'お住まいの都道府県・市区町村独自の給付金や助成制度がある場合があります。「(お住まいの自治体名) 給付金 助成」で検索して確認してみましょう。';
@@ -2759,7 +2762,7 @@ function renderWall(inc){
   const el=document.getElementById('wall');
   if(!el) return;
   const wm={150:"年収150万円前後は、178万円への引き上げにより扶養される側のパート・副業収入の上限が広がる可能性があります。",200:"年収200万円台は配偶者控除・扶養の見直しが関係してくる水準。178万円引き上げで就業調整のタイミングを再検討できます。",300:"年収300万円台は直接の影響は限定的ですが、同居家族のパート収入上限が広がる可能性があります。",400:"年収400万円台では配偶者のパート収入上限が広がり、世帯手取り増につながる可能性があります。",500:"年収500万円台では配偶者・扶養家族の副業・パート収入を増やせる可能性があります。",600:"年収600万円以上では配偶者・扶養家族の就業形態次第。ふるさと納税の節税効果が大きいゾーンです。",700:"年収700万円台はふるさと納税の控除限度額が10万円超となり、積極活用できます。医療費控除も有効です。",800:"年収800万円以上ではiDeCoの活用・医療費控除・ふるさと納税の組み合わせで年間数万円単位の節税も。",1000:"年収1000万円超は税負担も重い一方、ふるさと納税の控除枠が最大級で積極活用できます。",1200:"年収1000万円超は税負担も重い一方、ふるさと納税の控除枠が最大級で積極活用できます。"};
-  el.innerHTML=`<div class="nb"><div class="ntit">📌 178万円の壁（引き上げ検討中）</div><div class="ntxt">${wm[inc]||wm[500]}</div></div><div style="font-size:12px;color:#999">※税制改正の動向によって変わる可能性があります。国税庁サイトで最新情報をご確認ください。</div>`;
+  el.innerHTML=`<div class="nb"><div class="ntit">📌 178万円の壁（2026年から適用）</div><div class="ntxt">${wm[inc]||wm[500]}</div></div><div style="font-size:12px;color:#999">※2026年1〜12月の給与から適用され、2026年12月の年末調整で反映されます。社会保険の扶養基準（106万円・130万円の壁）は別の仕組みのため、国税庁サイトで最新情報をご確認ください。</div>`;
 }
 
 function gActs(inc,fam){
