@@ -1,12 +1,20 @@
 import { NewsCategory, RawNewsItem, CATEGORY_META } from '@/types'
 
 // RSS取得先リスト（信頼性の高い公的機関）
+// NHKのRSS(cat0/1/5)は2026-08-09以降更新が止まっているため除外している。
+// 他の公的機関フィードは2026-10-05時点で更新を確認済み。
 const RSS_SOURCES = [
   {
-    url: 'https://www3.nhk.or.jp/rss/news/cat1.xml', // NHK社会
-    category: 'general' as NewsCategory,
-    source: 'NHK',
-    keywords: ['物価', '給付', '支援金', '保険料', '税', '年金', '補助', '家計', '食料', 'ガス', '電気'],
+    url: 'https://www.boj.or.jp/rss/whatsnew.xml', // 日本銀行 新着情報
+    category: 'price' as NewsCategory,
+    source: '日本銀行',
+    keywords: ['金融政策', '政策金利', '利上げ', '物価', '展望', '金利', '決定会合'],
+  },
+  {
+    url: 'https://www.fsa.go.jp/fsaNewsListAll_rss2.xml', // 金融庁 新着情報
+    category: 'invest' as NewsCategory,
+    source: '金融庁',
+    keywords: ['NISA', 'iDeCo', '資産形成', '投資', '預金', '年金', '詐欺'],
   },
   {
     // 旧 e-gov.go.jp/rss/news.rss は404のため、内閣府の報道発表RSS(RSS1.0/RDF形式)に差し替え
@@ -108,8 +116,11 @@ async function fetchRss(url: string, source: string, category: NewsCategory, key
     const xml = await res.text()
     const all = parseRssXml(xml, source, category)
 
-    // 家計に関連するニュースだけフィルタ
+    // 家計に関連し、かつ直近60日以内のニュースだけに絞る（更新が止まったフィードの古い記事を除外）
+    const cutoff = Date.now() - 60 * 24 * 60 * 60 * 1000
     return all.filter(item => {
+      const t = new Date(item.pubDate).getTime()
+      if (!isNaN(t) && t < cutoff) return false
       const text = item.title + ' ' + (item.content ?? '')
       return keywords.some(kw => text.includes(kw))
     })
