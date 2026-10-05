@@ -162,8 +162,16 @@ export async function fetchNews(maxItems = 10): Promise<RawNewsItem[]> {
     new Map(rssItems.map(item => [item.id, item])).values()
   ).sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
 
-  if (unique.length >= 3) {
-    return unique.slice(0, maxItems)
+  // 1機関の記事（統計資料の同時公開など）が並びすぎないよう、機関ごとに最大3件まで
+  const perSource = new Map<string, number>()
+  const diversified = unique.filter(item => {
+    const n = perSource.get(item.source) ?? 0
+    perSource.set(item.source, n + 1)
+    return n < 3
+  })
+
+  if (diversified.length >= 3) {
+    return diversified.slice(0, maxItems)
   }
 
   // RSSが少ない場合はfallbackで補完
