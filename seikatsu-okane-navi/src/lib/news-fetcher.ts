@@ -1,3 +1,4 @@
+import { createHash } from 'crypto'
 import { NewsCategory, RawNewsItem, CATEGORY_META } from '@/types'
 
 // RSS取得先リスト（信頼性の高い公的機関）
@@ -8,7 +9,7 @@ const RSS_SOURCES = [
     url: 'https://www.boj.or.jp/rss/whatsnew.xml', // 日本銀行 新着情報
     category: 'price' as NewsCategory,
     source: '日本銀行',
-    keywords: ['金融政策', '政策金利', '利上げ', '物価', '展望', '金利', '決定会合'],
+    keywords: ['金融政策', '政策金利', '利上げ', '物価', '決定会合', '金融市場調節方針'],
   },
   {
     url: 'https://www.fsa.go.jp/fsaNewsListAll_rss2.xml', // 金融庁 新着情報
@@ -76,9 +77,10 @@ function parseRssXml(xml: string, source: string, defaultCategory: NewsCategory)
     const title   = stripHtml(titleMatch?.[1] ?? titleMatch?.[2] ?? '')
     const linkMatch = /<link>(.*?)<\/link>|<link\s+href="(.*?)"/.exec(itemXml)
     const link    = (linkMatch?.[1] ?? linkMatch?.[2] ?? '').trim()
-    const pubDate = /<pubDate>(.*?)<\/pubDate>/.exec(itemXml)?.[1]?.trim()
+    // 金融庁フィードは「15:00:00 JST」形式でDateが解釈できないため+0900に置換する
+    const pubDate = (/<pubDate>(.*?)<\/pubDate>/.exec(itemXml)?.[1]?.trim()
       ?? /<dc:date>(.*?)<\/dc:date>/.exec(itemXml)?.[1]?.trim()
-      ?? new Date().toISOString()
+      ?? new Date().toISOString()).replace(/\sJST$/, ' +0900')
     const descMatch = /<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/s.exec(itemXml)
     const desc    = stripHtml(descMatch?.[1] ?? descMatch?.[2] ?? '')
     const guid    = /<guid[^>]*>(.*?)<\/guid>/.exec(itemXml)?.[1]?.trim() ?? link
@@ -87,7 +89,7 @@ function parseRssXml(xml: string, source: string, defaultCategory: NewsCategory)
 
     const category = classifyCategory(title, desc)
     items.push({
-      id: `rss-${Buffer.from(guid).toString('base64').slice(0, 16)}`,
+      id: `rss-${createHash('sha1').update(guid).digest('hex').slice(0, 16)}`,
       title: title.slice(0, 120),
       link,
       pubDate,
