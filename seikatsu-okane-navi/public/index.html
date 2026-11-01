@@ -1519,23 +1519,23 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
         </div>
         <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">⚠️ 負担増・税制情報</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.11.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
         <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">🎁 給付金・助成情報</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.11.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
         <div class="upd-row" data-due="2026-12-01">
           <div class="upd-cat">📈 NISA・iDeCo制度</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.11.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
         <div class="upd-row" data-due="2026-12-15">
           <div class="upd-cat">🏘️ ふるさと納税</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.11.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
         <div class="upd-row" data-due="2027-04-30">
           <div class="upd-cat">🏘️ ふるさと納税限度額表</div>
-          <div style="display:flex;align-items:center"><div class="upd-date">2026.10.01</div><span class="upd-status upd-fresh">最新</span></div>
+          <div style="display:flex;align-items:center"><div class="upd-date">2026.11.01</div><span class="upd-status upd-fresh">最新</span></div>
         </div>
       </div>
       <div id="upd-overdue-note" style="display:none;font-size:12px;color:#a8791f;background:#fff8e0;border-radius:8px;padding:8px 10px;margin-top:8px">⚠️ 確認期限を過ぎている項目があります（運営者向け）。内容を見直し、問題なければ次回期限を延長してください。</div>
@@ -1556,7 +1556,7 @@ input[type=text]:focus,input[type=number]:focus,select:focus{border-color:#3a8f4
   </div>
 
   <button class="btn btn-s" onclick="toP2()">← お得情報に戻る</button>
-  <div class="dsc">※ このサイトはあくまでも参考情報です。数値は2026年10月時点の公表情報をもとにした概算で、個別の状況により大きく異なります。投資にはリスクがあります。<br>詳細は <strong>国税庁・金融庁・お住まいの自治体公式サイト</strong> でご確認・ご相談ください。<br>PR・広告掲載あり。掲載内容は2026年10月時点の情報です。</div>
+  <div class="dsc">※ このサイトはあくまでも参考情報です。数値は2026年11月時点の公表情報をもとにした概算で、個別の状況により大きく異なります。投資にはリスクがあります。<br>詳細は <strong>国税庁・金融庁・お住まいの自治体公式サイト</strong> でご確認・ご相談ください。<br>PR・広告掲載あり。掲載内容は2026年11月時点の情報です。</div>
 </div>
 
 <div style="text-align:center;padding:1.5rem 1rem 2.5rem;font-size:12px;color:#999">
@@ -2061,18 +2061,18 @@ document.addEventListener('DOMContentLoaded', () => {
 // =====================================================
 const DATA_VERSION = {
   app: '4.0',
-  lastUpdated: '2026-10-01',
-  nextUpdate: '2026-11-01',
+  lastUpdated: '2026-11-01',
+  nextUpdate: '2026-12-01',
   cpiMonth: '2026年2月',
 };
 
 const UPDATE_INFO = {
   cpi: {date:'毎月', status:'fresh'},
-  tax: {date:'2026.10.01', status:'fresh'},
-  benefits: {date:'2026.10.01', status:'fresh'},
-  invest: {date:'2026.10.01', status:'fresh'},
-  furusato: {date:'2026.10.01', status:'fresh'},
-  furusatoTable: {date:'2026.10.01', status:'fresh'},
+  tax: {date:'2026.11.01', status:'fresh'},
+  benefits: {date:'2026.11.01', status:'fresh'},
+  invest: {date:'2026.11.01', status:'fresh'},
+  furusato: {date:'2026.11.01', status:'fresh'},
+  furusatoTable: {date:'2026.11.01', status:'fresh'},
 };
 
 // ===================================================
@@ -2183,6 +2183,9 @@ const REGIONAL_BENEFITS = {
   ],
   '愛知県': [
     {name:'愛知県子育て応援給付金', amt:'5万円/回（対象児童1人）', desc:'1歳6か月児健診・3歳児健診を受診した児童が対象。児童扶養手当受給世帯または住民税均等割非課税世帯が対象（所得制限あり）。健診日から6か月以内に要申請（愛知県独自事業）'},
+  ],
+  '福岡県': [
+    {name:'物価高対応福岡県子育て応援金', amt:'1万円/子', desc:'国の「物価高対応子育て応援手当」（2026年2〜3月頃支給済み）を受けた福岡県内居住の保護者に、県が独自に上乗せ支給。18歳以下が対象で所得制限なし。原則申請不要（2026年6月より順次支給、県外からの転入者等は申請が必要な場合あり）。すでに支給済みの制度です（福岡県独自事業）'},
   ],
 };
 const REGIONAL_FALLBACK = 'お住まいの都道府県・市区町村独自の給付金や助成制度がある場合があります。「(お住まいの自治体名) 給付金 助成」で検索して確認してみましょう。';
@@ -2747,14 +2750,14 @@ function renderShiko(){
   el.innerHTML=`
 <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:12px">お酒やたばこにも2026年に大きな改正があります。</div>
 <div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🚬 たばこ税の段階的引き上げ</div>
-<div class="tl"><div class="tli"><div class="tld"></div><div class="tly">2026年4月・10月（2段階）</div><div class="tlx">加熱式たばこの課税方式を見直し、紙巻きと同水準に引き上げ。1箱40〜100円程度の増税。防衛費確保が目的。</div></div><div class="tli"><div class="tld"></div><div class="tly">2027・2028・2029年4月</div><div class="tlx">紙巻き・加熱式ともに1本0.5円ずつ（1箱10円）引き上げ。3年で1箱計30円増税。最終的に1箱600〜700円台へ。</div></div></div>
+<div class="tl"><div class="tli"><div class="tld"></div><div class="tly">2026年4月・10月（2段階）</div><div class="tlx">加熱式たばこの課税方式を見直し、紙巻きと同水準に引き上げ。1箱20〜100円程度の増税（銘柄により異なる）。防衛費確保が目的。</div></div><div class="tli"><div class="tld"></div><div class="tly">2027・2028・2029年4月</div><div class="tlx">紙巻き・加熱式ともに1本0.5円ずつ（1箱10円）引き上げ。3年で1箱計30円増税。最終的に1箱600〜700円台へ。</div></div></div>
 <div style="font-size:12px;color:#999;margin:4px 0 14px">喫煙者は3年間で累計約11,000円の負担増の目安。禁煙外来は条件付きで保険適用あり。</div>
-<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🍺 酒税改正（2026年10月・最終段階）</div>
+<div style="font-size:13px;font-weight:700;color:#5a5a58;margin-bottom:8px">🍺 酒税改正（2026年10月・ビール系飲料の税率一本化が完了）</div>
 <div style="background:#faf9f7;border-radius:10px;padding:10px 12px">
-<div class="skrow"><div class="skn">ビール（350ml）</div><div class="skdn">変化なし</div></div>
-<div class="skrow"><div class="skn">発泡酒・チューハイ・サワー</div><div class="skup">▲ 増税（統一税率へ）</div></div>
-<div class="skrow"><div class="skn">日本酒（1.8L）</div><div class="skdn">▼ 減税（-18円）</div></div>
-<div class="skrow"><div class="skn">ワイン（720ml）</div><div class="skup">▲ 増税（+7.2円）</div></div>
+<div class="skrow"><div class="skn">ビール（350ml）</div><div class="skdn">▼ 減税（約-9.1円、63.35円→54.25円）</div></div>
+<div class="skrow"><div class="skn">発泡酒（350ml）</div><div class="skup">▲ 増税（約+7.3円、ビールと同一税率に統一）</div></div>
+<div class="skrow"><div class="skn">チューハイ・サワー等（350ml）</div><div class="skup">▲ 増税（35円に統一）</div></div>
+<div class="skrow"><div class="skn">日本酒・ワインなど醸造酒類</div><div class="skdn">変化なし（2023年10月に税率一本化済みのため今回対象外）</div></div>
 </div>`;
 }
 
@@ -2762,7 +2765,7 @@ function renderWall(inc){
   const el=document.getElementById('wall');
   if(!el) return;
   const wm={150:"年収150万円前後は、178万円への引き上げにより扶養される側のパート・副業収入の上限が広がる可能性があります。",200:"年収200万円台は配偶者控除・扶養の見直しが関係してくる水準。178万円引き上げで就業調整のタイミングを再検討できます。",300:"年収300万円台は直接の影響は限定的ですが、同居家族のパート収入上限が広がる可能性があります。",400:"年収400万円台では配偶者のパート収入上限が広がり、世帯手取り増につながる可能性があります。",500:"年収500万円台では配偶者・扶養家族の副業・パート収入を増やせる可能性があります。",600:"年収600万円以上では配偶者・扶養家族の就業形態次第。ふるさと納税の節税効果が大きいゾーンです。",700:"年収700万円台はふるさと納税の控除限度額が10万円超となり、積極活用できます。医療費控除も有効です。",800:"年収800万円以上ではiDeCoの活用・医療費控除・ふるさと納税の組み合わせで年間数万円単位の節税も。",1000:"年収1000万円超は税負担も重い一方、ふるさと納税の控除枠が最大級で積極活用できます。",1200:"年収1000万円超は税負担も重い一方、ふるさと納税の控除枠が最大級で積極活用できます。"};
-  el.innerHTML=`<div class="nb"><div class="ntit">📌 178万円の壁（2026年から適用）</div><div class="ntxt">${wm[inc]||wm[500]}</div></div><div style="font-size:12px;color:#999">※2026年1〜12月の給与から適用され、2026年12月の年末調整で反映されます。社会保険の扶養基準（106万円・130万円の壁）は別の仕組みのため、国税庁サイトで最新情報をご確認ください。</div>`;
+  el.innerHTML=`<div class="nb"><div class="ntit">📌 178万円の壁（2026年から適用）</div><div class="ntxt">${wm[inc]||wm[500]}</div></div><div style="font-size:12px;color:#999">※2026年1〜12月の給与から適用され、2026年12月の年末調整で反映されます。基礎控除の上乗せ特例は2026・2027年度の2年間限定の時限措置で、2028年度以降の取り扱いは未定です。社会保険の扶養基準（106万円・130万円の壁）は別の仕組みのため、国税庁サイトで最新情報をご確認ください。</div>`;
 }
 
 function gActs(inc,fam){
